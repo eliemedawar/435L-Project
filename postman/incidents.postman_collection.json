@@ -1,0 +1,2080 @@
+{
+  "info": {
+    "name": "Service 3 - Incident Management (Elie Medawar)",
+    "description": "Incident Management Service, port 5003. Needs the Users, Logs, Notifications and Assets services running, and an existing asset id in {{asset_id}}. Developed by: Elie Medawar.\n\nUses the users created by the Users collection (admin, rami, lara, nadia). Set the *_password variables locally first.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_incidents",
+      "value": "http://127.0.0.1:5003"
+    },
+    {
+      "key": "base_users",
+      "value": "http://127.0.0.1:5001"
+    },
+    {
+      "key": "admin_username",
+      "value": "admin"
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "user_username",
+      "value": "rami"
+    },
+    {
+      "key": "user_password",
+      "value": ""
+    },
+    {
+      "key": "analyst_username",
+      "value": "lara"
+    },
+    {
+      "key": "analyst_password",
+      "value": ""
+    },
+    {
+      "key": "auditor_username",
+      "value": "nadia"
+    },
+    {
+      "key": "auditor_password",
+      "value": ""
+    },
+    {
+      "key": "token_admin",
+      "value": ""
+    },
+    {
+      "key": "token_user",
+      "value": ""
+    },
+    {
+      "key": "token_analyst",
+      "value": ""
+    },
+    {
+      "key": "token_auditor",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "analyst_id",
+      "value": ""
+    },
+    {
+      "key": "auditor_id",
+      "value": ""
+    },
+    {
+      "key": "asset_id",
+      "value": "1"
+    },
+    {
+      "key": "incident_id",
+      "value": ""
+    },
+    {
+      "key": "incident2_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Setup - log in",
+      "item": [
+        {
+          "name": "Login - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_admin\", json.data.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - regular user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_user\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"user_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{user_username}}\",\n  \"password\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_analyst\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"analyst_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{analyst_username}}\",\n  \"password\": \"{{analyst_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_auditor\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"auditor_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{auditor_username}}\",\n  \"password\": \"{{auditor_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "1. Create incident",
+      "item": [
+        {
+          "name": "Create - regular user (Medium)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"incident_id\", json.data.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nMedium: phishing click, limited impact but needs investigation. The reporter is taken from the token.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Phishing email received\",\n  \"description\": \"Employee clicked a link in a fake invoice email\",\n  \"category\": \"Phishing\",\n  \"severity\": \"Medium\",\n  \"asset_id\": {{asset_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - admin (Critical)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"incident2_id\", json.data.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nCritical: ransomware on a production server requires immediate response.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Ransomware on web server\",\n  \"description\": \"Files encrypted, ransom note found\",\n  \"category\": \"Malware\",\n  \"severity\": \"Critical\",\n  \"asset_id\": {{asset_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - admin (High)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nHigh: brute force against an important database.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Brute force on HR database\",\n  \"description\": \"Thousands of failed logins from one IP\",\n  \"category\": \"Unauthorized Access\",\n  \"severity\": \"High\",\n  \"asset_id\": {{asset_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - regular user (Low)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nLow: port scan with no impact.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Port scan detected\",\n  \"description\": \"Firewall blocked a port scan\",\n  \"category\": \"Other\",\n  \"severity\": \"Low\",\n  \"asset_id\": {{asset_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - invalid severity",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSeverity must be Low/Medium/High/Critical.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Phishing email received\",\n  \"description\": \"Employee clicked a link in a fake invoice email\",\n  \"category\": \"Phishing\",\n  \"severity\": \"Extreme\",\n  \"asset_id\": {{asset_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - invalid category",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nCategory must be one of the allowed values.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Phishing email received\",\n  \"description\": \"Employee clicked a link in a fake invoice email\",\n  \"category\": \"Aliens\",\n  \"severity\": \"Medium\",\n  \"asset_id\": {{asset_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - missing fields",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nRequired fields validation.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Incomplete\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - non-existing asset",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nThe Assets service is asked whether the asset exists.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Phishing email received\",\n  \"description\": \"Employee clicked a link in a fake invoice email\",\n  \"category\": \"Phishing\",\n  \"severity\": \"Medium\",\n  \"asset_id\": 99999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAnalysts cannot create incidents.\n\nExpected: HTTP 403",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Phishing email received\",\n  \"description\": \"Employee clicked a link in a fake invoice email\",\n  \"category\": \"Phishing\",\n  \"severity\": \"Medium\",\n  \"asset_id\": {{asset_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - no token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nMissing authentication.\n\nExpected: HTTP 401",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Phishing email received\",\n  \"description\": \"Employee clicked a link in a fake invoice email\",\n  \"category\": \"Phishing\",\n  \"severity\": \"Medium\",\n  \"asset_id\": {{asset_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Retrieve all incidents",
+      "item": [
+        {
+          "name": "Get all - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAll incidents with status and assigned analyst.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get all - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nRead-only access.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get all - filter by severity",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents?severity=Critical",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ],
+              "query": [
+                {
+                  "key": "severity",
+                  "value": "Critical"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nOptional filters: status, severity.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get all - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo access to the full list.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Retrieve specific incident",
+      "item": [
+        {
+          "name": "Get - reporter views own incident",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nTrack own report.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nComplete information with notes.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get - invalid id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/99999",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "99999"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUnknown id -> 404.\n\nExpected: HTTP 404"
+          }
+        },
+        {
+          "name": "Get - analyst not assigned (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAnalysts only see incidents assigned to them.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Assign incident to analyst",
+      "item": [
+        {
+          "name": "Status before assignment (rejected)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}/status",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}",
+                "status"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAn investigation cannot start without an assigned analyst.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Under Investigation\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Assign - admin to analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}/assign",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}",
+                "assign"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nVerified through the Users service, logged, and the analyst gets an Incident Assignment notification.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"analyst_id\": {{analyst_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Assign incident 2 to analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}/assign",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}",
+                "assign"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSecond assignment.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"analyst_id\": {{analyst_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Assign - user is not an analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}/assign",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}",
+                "assign"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nThe assignee must have the analyst role.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"analyst_id\": {{user_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Assign - by analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}/assign",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}",
+                "assign"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nOnly admins assign incidents.\n\nExpected: HTTP 403",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"analyst_id\": {{analyst_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Assign - non-existing incident",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/99999/assign",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "99999",
+                "assign"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUnknown incident -> 404.\n\nExpected: HTTP 404",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"analyst_id\": {{analyst_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Incident lifecycle",
+      "item": [
+        {
+          "name": "Open -> Closed (rejected)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}/status",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}",
+                "status"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSteps cannot be skipped.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Closed\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Open -> Under Investigation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}/status",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}",
+                "status"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nStep 1.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Under Investigation\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Under Investigation -> Mitigated",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}/status",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}",
+                "status"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nStep 2.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Mitigated\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Mitigated -> Resolved",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}/status",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}",
+                "status"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nStep 3, sets resolved_at.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Resolved\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Resolved -> Mitigated (rejected)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}/status",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}",
+                "status"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nGoing backwards is not allowed.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Mitigated\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Resolved -> Closed",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}/status",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}",
+                "status"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nStep 4, final state.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Closed\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Closed -> Open (rejected)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}/status",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}",
+                "status"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nClosed is final.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Open\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Status change - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}/status",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}",
+                "status"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUsers cannot modify status.\n\nExpected: HTTP 403",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Under Investigation\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Investigation notes",
+      "item": [
+        {
+          "name": "Add note - assigned analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}/notes",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}",
+                "notes"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAnalysis performed.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Analysis: ransomware strain identified as LockBit\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Add note - evidence",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}/notes",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}",
+                "notes"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nEvidence collected.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Evidence: memory dump and encrypted samples collected\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Add note - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}/notes",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}",
+                "notes"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nActions taken.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Action: server isolated and restored from backup\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Add note - empty content",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}/notes",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}",
+                "notes"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nValidation.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"   \"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Add note - closed incident",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident_id}}/notes",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident_id}}",
+                "notes"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nClosed incidents are read-only.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Too late\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Add note - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}/notes",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}",
+                "notes"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo access.\n\nExpected: HTTP 403",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"x\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get incident with notes",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_incidents}}/incidents/{{incident2_id}}",
+              "host": [
+                "{{base_incidents}}"
+              ],
+              "path": [
+                "incidents",
+                "{{incident2_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNotes are listed in order.\n\nExpected: HTTP 200"
+          }
+        }
+      ]
+    }
+  ]
+}

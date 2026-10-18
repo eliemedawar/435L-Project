@@ -1,0 +1,666 @@
+{
+  "info": {
+    "name": "Service 6 - Reports: summary, incidents, activity (Elie Medawar)",
+    "description": "Security Reports Service, port 5006. Reports are built from the other services' /internal/stats endpoints. Developed by: Elie Medawar.\n\nUses the users created by the Users collection (admin, rami, lara, nadia). Set the *_password variables locally first.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_reports",
+      "value": "http://127.0.0.1:5006"
+    },
+    {
+      "key": "base_users",
+      "value": "http://127.0.0.1:5001"
+    },
+    {
+      "key": "admin_username",
+      "value": "admin"
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "user_username",
+      "value": "rami"
+    },
+    {
+      "key": "user_password",
+      "value": ""
+    },
+    {
+      "key": "analyst_username",
+      "value": "lara"
+    },
+    {
+      "key": "analyst_password",
+      "value": ""
+    },
+    {
+      "key": "auditor_username",
+      "value": "nadia"
+    },
+    {
+      "key": "auditor_password",
+      "value": ""
+    },
+    {
+      "key": "token_admin",
+      "value": ""
+    },
+    {
+      "key": "token_user",
+      "value": ""
+    },
+    {
+      "key": "token_analyst",
+      "value": ""
+    },
+    {
+      "key": "token_auditor",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "analyst_id",
+      "value": ""
+    },
+    {
+      "key": "auditor_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Setup - log in",
+      "item": [
+        {
+          "name": "Login - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_admin\", json.data.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - regular user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_user\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"user_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{user_username}}\",\n  \"password\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_analyst\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"analyst_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{analyst_username}}\",\n  \"password\": \"{{analyst_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_auditor\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"auditor_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{auditor_username}}\",\n  \"password\": \"{{auditor_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "1. Security summary report",
+      "item": [
+        {
+          "name": "Summary - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_reports}}/reports/summary",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "summary"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUsers, assets, incidents, open incidents, critical threats.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Summary - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_reports}}/reports/summary",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "summary"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuditors may generate reports.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Summary - analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_reports}}/reports/summary",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "summary"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo report access.\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Summary - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_reports}}/reports/summary",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "summary"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo report access.\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Summary - no token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_reports}}/reports/summary",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "summary"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nMissing authentication.\n\nExpected: HTTP 401"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Incident report",
+      "item": [
+        {
+          "name": "Incident report - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_reports}}/reports/incidents",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nTotal, by severity, by status, by category.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Incident report - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_reports}}/reports/incidents",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuditor access.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Incident report - analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_reports}}/reports/incidents",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "incidents"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo access.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Activity report",
+      "item": [
+        {
+          "name": "Activity report - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_reports}}/reports/activity",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "activity"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nActivities, logins, failed logins, top actions.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Activity report - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_reports}}/reports/activity",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "activity"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuditor access.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Activity report - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_reports}}/reports/activity",
+              "host": [
+                "{{base_reports}}"
+              ],
+              "path": [
+                "reports",
+                "activity"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo access.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    }
+  ]
+}

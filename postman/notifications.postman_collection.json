@@ -1,0 +1,1461 @@
+{
+  "info": {
+    "name": "Service 8 - Notifications (Elie Medawar)",
+    "description": "Notification and Alert Management Service, port 5008. Developed by: Elie Medawar.\n\nUses the users created by the Users collection (admin, rami, lara, nadia). Set the *_password variables locally first.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_notifications",
+      "value": "http://127.0.0.1:5008"
+    },
+    {
+      "key": "base_users",
+      "value": "http://127.0.0.1:5001"
+    },
+    {
+      "key": "admin_username",
+      "value": "admin"
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "user_username",
+      "value": "rami"
+    },
+    {
+      "key": "user_password",
+      "value": ""
+    },
+    {
+      "key": "analyst_username",
+      "value": "lara"
+    },
+    {
+      "key": "analyst_password",
+      "value": ""
+    },
+    {
+      "key": "auditor_username",
+      "value": "nadia"
+    },
+    {
+      "key": "auditor_password",
+      "value": ""
+    },
+    {
+      "key": "token_admin",
+      "value": ""
+    },
+    {
+      "key": "token_user",
+      "value": ""
+    },
+    {
+      "key": "token_analyst",
+      "value": ""
+    },
+    {
+      "key": "token_auditor",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "analyst_id",
+      "value": ""
+    },
+    {
+      "key": "auditor_id",
+      "value": ""
+    },
+    {
+      "key": "notification_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Setup - log in",
+      "item": [
+        {
+          "name": "Login - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_admin\", json.data.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - regular user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_user\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"user_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{user_username}}\",\n  \"password\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_analyst\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"analyst_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{analyst_username}}\",\n  \"password\": \"{{analyst_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_auditor\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"auditor_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{auditor_username}}\",\n  \"password\": \"{{auditor_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "1. Create notification",
+      "item": [
+        {
+          "name": "Create - system notification",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"notification_id\", json.data.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAdmin notifies a user.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{user_id}},\n  \"title\": \"Security awareness training\",\n  \"message\": \"Mandatory training on Friday\",\n  \"notification_type\": \"System Notification\",\n  \"severity\": \"Low\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - threat alert",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nThreat Alert, High.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{user_id}},\n  \"title\": \"Malicious IP blocked\",\n  \"message\": \"185.220.101.4 tried to reach your laptop\",\n  \"notification_type\": \"Threat Alert\",\n  \"severity\": \"High\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - vulnerability alert to analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nVulnerability Alert, Critical.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{analyst_id}},\n  \"title\": \"Critical CVE\",\n  \"message\": \"CVE-2024-3400 affects the firewall\",\n  \"notification_type\": \"Vulnerability Alert\",\n  \"severity\": \"Critical\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - invalid type",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nType validation.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{user_id}},\n  \"title\": \"Security awareness training\",\n  \"message\": \"Mandatory training on Friday\",\n  \"notification_type\": \"Spam\",\n  \"severity\": \"Low\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - non-existing user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nuser_id must exist.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 99999,\n  \"title\": \"Security awareness training\",\n  \"message\": \"Mandatory training on Friday\",\n  \"notification_type\": \"System Notification\",\n  \"severity\": \"Low\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - missing fields",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nRequired fields.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Incomplete\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create - analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nOnly admins and services.\n\nExpected: HTTP 403",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{user_id}},\n  \"title\": \"Security awareness training\",\n  \"message\": \"Mandatory training on Friday\",\n  \"notification_type\": \"System Notification\",\n  \"severity\": \"Low\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Retrieve user notifications",
+      "item": [
+        {
+          "name": "User's own notifications",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/user/{{user_id}}",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "user",
+                "{{user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNewest first.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "User's unread notifications",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/user/{{user_id}}?status=Unread",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "user",
+                "{{user_id}}"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "Unread"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nOptional ?status filter.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Auditor views a user's notifications",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/user/{{user_id}}",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "user",
+                "{{user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nRead access.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Empty result (user with no notifications)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/user/{{auditor_id}}",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "user",
+                "{{auditor_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nReturns an empty list and a 'No notifications found' message.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Other user's notifications (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/user/{{analyst_id}}",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "user",
+                "{{analyst_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUsers only see their own.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Retrieve specific notification",
+      "item": [
+        {
+          "name": "Get - owner",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/{{notification_id}}",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notification_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nExisting notification.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get - invalid id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/99999",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "99999"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUnknown id -> 404.\n\nExpected: HTTP 404"
+          }
+        },
+        {
+          "name": "Get - another user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/{{notification_id}}",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notification_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNot the owner.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Mark as read",
+      "item": [
+        {
+          "name": "Mark read - another user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/{{notification_id}}/read",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notification_id}}",
+                "read"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nOnly the owner (or an admin).\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Mark read - owner",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/{{notification_id}}/read",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notification_id}}",
+                "read"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUnread -> Read, sets read_at.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Mark read - again",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/{{notification_id}}/read",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notification_id}}",
+                "read"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAlready read: no change.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Mark read - auditor (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/{{notification_id}}/read",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notification_id}}",
+                "read"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuditors are read-only.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Search notifications",
+      "item": [
+        {
+          "name": "Search by type",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/search?type=Threat Alert",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Threat Alert"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nType filter.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search by user and status",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/search?user={{user_id}}&status=Read",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "user",
+                  "value": "{{user_id}}"
+                },
+                {
+                  "key": "status",
+                  "value": "Read"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nCombined filters (AND).\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search by severity - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/search?severity=Critical",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "severity",
+                  "value": "Critical"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuditor search.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search - analyst (own only)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/search?status=Unread",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "Unread"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAnalysts only get their own.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search - no criteria",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/search",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "search"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAt least one filter.\n\nExpected: HTTP 400"
+          }
+        },
+        {
+          "name": "Search - invalid type",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/search?type=Spam",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "Spam"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nValidation.\n\nExpected: HTTP 400"
+          }
+        },
+        {
+          "name": "Search - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/search?status=Read",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "Read"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo search access.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Delete notification",
+      "item": [
+        {
+          "name": "Delete - analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/{{notification_id}}",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notification_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAdmins only.\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Delete - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/{{notification_id}}",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notification_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuthorized deletion (logged).\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Delete - already deleted",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_notifications}}/notifications/{{notification_id}}",
+              "host": [
+                "{{base_notifications}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notification_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUnknown id -> 404.\n\nExpected: HTTP 404"
+          }
+        }
+      ]
+    }
+  ]
+}
