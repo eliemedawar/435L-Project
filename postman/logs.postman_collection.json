@@ -1,0 +1,1877 @@
+{
+  "info": {
+    "name": "Service 5 - Security Audit Logging (Elie Medawar)",
+    "description": "Security Audit Logging Service, port 5005. Developed by: Elie Medawar.\n\nRequires the Users service (port 5001) and users created by the Users collection (admin, rami, lara, nadia). Set the *_password variables locally first.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.collectionVariables.set(\"today\", new Date().toISOString().slice(0, 10));"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_logs",
+      "value": "http://127.0.0.1:5005"
+    },
+    {
+      "key": "base_users",
+      "value": "http://127.0.0.1:5001"
+    },
+    {
+      "key": "admin_username",
+      "value": "admin"
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "user_username",
+      "value": "rami"
+    },
+    {
+      "key": "user_password",
+      "value": ""
+    },
+    {
+      "key": "analyst_username",
+      "value": "lara"
+    },
+    {
+      "key": "analyst_password",
+      "value": ""
+    },
+    {
+      "key": "auditor_username",
+      "value": "nadia"
+    },
+    {
+      "key": "auditor_password",
+      "value": ""
+    },
+    {
+      "key": "token_admin",
+      "value": ""
+    },
+    {
+      "key": "token_user",
+      "value": ""
+    },
+    {
+      "key": "token_analyst",
+      "value": ""
+    },
+    {
+      "key": "token_auditor",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "analyst_id",
+      "value": ""
+    },
+    {
+      "key": "log_id",
+      "value": ""
+    },
+    {
+      "key": "no_logs_user_id",
+      "value": "9999"
+    },
+    {
+      "key": "today",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Setup - log in",
+      "item": [
+        {
+          "name": "Login - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_admin\", json.data.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - regular user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_user\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"user_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{user_username}}\",\n  \"password\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_analyst\", json.data.token);",
+                  "if (json.data) pm.collectionVariables.set(\"analyst_id\", json.data.user.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{analyst_username}}\",\n  \"password\": \"{{analyst_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_auditor\", json.data.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSetup: log in and store the token.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{auditor_username}}\",\n  \"password\": \"{{auditor_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - wrong password (creates LOGIN_FAILED log)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nGenerates a failed-login audit record automatically.\n\nExpected: HTTP 401",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{user_username}}\",\n  \"password\": \"WrongPass1!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "1. Create log record",
+      "item": [
+        {
+          "name": "Create log - admin (Information)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"log_id\", json.data.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAdmin records a manual audit entry.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{user_id}},\n  \"action\": \"ACCOUNT_REVIEW\",\n  \"description\": \"Quarterly review of account activity\",\n  \"severity\": \"Information\",\n  \"related_service\": \"users\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create log - admin (Warning, other user)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSecond user, Warning severity.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{analyst_id}},\n  \"action\": \"POLICY_EXCEPTION\",\n  \"description\": \"Analyst accessed a restricted share\",\n  \"severity\": \"Warning\",\n  \"related_service\": \"assets\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create log - admin (Critical)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nCritical severity entry.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{analyst_id}},\n  \"action\": \"DATA_EXFILTRATION_SUSPECTED\",\n  \"description\": \"Large outbound transfer flagged on file server\",\n  \"severity\": \"Critical\",\n  \"related_service\": \"incidents\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create log - missing user_id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nRequired field validation -> 400.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"TEST_EVENT\",\n  \"description\": \"No user\",\n  \"severity\": \"Information\",\n  \"related_service\": \"users\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create log - invalid severity",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSeverity must be Information/Warning/Error/Critical.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{user_id}},\n  \"action\": \"TEST_EVENT\",\n  \"description\": \"Bad severity\",\n  \"severity\": \"Huge\",\n  \"related_service\": \"users\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create log - invalid related service",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nrelated_service must be one of the 9 services.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{user_id}},\n  \"action\": \"TEST_EVENT\",\n  \"description\": \"Bad service\",\n  \"severity\": \"Error\",\n  \"related_service\": \"pizza\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create log - non-existing user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nuser_id must reference an existing user.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 9999,\n  \"action\": \"TEST_EVENT\",\n  \"description\": \"Ghost\",\n  \"severity\": \"Error\",\n  \"related_service\": \"users\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Create log - analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nOnly admins (and internal services) create logs.\n\nExpected: HTTP 403",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": {{user_id}},\n  \"action\": \"TEST_EVENT\",\n  \"description\": \"Not allowed\",\n  \"severity\": \"Error\",\n  \"related_service\": \"users\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Retrieve all logs",
+      "item": [
+        {
+          "name": "Get all logs - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNewest first, with count.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get all logs - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuditor has read access.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get all logs - analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAnalysts cannot list all logs.\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Get all logs - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo audit log access.\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Get all logs - no token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_logs}}/logs",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nMissing authentication.\n\nExpected: HTTP 401"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Retrieve specific log",
+      "item": [
+        {
+          "name": "Get log by id - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/{{log_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "{{log_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nExisting log.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get log by id - analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/{{log_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "{{log_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAnalysts may view a specific log.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get log by id - invalid id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/99999",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "99999"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUnknown id -> 404.\n\nExpected: HTTP 404"
+          }
+        },
+        {
+          "name": "Get log by id - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/{{log_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "{{log_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo access.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Search logs",
+      "item": [
+        {
+          "name": "Search by user id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?user={{user_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "user",
+                  "value": "{{user_id}}"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nFilter by user id.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search by username",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?user={{user_username}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "user",
+                  "value": "{{user_username}}"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nThe same filter also accepts a username.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search by action (failed logins)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?action=LOGIN_FAILED",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "LOGIN_FAILED"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAction filter (case-insensitive).\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search by severity",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?severity=Warning",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "severity",
+                  "value": "Warning"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSeverity filter.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search by related service",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?service=users",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "service",
+                  "value": "users"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nRelated service filter.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search by date (today)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?date={{today}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "{{today}}"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSingle day (YYYY-MM-DD).\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search by date range",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?date_from=2026-01-01&date_to={{today}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "date_from",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "date_to",
+                  "value": "{{today}}"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\ndate_from / date_to inclusive.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search combined criteria",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?user={{admin_username}}&action=LOGIN_SUCCESS",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "user",
+                  "value": "{{admin_username}}"
+                },
+                {
+                  "key": "action",
+                  "value": "LOGIN_SUCCESS"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nFilters are combined with AND.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search - analyst allowed",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?severity=Critical",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "severity",
+                  "value": "Critical"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAnalysts may search logs.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Search - invalid date format",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?date=17-10-2026",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "17-10-2026"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nValidation -> 400.\n\nExpected: HTTP 400"
+          }
+        },
+        {
+          "name": "Search - no criteria",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAt least one filter is required -> 400.\n\nExpected: HTTP 400"
+          }
+        },
+        {
+          "name": "Search - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?severity=Warning",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "severity",
+                  "value": "Warning"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo access.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Logs by user",
+      "item": [
+        {
+          "name": "Logs by user - user with logs",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/user/{{user_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "user",
+                "{{user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAll activity of one user.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Logs by user - user with no logs",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/user/{{no_logs_user_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "user",
+                "{{no_logs_user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nEmpty list with a 'No logs found' message.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Logs by user - analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/user/{{user_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "user",
+                "{{user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nNo access.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Delete logs & immutability",
+      "item": [
+        {
+          "name": "Delete log - analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/{{log_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "{{log_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAnalysts cannot delete.\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Delete log - auditor (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/{{log_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "{{log_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuditors are read-only.\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Delete log - admin (success)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/{{log_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "{{log_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuthorized deletion. The deletion itself is logged as LOG_DELETED.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Delete log - already deleted",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/{{log_id}}",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "{{log_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSame id again -> 404.\n\nExpected: HTTP 404"
+          }
+        },
+        {
+          "name": "Update log - not allowed (immutable)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 405\", () => pm.response.to.have.status(405));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/1",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "1"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nLogs cannot be modified -> 405.\n\nExpected: HTTP 405",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"tampered\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Search the LOG_DELETED record",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_logs}}/logs/search?action=LOG_DELETED",
+              "host": [
+                "{{base_logs}}"
+              ],
+              "path": [
+                "logs",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "LOG_DELETED"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nShows the deletion was audited.\n\nExpected: HTTP 200"
+          }
+        }
+      ]
+    }
+  ]
+}
