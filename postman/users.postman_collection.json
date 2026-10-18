@@ -1,0 +1,1561 @@
+{
+  "info": {
+    "name": "Service 1 - Users & Identity (Elie Medawar)",
+    "description": "Users and Identity Management Service, port 5001. Developed by: Elie Medawar.\n\nRun the folders in order. Set the *_password collection variables locally first (they are empty on purpose so no password is committed).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_users",
+      "value": "http://127.0.0.1:5001"
+    },
+    {
+      "key": "admin_username",
+      "value": "admin"
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "user_password",
+      "value": ""
+    },
+    {
+      "key": "analyst_password",
+      "value": ""
+    },
+    {
+      "key": "auditor_password",
+      "value": ""
+    },
+    {
+      "key": "token_admin",
+      "value": ""
+    },
+    {
+      "key": "token_user",
+      "value": ""
+    },
+    {
+      "key": "token_analyst",
+      "value": ""
+    },
+    {
+      "key": "token_auditor",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "analyst_id",
+      "value": ""
+    },
+    {
+      "key": "temp_user_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Login (admin)",
+      "item": [
+        {
+          "name": "Login - admin (success)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_admin\", json.data.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuthenticates the Security Administrator and stores the JWT in {{token_admin}}.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - wrong password (failure)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nFailed authentication: wrong password. Recorded as LOGIN_FAILED in the audit log.\n\nExpected: HTTP 401",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\",\n  \"password\": \"WrongPass1!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - missing password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nValidation error: password not provided.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Register users",
+      "item": [
+        {
+          "name": "Register - regular user (self-registration)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"user_id\", json.data.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/register",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nPublic registration. With no token the role must be 'user'.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Rami Haddad\",\n  \"username\": \"rami\",\n  \"email\": \"rami@corp.com\",\n  \"password\": \"{{user_password}}\",\n  \"department\": \"Finance\",\n  \"role\": \"user\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Register - analyst (by admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"analyst_id\", json.data.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/register",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAn admin token allows creating privileged roles.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Lara Khoury\",\n  \"username\": \"lara\",\n  \"email\": \"lara@corp.com\",\n  \"password\": \"{{analyst_password}}\",\n  \"department\": \"SOC\",\n  \"role\": \"analyst\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Register - auditor (by admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/register",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAn admin token allows creating privileged roles.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Nadia Saab\",\n  \"username\": \"nadia\",\n  \"email\": \"nadia@corp.com\",\n  \"password\": \"{{auditor_password}}\",\n  \"department\": \"Compliance\",\n  \"role\": \"auditor\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Register - temporary user (to delete later)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"temp_user_id\", json.data.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/register",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nCreates a user that the Delete request removes.\n\nExpected: HTTP 201",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Temp Employee\",\n  \"username\": \"temp.employee\",\n  \"email\": \"temp@corp.com\",\n  \"password\": \"{{user_password}}\",\n  \"department\": \"HR\",\n  \"role\": \"user\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Register - duplicate username",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/register",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUsernames are unique (case-insensitive) -> 409 Conflict.\n\nExpected: HTTP 409",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Another Rami\",\n  \"username\": \"RAMI\",\n  \"email\": \"rami2@corp.com\",\n  \"password\": \"{{user_password}}\",\n  \"department\": \"IT\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Register - invalid email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/register",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nEmail format validation -> 400.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Bad Email\",\n  \"username\": \"bademail\",\n  \"email\": \"not-an-email\",\n  \"password\": \"{{user_password}}\",\n  \"department\": \"IT\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Register - weak password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/register",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nPassword rules: 8-64 chars, upper, lower, digit, special -> 400.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Weak Pass\",\n  \"username\": \"weakpass\",\n  \"email\": \"weak@corp.com\",\n  \"password\": \"abc\",\n  \"department\": \"IT\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Register - missing required fields",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/register",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nRequired fields validation -> 400.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"incomplete\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Register - unexpected field",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/register",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUnknown fields are rejected -> 400.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"X Y\",\n  \"username\": \"xyuser\",\n  \"email\": \"xy@corp.com\",\n  \"password\": \"{{user_password}}\",\n  \"department\": \"IT\",\n  \"is_admin\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Register - self-register as admin (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/register",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nWithout an admin token, privileged roles are refused -> 403 and logged.\n\nExpected: HTTP 403",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Sneaky\",\n  \"username\": \"sneaky\",\n  \"email\": \"sneaky@corp.com\",\n  \"password\": \"{{user_password}}\",\n  \"department\": \"IT\",\n  \"role\": \"admin\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Login other roles",
+      "item": [
+        {
+          "name": "Login - regular user (by email)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_user\", json.data.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nLogin also works with the email address.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"rami@corp.com\",\n  \"password\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - analyst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_analyst\", json.data.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nStores {{token_analyst}}.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"lara\",\n  \"password\": \"{{analyst_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));",
+                  "const json = pm.response.json();",
+                  "if (json.data) pm.collectionVariables.set(\"token_auditor\", json.data.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/login",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nStores {{token_auditor}}.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"nadia\",\n  \"password\": \"{{auditor_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Retrieve users",
+      "item": [
+        {
+          "name": "Get all users - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nReturns {count, users[]}.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get all users - auditor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAuditor has read access.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get users filtered by role",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users?role=analyst",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "role",
+                  "value": "analyst"
+                }
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nOptional ?role= filter.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get all users - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nInsufficient permissions -> 403, logged as UNAUTHORIZED_ACCESS.\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Get all users - analyst (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAnalysts have no user management access -> 403.\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Get all users - no token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_users}}/users",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nMissing authentication -> 401.\n\nExpected: HTTP 401"
+          }
+        },
+        {
+          "name": "Get user by username - existing",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/lara",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "lara"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nExisting user -> 200.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get user by username - non-existing",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/ghost",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "ghost"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUnknown user -> 404.\n\nExpected: HTTP 404"
+          }
+        },
+        {
+          "name": "Get own info - regular user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/rami",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "rami"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nA user can view their own record.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Get another user - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/lara",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "lara"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nA user cannot view other users -> 403.\n\nExpected: HTTP 403"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Update users",
+      "item": [
+        {
+          "name": "Update own info - regular user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/{{user_id}}",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "{{user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUsers may update name, email and department.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"department\": \"Accounting\",\n  \"full_name\": \"Rami Haddad\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update another user - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/{{analyst_id}}",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "{{analyst_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nA user can only update themselves -> 403.\n\nExpected: HTTP 403",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"department\": \"X\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update own role - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/{{user_id}}",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "{{user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nOnly admins change roles -> 403.\n\nExpected: HTTP 403",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"admin\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update role - admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/{{analyst_id}}",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "{{analyst_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nAdmin changes a role; logged as ROLE_CHANGED.\n\nExpected: HTTP 200",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"analyst\",\n  \"department\": \"Security Operations Center\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update - invalid role value",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/{{user_id}}",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "{{user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nInvalid enum value -> 400.\n\nExpected: HTTP 400",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"superuser\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update - non-existing user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/9999",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "9999"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nUnknown id -> 404.\n\nExpected: HTTP 404",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"department\": \"X\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Delete users",
+      "item": [
+        {
+          "name": "Delete user - regular user (forbidden)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/{{temp_user_id}}",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "{{temp_user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nOnly admins delete users -> 403.\n\nExpected: HTTP 403"
+          }
+        },
+        {
+          "name": "Delete user - admin (success)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/{{temp_user_id}}",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "{{temp_user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nDeletes the temporary user; logged as USER_DELETED.\n\nExpected: HTTP 200"
+          }
+        },
+        {
+          "name": "Delete user - already deleted",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"Uses the standard response format\", () => pm.expect(pm.response.json()).to.have.property(\"status\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_users}}/users/{{temp_user_id}}",
+              "host": [
+                "{{base_users}}"
+              ],
+              "path": [
+                "users",
+                "{{temp_user_id}}"
+              ]
+            },
+            "description": "**Developed by: Elie Medawar**\n\nSame id again -> 404.\n\nExpected: HTTP 404"
+          }
+        }
+      ]
+    }
+  ]
+}
