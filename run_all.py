@@ -10,6 +10,7 @@ import sys
 import time
 from pathlib import Path
 
+from common.app_factory import init_database
 from common.config import SERVICE_PORTS
 
 ROOT = Path(__file__).resolve().parent
@@ -17,6 +18,7 @@ ROOT = Path(__file__).resolve().parent
 
 def main():
     wanted = sys.argv[1:] or list(SERVICE_PORTS)
+    init_database()   # create tables once, so the services don't race to create them
     processes = []
     for name in wanted:
         if name not in SERVICE_PORTS:

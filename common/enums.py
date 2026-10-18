@@ -12,7 +12,16 @@ NOTIFICATION_STATUSES = ("Unread", "Read")
 INCIDENT_FLOW = ("Open", "Under Investigation", "Mitigated", "Resolved", "Closed")
 VULNERABILITY_FLOW = ("Open", "Under Investigation", "In Progress", "Resolved", "Closed")
 
-THREAT_TYPES = ("IP Address", "Domain", "File Hash", "Malware Signature", "Other")
+INCIDENT_CATEGORIES = (
+    "Malware",
+    "Unauthorized Access",
+    "Phishing",
+    "Data Leakage",
+    "Account Compromise",
+    "Denial of Service",
+    "Other",
+)
+THREAT_TYPES =("IP Address", "Domain", "File Hash", "Malware Signature", "Other")
 NOTIFICATION_TYPES = (
     "Incident Assignment",
     "Security Alert",

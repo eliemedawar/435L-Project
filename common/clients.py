@@ -46,13 +46,18 @@ def send_notification(user_id, title, message, ntype, severity):
         return False
 
 
-def get_service(service_name, path, params=None):
-    """GET another service's endpoint with the service key. Returns the response's "data", or None on failure."""
+def fetch_service(service_name, path, params=None):
+    """GET another service's endpoint with the service key.
+    Returns (status_code, data): status_code is None when the service could not be reached."""
     try:
         response = requests.get(f"{service_url(service_name)}{path}", params=params,
                                 headers=_service_headers(), timeout=Config.HTTP_TIMEOUT)
-        if not response.ok:
-            return None
-        return response.json().get("data")
+        return response.status_code, response.json().get("data")
     except (requests.RequestException, ValueError):
-        return None
+        return None, None
+
+
+def get_service(service_name, path, params=None):
+    """Like fetch_service, but only returns the "data" of a successful response (None otherwise)."""
+    status, data = fetch_service(service_name, path, params)
+    return data if status == 200 else None
