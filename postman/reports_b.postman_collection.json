@@ -1,0 +1,691 @@
+{
+  "info": {
+    "name": "reports_b (Marc Bteich)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Developed by: Marc Bteich. Start all services and provision accounts with database.seed or the combined Users folder. Private passwords/service_key must be set locally. Run folders in order; destructive test data is labelled."
+  },
+  "variable": [
+    {
+      "key": "base_users",
+      "value": "http://127.0.0.1:5001"
+    },
+    {
+      "key": "base_assets",
+      "value": "http://127.0.0.1:5002"
+    },
+    {
+      "key": "base_incidents",
+      "value": "http://127.0.0.1:5003"
+    },
+    {
+      "key": "base_threats",
+      "value": "http://127.0.0.1:5004"
+    },
+    {
+      "key": "base_logs",
+      "value": "http://127.0.0.1:5005"
+    },
+    {
+      "key": "base_reports",
+      "value": "http://127.0.0.1:5006"
+    },
+    {
+      "key": "base_vulnerabilities",
+      "value": "http://127.0.0.1:5007"
+    },
+    {
+      "key": "base_notifications",
+      "value": "http://127.0.0.1:5008"
+    },
+    {
+      "key": "base_playbooks",
+      "value": "http://127.0.0.1:5009"
+    },
+    {
+      "key": "admin_username",
+      "value": "admin"
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "token_admin",
+      "value": ""
+    },
+    {
+      "key": "analyst_username",
+      "value": "lara"
+    },
+    {
+      "key": "analyst_password",
+      "value": ""
+    },
+    {
+      "key": "token_analyst",
+      "value": ""
+    },
+    {
+      "key": "auditor_username",
+      "value": "nadia"
+    },
+    {
+      "key": "auditor_password",
+      "value": ""
+    },
+    {
+      "key": "token_auditor",
+      "value": ""
+    },
+    {
+      "key": "user_username",
+      "value": "rami"
+    },
+    {
+      "key": "user_password",
+      "value": ""
+    },
+    {
+      "key": "token_user",
+      "value": ""
+    },
+    {
+      "key": "service_key",
+      "value": ""
+    },
+    {
+      "key": "owner_id",
+      "value": ""
+    },
+    {
+      "key": "analyst_id",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "auditor_id",
+      "value": ""
+    },
+    {
+      "key": "threat_id",
+      "value": ""
+    },
+    {
+      "key": "vulnerability_id",
+      "value": ""
+    },
+    {
+      "key": "playbook_id",
+      "value": ""
+    },
+    {
+      "key": "action_id",
+      "value": ""
+    },
+    {
+      "key": "vulnerability_asset_id",
+      "value": ""
+    },
+    {
+      "key": "indicator_domain",
+      "value": "postman.example.test"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Login existing accounts",
+      "item": [
+        {
+          "name": "Login admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login admin. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_admin\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"owner_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login analyst",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login analyst. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{analyst_username}}\",\n  \"password\": \"{{analyst_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_analyst\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"analyst_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login auditor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login auditor. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{auditor_username}}\",\n  \"password\": \"{{auditor_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_auditor\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"auditor_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login user. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{user_username}}\",\n  \"password\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_user\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"user_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1. Report access and generation",
+      "item": [
+        {
+          "name": "Generate assets report (admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/assets",
+            "description": "Developed by: Marc Bteich. Generate assets report (admin). Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Generate assets report (auditor)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/assets",
+            "description": "Developed by: Marc Bteich. Generate assets report (auditor). Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "No token assets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_reports}}/reports/assets",
+            "description": "Developed by: Marc Bteich. No token assets. Expected HTTP 401. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analyst denied assets",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/assets",
+            "description": "Developed by: Marc Bteich. Analyst denied assets. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "User denied assets",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/assets",
+            "description": "Developed by: Marc Bteich. User denied assets. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Generate threats report (admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/threats",
+            "description": "Developed by: Marc Bteich. Generate threats report (admin). Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Generate threats report (auditor)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/threats",
+            "description": "Developed by: Marc Bteich. Generate threats report (auditor). Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "No token threats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_reports}}/reports/threats",
+            "description": "Developed by: Marc Bteich. No token threats. Expected HTTP 401. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analyst denied threats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/threats",
+            "description": "Developed by: Marc Bteich. Analyst denied threats. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "User denied threats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/threats",
+            "description": "Developed by: Marc Bteich. User denied threats. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Generate vulnerabilities report (admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Generate vulnerabilities report (admin). Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Generate vulnerabilities report (auditor)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Generate vulnerabilities report (auditor). Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "No token vulnerabilities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_reports}}/reports/vulnerabilities",
+            "description": "Developed by: Marc Bteich. No token vulnerabilities. Expected HTTP 401. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analyst denied vulnerabilities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Analyst denied vulnerabilities. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "User denied vulnerabilities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": "{{base_reports}}/reports/vulnerabilities",
+            "description": "Developed by: Marc Bteich. User denied vulnerabilities. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

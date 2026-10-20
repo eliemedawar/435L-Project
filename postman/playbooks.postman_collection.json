@@ -1,0 +1,1140 @@
+{
+  "info": {
+    "name": "playbooks (Marc Bteich)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Developed by: Marc Bteich. Start all services and provision accounts with database.seed or the combined Users folder. Private passwords/service_key must be set locally. Run folders in order; destructive test data is labelled."
+  },
+  "variable": [
+    {
+      "key": "base_users",
+      "value": "http://127.0.0.1:5001"
+    },
+    {
+      "key": "base_assets",
+      "value": "http://127.0.0.1:5002"
+    },
+    {
+      "key": "base_incidents",
+      "value": "http://127.0.0.1:5003"
+    },
+    {
+      "key": "base_threats",
+      "value": "http://127.0.0.1:5004"
+    },
+    {
+      "key": "base_logs",
+      "value": "http://127.0.0.1:5005"
+    },
+    {
+      "key": "base_reports",
+      "value": "http://127.0.0.1:5006"
+    },
+    {
+      "key": "base_vulnerabilities",
+      "value": "http://127.0.0.1:5007"
+    },
+    {
+      "key": "base_notifications",
+      "value": "http://127.0.0.1:5008"
+    },
+    {
+      "key": "base_playbooks",
+      "value": "http://127.0.0.1:5009"
+    },
+    {
+      "key": "admin_username",
+      "value": "admin"
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "token_admin",
+      "value": ""
+    },
+    {
+      "key": "analyst_username",
+      "value": "lara"
+    },
+    {
+      "key": "analyst_password",
+      "value": ""
+    },
+    {
+      "key": "token_analyst",
+      "value": ""
+    },
+    {
+      "key": "auditor_username",
+      "value": "nadia"
+    },
+    {
+      "key": "auditor_password",
+      "value": ""
+    },
+    {
+      "key": "token_auditor",
+      "value": ""
+    },
+    {
+      "key": "user_username",
+      "value": "rami"
+    },
+    {
+      "key": "user_password",
+      "value": ""
+    },
+    {
+      "key": "token_user",
+      "value": ""
+    },
+    {
+      "key": "service_key",
+      "value": ""
+    },
+    {
+      "key": "owner_id",
+      "value": ""
+    },
+    {
+      "key": "analyst_id",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "auditor_id",
+      "value": ""
+    },
+    {
+      "key": "threat_id",
+      "value": ""
+    },
+    {
+      "key": "vulnerability_id",
+      "value": ""
+    },
+    {
+      "key": "playbook_id",
+      "value": ""
+    },
+    {
+      "key": "action_id",
+      "value": ""
+    },
+    {
+      "key": "vulnerability_asset_id",
+      "value": ""
+    },
+    {
+      "key": "indicator_domain",
+      "value": "postman.example.test"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Login existing accounts",
+      "item": [
+        {
+          "name": "Login admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login admin. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_admin\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"owner_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login analyst",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login analyst. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{analyst_username}}\",\n  \"password\": \"{{analyst_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_analyst\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"analyst_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login auditor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login auditor. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{auditor_username}}\",\n  \"password\": \"{{auditor_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_auditor\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"auditor_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login user. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{user_username}}\",\n  \"password\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_user\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"user_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1. Ordered workflow",
+      "item": [
+        {
+          "name": "Create playbook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks",
+            "description": "Developed by: Marc Bteich. Create playbook. Expected HTTP 201. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman laboratory response\",\n  \"description\": \"Lab procedure\",\n  \"incident_category\": \"Malware\",\n  \"severity\": \"High\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"playbook_id\",body.data.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List playbooks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks",
+            "description": "Developed by: Marc Bteich. List playbooks. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Add second step first",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks/{{playbook_id}}/actions",
+            "description": "Developed by: Marc Bteich. Add second step first. Expected HTTP 201. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Contain host\",\n  \"step_number\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Add first step",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks/{{playbook_id}}/actions",
+            "description": "Developed by: Marc Bteich. Add first step. Expected HTTP 201. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Collect evidence\",\n  \"step_number\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"action_id\",body.data.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Verify ordered actions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks/{{playbook_id}}",
+            "description": "Developed by: Marc Bteich. Verify ordered actions. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "pm.test(\"Ordered steps\", () => pm.expect(body.data.actions.map(a=>a.step_number)).to.eql([1,2]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Duplicate step rejected",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks/{{playbook_id}}/actions",
+            "description": "Developed by: Marc Bteich. Duplicate step rejected. Expected HTTP 409. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Duplicate\",\n  \"step_number\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cannot skip Pending",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/actions/{{action_id}}/status",
+            "description": "Developed by: Marc Bteich. Cannot skip Pending. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Completed\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Start assigned action",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/actions/{{action_id}}/status",
+            "description": "Developed by: Marc Bteich. Start assigned action. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"In Progress\",\n  \"assigned_user_id\": {{analyst_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Complete action",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/actions/{{action_id}}/status",
+            "description": "Developed by: Marc Bteich. Complete action. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Completed\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "pm.test(\"Completion recorded\",()=>pm.expect(body.data.completion_date).to.be.a(\"string\"));",
+                  "pm.test(\"History preserved\",()=>pm.expect(body.data.execution_history.map(e=>e.to_status)).to.eql([\"Pending\",\"In Progress\",\"Completed\"]));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Negative tests",
+      "item": [
+        {
+          "name": "No token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_playbooks}}/playbooks",
+            "description": "Developed by: Marc Bteich. No token. Expected HTTP 401. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "User denied",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks",
+            "description": "Developed by: Marc Bteich. User denied. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analyst create denied",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks",
+            "description": "Developed by: Marc Bteich. Analyst create denied. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman laboratory response\",\n  \"description\": \"Lab procedure\",\n  \"incident_category\": \"Malware\",\n  \"severity\": \"High\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Auditor action denied",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks/{{playbook_id}}/actions",
+            "description": "Developed by: Marc Bteich. Auditor action denied. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"x\",\n  \"step_number\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Missing playbook",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks/2147483647",
+            "description": "Developed by: Marc Bteich. Missing playbook. Expected HTTP 404. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Missing action",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/actions/2147483647/status",
+            "description": "Developed by: Marc Bteich. Missing action. Expected HTTP 404. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"In Progress\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invalid step",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks/{{playbook_id}}/actions",
+            "description": "Developed by: Marc Bteich. Invalid step. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"x\",\n  \"step_number\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Missing assigned user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks/{{playbook_id}}/actions",
+            "description": "Developed by: Marc Bteich. Missing assigned user. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"x\",\n  \"step_number\": 3,\n  \"assigned_user_id\": 2147483647\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Completed cannot change",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/actions/{{action_id}}/status",
+            "description": "Developed by: Marc Bteich. Completed cannot change. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Pending\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invalid category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks",
+            "description": "Developed by: Marc Bteich. Invalid category. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman laboratory response\",\n  \"description\": \"Lab procedure\",\n  \"incident_category\": \"bad\",\n  \"severity\": \"High\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Empty body",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks",
+            "description": "Developed by: Marc Bteich. Empty body. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Cascade deletion",
+      "item": [
+        {
+          "name": "Delete playbook",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks/{{playbook_id}}",
+            "description": "Developed by: Marc Bteich. Delete playbook. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Deleted playbook",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_playbooks}}/playbooks/{{playbook_id}}",
+            "description": "Developed by: Marc Bteich. Deleted playbook. Expected HTTP 404. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cascaded action missing",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_playbooks}}/actions/{{action_id}}/status",
+            "description": "Developed by: Marc Bteich. Cascaded action missing. Expected HTTP 404. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"In Progress\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

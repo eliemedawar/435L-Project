@@ -21,7 +21,7 @@ Keep `DATABASE_URL` empty for SQLite. Keep `.env`, passwords, and JWTs private.
 The teammates must share matching secrets when their services run together.
 
 The development database has already been initialized on Marc's machine with all
-ten tables and no user accounts. On a fresh clone, before starting any services,
+ten tables and labelled sample accounts/data from database.seed. On a fresh clone, before starting any services,
 initialize the full schema once with the following command. It refuses to overwrite
 an existing database:
 
@@ -30,31 +30,14 @@ an existing database:
 ```
 
 `schema.sql` targets **SQLite development**, as permitted by the plan. It is not a
-MySQL import script. The five tables owned by future B services are present in the
-schema, but their services and ORM models have not been implemented in this step.
-The existing six ORM tables (including Assets) match the script's columns, types,
-nullability and foreign-key deletion rules. Status transitions, IP/CVE formats,
-and audit immutability also need application validation; SQL enum checks alone
-do not enforce these rules. Existing Logs code prevents ORM updates to audit logs.
+MySQL import script. All Person B services and models are now implemented. The
+seed script provisions labelled samples and random private account passwords in
+`.local/seed-credentials.json`, which is excluded from Git.
 
-Create your first administrator using Elie's existing command. It asks for the
-password privately; the password must satisfy his password rules:
-
-```powershell
-.\.venv\Scripts\python.exe -m services.users.create_admin --username admin --email marc@example.test --full-name "Marc Bteich" --department Security
-.\.venv\Scripts\python.exe run_all.py users logs assets
-```
-
-Stop with Ctrl+C. To run only Assets when Users and Logs are already running:
-
-```powershell
-.\.venv\Scripts\python.exe -m services.assets.app
-```
-
-Use the Users service to log in and create an analyst, auditor and regular user
-as admin. Elie's Users Postman collection provides those requests. The Assets
-collection defaults to account names `admin`, `lara`, `nadia`, and `rami`; adjust
-them to match your actual accounts. No demo passwords or accounts are preloaded.
+On this machine, the database and accounts have already been configured. For a
+fresh development installation, run `python -m database.seed`, then `python run_all.py`
+using the virtual environment. Seeding is additive and never resets an existing password.
+The collections use admin, lara, nadia and rami; keep credentials private.
 
 ## Understand the implementation
 
@@ -138,47 +121,14 @@ services or submission evidence. Test databases are removed after a successful r
 
 ## Postman and screenshots
 
-Import `postman/assets.postman_collection.json` (50 requests). Set the four account
-names/passwords and `service_key` in a private local Postman environment. Do not
-export secrets or populated tokens into Git. Folders 0–3 can be run in order;
-folder 4 is a separate manual conflict test. Login saves tokens and owner_id;
-asset creation saves asset_id. Sample requests intentionally insert multiple assets;
-repeated runs add more samples. Each request has Marc's full name, expected status
-and response assertions. Automated HTTP tests have run; the Postman GUI collection
-has not been executed or photographed by Codex.
+The Assets collection now contains **55 requests** and has been executed successfully
+through Newman (Postman Runtime). All folders run in order. Folder 4 automatically
+creates and cleans up a linked-vulnerability fixture through the implemented API;
+no manual SQL setup is required. Never export private passwords, service keys or
+populated tokens into Git.
 
-For folder 4, create an asset through Postman, set `linked_asset_id` to its ID, then
-insert a clearly identified test vulnerability using a database tool connected to
-your development database. Bind `:asset_id` to that actual ID:
-
-```sql
-PRAGMA foreign_keys = ON;
-INSERT INTO vulnerabilities
- (title, description, cve_id, cvss_score, severity, asset_id, discovery_source, status, created_at)
-VALUES
- ('Assets FK test', 'Temporary test fixture', 'CVE-2026-1234', 9.8, 'Critical',
-  :asset_id, 'Local test fixture', 'Open', CURRENT_TIMESTAMP);
-```
-
-Commit the database transaction, run folder 4 and expect 409. Confirm that the
-asset still exists. Remove only your temporary vulnerability row afterward. This
-is test data for verifying FK protection; it is not a claim about a real CVE or
-evidence that Service 7 exists.
-
-Capture screenshots yourself from your running system:
-
-1. Multiple successful creates, with request/response and actual inserted rows.
-2. Update request/response and before/after database rows.
-3. Successful delete, unauthorized delete, and rows confirming the outcome.
-4. List response showing details, criticality and status.
-5. Existing ID and missing-ID responses.
-6. Each of the five search criteria, combined filters and a no-match case.
-7. 400, 401, 403, 404 and the linked-record 409, showing actual input/output.
-8. Audit rows for create/update/delete and permission denial.
-9. All ten tables, PKs/FKs, relationships and real stored records. An ER diagram
-   and design explanation are still required for the later report work.
-
-Every caption must read `Marc Bteich – API title – what it does`. Hide passwords,
-tokens and service keys. Code screenshots do not count as operation evidence.
-Explain at least three APIs in the report and disclose where and why AI helped;
-review and adapt the implementation so you can defend it yourself.
+Actual execution records, genuine browser screenshots of the Newman reports,
+architecture/ER diagrams, the Word report draft and the detailed screenshot
+checklist are under `report/`. These captures are labelled execution reports and
+are not represented as Postman desktop screenshots. See `report/TOOLS.md` and
+`report/SCREENSHOT_CHECKLIST.md` for the complete workflow and evidence requirements.

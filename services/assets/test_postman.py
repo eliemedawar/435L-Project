@@ -14,7 +14,7 @@ class PostmanCollectionTests(unittest.TestCase):
         self.assertEqual(collection['info']['schema'],
                          'https://schema.getpostman.com/json/collection/v2.1.0/collection.json')
         requests = [item for folder in collection['item'] for item in folder['item']]
-        self.assertEqual(len(requests), 50)
+        self.assertEqual(len(requests), 55)
         routes = {(item['request']['method'], item['request']['url']) for item in requests}
         for method, path in [('POST','/assets'),('PUT','/assets/{{asset_id}}'),
                              ('DELETE','/assets/{{asset_id}}'),('GET','/assets'),
