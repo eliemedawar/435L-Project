@@ -47,8 +47,8 @@ class AssetValidator:
             result["ip_address"] = cls.ip(data["ip_address"])
         if "owner_id" in data:
             value = data["owner_id"]
-            if type(value) is not int or value < 1:
-                raise ValidationError("'owner_id' must be a positive integer")
+            if type(value) is not int or not 1 <= value <= 9223372036854775807:
+                raise ValidationError("'owner_id' must be a positive 64-bit integer")
             result["owner_id"] = value
         if not update:
             result.setdefault("status", "Active")
@@ -58,6 +58,8 @@ class AssetValidator:
 class AssetService:
     @staticmethod
     def get(asset_id):
+        if not 1 <= asset_id <= 9223372036854775807:
+            raise NotFoundError(f"Asset with id {asset_id} not found")
         asset = db.session.get(Asset, asset_id)
         if asset is None:
             raise NotFoundError(f"Asset with id {asset_id} not found")

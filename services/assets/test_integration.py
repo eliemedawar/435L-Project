@@ -167,7 +167,7 @@ class AssetsHTTPTests(unittest.TestCase):
         bad = [dict(asset_name=' '), dict(asset_name=12), dict(asset_name='x'*151), dict(asset_type='Laptop'),
                dict(asset_type=[]), dict(ip_address='999.1.2.3'), dict(ip_address=1), dict(ip_address='fe80::1%eth0'),
                dict(criticality='Urgent'), dict(criticality={}), dict(status='Broken'), dict(status=None),
-               dict(owner_id=True), dict(owner_id='1'), dict(owner_id=0), dict(owner_id=999999),
+               dict(owner_id=True), dict(owner_id='1'), dict(owner_id=0), dict(owner_id=999999), dict(owner_id=10**30),
                dict(department=''), dict(department=[]), dict(location=10), dict(operating_system=False),
                dict(unexpected='x')]
         before = self.sql('SELECT COUNT(*) FROM assets')[0][0]
@@ -206,6 +206,7 @@ class AssetsHTTPTests(unittest.TestCase):
         self.call('GET', '/assets?unknown=x', expected=400)
 
     def test_06_missing_records_and_internal_access(self):
+        self.call('GET', '/assets/999999999999999999999999999999', expected=404)
         for method in ('GET','PUT','DELETE'):
             kwargs = {'json':{'status':'Active'}} if method == 'PUT' else {}
             self.call(method, '/assets/999999', expected=404, **kwargs)
