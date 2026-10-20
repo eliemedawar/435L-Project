@@ -1,0 +1,1971 @@
+{
+  "info": {
+    "name": "Service 2 - Assets (Marc Bteich)",
+    "description": "Developed by: Marc Bteich. Run all folders in order with all services running. Folder 4 now provisions and cleans up its linked-record fixture automatically.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_assets",
+      "value": "http://127.0.0.1:5002"
+    },
+    {
+      "key": "base_users",
+      "value": "http://127.0.0.1:5001"
+    },
+    {
+      "key": "base_logs",
+      "value": "http://127.0.0.1:5005"
+    },
+    {
+      "key": "service_key",
+      "value": ""
+    },
+    {
+      "key": "asset_id",
+      "value": ""
+    },
+    {
+      "key": "owner_id",
+      "value": ""
+    },
+    {
+      "key": "linked_asset_id",
+      "value": ""
+    },
+    {
+      "key": "admin_username",
+      "value": "admin"
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "token_admin",
+      "value": ""
+    },
+    {
+      "key": "analyst_username",
+      "value": "lara"
+    },
+    {
+      "key": "analyst_password",
+      "value": ""
+    },
+    {
+      "key": "token_analyst",
+      "value": ""
+    },
+    {
+      "key": "auditor_username",
+      "value": "nadia"
+    },
+    {
+      "key": "auditor_password",
+      "value": ""
+    },
+    {
+      "key": "token_auditor",
+      "value": ""
+    },
+    {
+      "key": "user_username",
+      "value": "rami"
+    },
+    {
+      "key": "user_password",
+      "value": ""
+    },
+    {
+      "key": "token_user",
+      "value": ""
+    },
+    {
+      "key": "base_incidents",
+      "value": "http://127.0.0.1:5003"
+    },
+    {
+      "key": "base_threats",
+      "value": "http://127.0.0.1:5004"
+    },
+    {
+      "key": "base_reports",
+      "value": "http://127.0.0.1:5006"
+    },
+    {
+      "key": "base_vulnerabilities",
+      "value": "http://127.0.0.1:5007"
+    },
+    {
+      "key": "base_notifications",
+      "value": "http://127.0.0.1:5008"
+    },
+    {
+      "key": "base_playbooks",
+      "value": "http://127.0.0.1:5009"
+    },
+    {
+      "key": "analyst_id",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "auditor_id",
+      "value": ""
+    },
+    {
+      "key": "threat_id",
+      "value": ""
+    },
+    {
+      "key": "vulnerability_id",
+      "value": ""
+    },
+    {
+      "key": "playbook_id",
+      "value": ""
+    },
+    {
+      "key": "action_id",
+      "value": ""
+    },
+    {
+      "key": "vulnerability_asset_id",
+      "value": ""
+    },
+    {
+      "key": "indicator_domain",
+      "value": "postman.example.test"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Login existing accounts",
+      "item": [
+        {
+          "name": "Login admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Use an existing account. Set passwords in a private local environment before running.\nExpected HTTP 200. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"token_admin\", body.data.token);",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"owner_id\", body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login analyst",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Use an existing account. Set passwords in a private local environment before running.\nExpected HTTP 200. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{analyst_username}}\",\n  \"password\": \"{{analyst_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"token_analyst\", body.data.token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login auditor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Use an existing account. Set passwords in a private local environment before running.\nExpected HTTP 200. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{auditor_username}}\",\n  \"password\": \"{{auditor_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"token_auditor\", body.data.token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Use an existing account. Set passwords in a private local environment before running.\nExpected HTTP 200. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{user_username}}\",\n  \"password\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });",
+                  "if (pm.response.code === 200) pm.collectionVariables.set(\"token_user\", body.data.token);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1. Successful operations and searches",
+      "item": [
+        {
+          "name": "Create asset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. Capture the response and the corresponding database row. Saves asset_id for subsequent requests.\nExpected HTTP 201. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Lab Server\",\n  \"asset_type\": \"Server\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"Critical\",\n  \"status\": \"Active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });",
+                  "if (pm.response.code === 201) pm.collectionVariables.set(\"asset_id\", body.data.id);",
+                  "pm.test(\"Critical asset stored\", () => pm.expect(body.data.criticality).to.eql(\"Critical\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Workstation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. Deliberately creates a sample record for searches and screenshots. Repeated runs create more rows.\nExpected HTTP 201. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Workstation\",\n  \"asset_type\": \"Workstation\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"Low\",\n  \"status\": \"Active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Database",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. Deliberately creates a sample record for searches and screenshots. Repeated runs create more rows.\nExpected HTTP 201. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Database\",\n  \"asset_type\": \"Database\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"Medium\",\n  \"status\": \"Inactive\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Application",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. Deliberately creates a sample record for searches and screenshots. Repeated runs create more rows.\nExpected HTTP 201. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Application\",\n  \"asset_type\": \"Application\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"High\",\n  \"status\": \"Under Maintenance\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Network Device",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. Deliberately creates a sample record for searches and screenshots. Repeated runs create more rows.\nExpected HTTP 201. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Network Device\",\n  \"asset_type\": \"Network Device\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"High\",\n  \"status\": \"Active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Cloud Resource",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. Deliberately creates a sample record for searches and screenshots. Repeated runs create more rows.\nExpected HTTP 201. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Cloud Resource\",\n  \"asset_type\": \"Cloud Resource\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"Critical\",\n  \"status\": \"Active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List assets (auditor)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get asset before update (analyst)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{asset_id}}",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update asset (admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{asset_id}}",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Updated Postman Server\",\n  \"department\": \"IT\",\n  \"criticality\": \"High\",\n  \"status\": \"Under Maintenance\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get asset after update",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{asset_id}}",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search by name",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/search?name=Postman",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search by type",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/search?type=Server",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search by IP",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/search?ip=192.0.2.10",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search by department",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/search?department=IT",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search by criticality",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/search?criticality=High",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search by combined",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/search?type=Server&department=IT&criticality=High",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search by no matches",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/search?name=NoSuchAsset987",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Internal statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Service-Key",
+                "value": "{{service_key}}"
+              }
+            ],
+            "url": "{{base_assets}}/internal/stats",
+            "description": "Developed by: Marc Bteich. Set service_key locally from .env. Compare totals and by_type to actual database counts.\nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Internal asset lookup",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Service-Key",
+                "value": "{{service_key}}"
+              }
+            ],
+            "url": "{{base_assets}}/internal/assets/{{asset_id}}",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Inspect Assets audit records",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": "{{base_logs}}/logs/search?service=assets",
+            "description": "Developed by: Marc Bteich. Shows real ASSET_CREATED and ASSET_UPDATED events. Run again after deletion.\nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Invalid input and authorization",
+      "item": [
+        {
+          "name": "Missing token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 401. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Employee forbidden",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{asset_id}}",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 403. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analyst cannot list all",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 403. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Auditor cannot update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{asset_id}}",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 403. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Inactive\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analyst cannot delete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{asset_id}}",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 403. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Missing asset",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/2147483647",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 404. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Missing asset update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets/2147483647",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 404. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Inactive\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Missing asset deletion",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/2147483647",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 404. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Empty body",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invalid JSON",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{invalid",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Internal statistics reject JWT",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/internal/stats",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 401. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "invalid IP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Lab Server\",\n  \"asset_type\": \"Server\",\n  \"ip_address\": \"999.1.2.3\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"Critical\",\n  \"status\": \"Active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "invalid type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Lab Server\",\n  \"asset_type\": \"Invalid\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"Critical\",\n  \"status\": \"Active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "invalid criticality",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Lab Server\",\n  \"asset_type\": \"Server\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"Urgent\",\n  \"status\": \"Active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "invalid status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Lab Server\",\n  \"asset_type\": \"Server\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"Critical\",\n  \"status\": \"Broken\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "nonexistent owner",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Lab Server\",\n  \"asset_type\": \"Server\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": 2147483647,\n  \"location\": \"Lab\",\n  \"criticality\": \"Critical\",\n  \"status\": \"Active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "wrong owner type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Lab Server\",\n  \"asset_type\": \"Server\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": true,\n  \"location\": \"Lab\",\n  \"criticality\": \"Critical\",\n  \"status\": \"Active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "unknown field",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman Lab Server\",\n  \"asset_type\": \"Server\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"Critical\",\n  \"status\": \"Active\",\n  \"surprise\": \"x\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "missing name",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"\",\n  \"asset_type\": \"Server\",\n  \"ip_address\": \"192.0.2.10\",\n  \"operating_system\": \"Linux\",\n  \"department\": \"Security\",\n  \"owner_id\": {{owner_id}},\n  \"location\": \"Lab\",\n  \"criticality\": \"Critical\",\n  \"status\": \"Active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reject empty search",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/search",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reject invalid search enum",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/search?criticality=Urgent",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 400. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "SQL injection text returns no matches",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/search?name=%27%20OR%201%3D1%20--",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });",
+                  "pm.test(\"No matches\", () => pm.expect(body.data.count).to.eql(0));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Delete and verify audit",
+      "item": [
+        {
+          "name": "Delete asset (admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{asset_id}}",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Deleted asset returns 404",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{asset_id}}",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 404. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"error\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Verify deletion audit event",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": "{{base_logs}}/logs/search?service=assets&action=ASSET_DELETED",
+            "description": "Developed by: Marc Bteich. \nExpected HTTP 200. Uses the shared success/error JSON envelope."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"JSON envelope\", () => { pm.expect(body.status).to.eql(\"success\"); pm.expect(body.message).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. Automatic linked-record conflict fixture",
+      "item": [
+        {
+          "name": "Create linked asset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. Create linked asset. Expected HTTP 201. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman FK fixture\",\n  \"asset_type\": \"Server\",\n  \"ip_address\": \"192.0.2.220\",\n  \"owner_id\": {{owner_id}},\n  \"department\": \"Lab\",\n  \"criticality\": \"High\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"linked_asset_id\",body.data.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Link vulnerability",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Link vulnerability. Expected HTTP 201. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Synthetic Postman vulnerability\",\n  \"description\": \"Lab scenario only\",\n  \"cve_id\": \"CVE-2026-12345\",\n  \"cvss_score\": 9.8,\n  \"severity\": \"Low\",\n  \"asset_id\": {{linked_asset_id}},\n  \"discovery_source\": \"Postman lab\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"linked_vulnerability_id\",body.data.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Linked vulnerability prevents deletion",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{linked_asset_id}}",
+            "description": "Developed by: Marc Bteich. Linked vulnerability prevents deletion. Expected HTTP 409. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Linked asset preserved",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{linked_asset_id}}",
+            "description": "Developed by: Marc Bteich. Linked asset preserved. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Remove fixture vulnerability",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/{{linked_vulnerability_id}}",
+            "description": "Developed by: Marc Bteich. Remove fixture vulnerability. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Remove fixture asset",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{linked_asset_id}}",
+            "description": "Developed by: Marc Bteich. Remove fixture asset. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

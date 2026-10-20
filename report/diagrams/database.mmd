@@ -1,0 +1,119 @@
+erDiagram
+    assets {
+        INTEGER id PK
+        VARCHAR asset_name
+        VARCHAR asset_type
+        VARCHAR ip_address
+        VARCHAR operating_system
+        INTEGER owner_id FK
+        VARCHAR department
+        VARCHAR location
+        VARCHAR criticality
+        VARCHAR status
+    }
+    users ||--o{ assets : "owner_id"
+    incidents {
+        INTEGER id PK
+        VARCHAR title
+        VARCHAR description
+        VARCHAR category
+        VARCHAR severity
+        INTEGER reporter_id FK
+        INTEGER asset_id FK
+        INTEGER assigned_analyst_id FK
+        VARCHAR status
+        DATETIME created_at
+        DATETIME resolved_at
+    }
+    users ||--o{ incidents : "assigned_analyst_id"
+    assets ||--o{ incidents : "asset_id"
+    users ||--o{ incidents : "reporter_id"
+    investigation_notes {
+        INTEGER id PK
+        INTEGER incident_id FK
+        INTEGER analyst_id FK
+        VARCHAR content
+        DATETIME created_at
+    }
+    users ||--o{ investigation_notes : "analyst_id"
+    incidents ||--o{ investigation_notes : "incident_id"
+    logs {
+        INTEGER id PK
+        INTEGER user_id FK
+        VARCHAR username
+        VARCHAR action
+        VARCHAR description
+        VARCHAR severity
+        VARCHAR related_service
+        DATETIME timestamp
+    }
+    users ||--o{ logs : "user_id"
+    notifications {
+        INTEGER id PK
+        INTEGER user_id FK
+        VARCHAR title
+        VARCHAR message
+        VARCHAR notification_type
+        VARCHAR severity
+        VARCHAR status
+        DATETIME created_at
+        DATETIME read_at
+    }
+    users ||--o{ notifications : "user_id"
+    playbooks {
+        INTEGER id PK
+        VARCHAR name
+        VARCHAR description
+        VARCHAR incident_category
+        VARCHAR severity
+        INTEGER created_by FK
+        DATETIME created_at
+    }
+    users ||--o{ playbooks : "created_by"
+    response_actions {
+        INTEGER id PK
+        INTEGER playbook_id FK
+        VARCHAR description
+        INTEGER step_number
+        VARCHAR status
+        INTEGER assigned_user_id FK
+        DATETIME completion_date
+        JSON execution_history
+    }
+    users ||--o{ response_actions : "assigned_user_id"
+    playbooks ||--o{ response_actions : "playbook_id"
+    threats {
+        INTEGER id PK
+        VARCHAR threat_type
+        VARCHAR threat_value
+        VARCHAR description
+        VARCHAR severity
+        VARCHAR source
+        DATETIME date_added
+    }
+    users {
+        INTEGER id PK
+        VARCHAR full_name
+        VARCHAR username
+        VARCHAR email
+        VARCHAR password_hash
+        VARCHAR department
+        VARCHAR role
+        VARCHAR account_status
+        DATETIME created_at
+        DATETIME last_login
+    }
+    vulnerabilities {
+        INTEGER id PK
+        VARCHAR title
+        VARCHAR description
+        VARCHAR cve_id
+        NUMERIC cvss_score
+        VARCHAR severity
+        INTEGER asset_id FK
+        VARCHAR discovery_source
+        VARCHAR status
+        DATETIME created_at
+        DATETIME resolution_date
+    }
+    assets ||--o{ vulnerabilities : "asset_id"

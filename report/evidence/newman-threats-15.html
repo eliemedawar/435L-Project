@@ -1,0 +1,75 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}table{border-collapse:collapse;background:white}td,th{border:1px solid #cbd5e1;padding:8px;text-align:left}th{background:#dbeafe}</style>
+<article>
+<h1>Marc Bteich – Internal stats – GET /internal/stats, HTTP 200</h1>
+<small>Genuine Newman execution report • 2026-10-20T12:07:44.605Z • source: newman-threats.json</small>
+<p>GET http://127.0.0.1:5004/internal/stats</p>
+<h2>Actual request body (credentials redacted)</h2><pre>null</pre>
+<h2>Actual response — HTTP 200</h2><pre>{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;message&quot;: &quot;OK&quot;,
+  &quot;data&quot;: {
+    &quot;total_threats&quot;: 9,
+    &quot;by_severity&quot;: {
+      &quot;Low&quot;: 2,
+      &quot;Medium&quot;: 2,
+      &quot;High&quot;: 3,
+      &quot;Critical&quot;: 2
+    },
+    &quot;by_type&quot;: {
+      &quot;IP Address&quot;: 2,
+      &quot;Domain&quot;: 2,
+      &quot;File Hash&quot;: 3,
+      &quot;Malware Signature&quot;: 1,
+      &quot;Other&quot;: 1
+    },
+    &quot;recently_added&quot;: [
+      {
+        &quot;id&quot;: 9,
+        &quot;threat_type&quot;: &quot;Domain&quot;,
+        &quot;threat_value&quot;: &quot;postman.example.test&quot;,
+        &quot;description&quot;: &quot;Reviewed&quot;,
+        &quot;severity&quot;: &quot;High&quot;,
+        &quot;source&quot;: &quot;Reviewed lab&quot;,
+        &quot;date_added&quot;: &quot;2026-10-20T12:07:42Z&quot;
+      },
+      {
+        &quot;id&quot;: 8,
+        &quot;threat_type&quot;: &quot;Other&quot;,
+        &quot;threat_value&quot;: &quot;LAB-INDICATOR-EXAMPLE&quot;,
+        &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+        &quot;severity&quot;: &quot;Critical&quot;,
+        &quot;source&quot;: &quot;University lab dataset&quot;,
+        &quot;date_added&quot;: &quot;2026-10-20T12:07:31Z&quot;
+      },
+      {
+        &quot;id&quot;: 7,
+        &quot;threat_type&quot;: &quot;Malware Signature&quot;,
+        &quot;threat_value&quot;: &quot;LAB-SIGNATURE-EXAMPLE&quot;,
+        &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+        &quot;severity&quot;: &quot;High&quot;,
+        &quot;source&quot;: &quot;University lab dataset&quot;,
+        &quot;date_added&quot;: &quot;2026-10-20T12:07:31Z&quot;
+      },
+      {
+        &quot;id&quot;: 6,
+        &quot;threat_type&quot;: &quot;File Hash&quot;,
+        &quot;threat_value&quot;: &quot;cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc&quot;,
+        &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+        &quot;severity&quot;: &quot;Medium&quot;,
+        &quot;source&quot;: &quot;University lab dataset&quot;,
+        &quot;date_added&quot;: &quot;2026-10-20T12:07:31Z&quot;
+      },
+      {
+        &quot;id&quot;: 5,
+        &quot;threat_type&quot;: &quot;File Hash&quot;,
+        &quot;threat_value&quot;: &quot;bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&quot;,
+        &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+        &quot;severity&quot;: &quot;Low&quot;,
+        &quot;source&quot;: &quot;University lab dataset&quot;,
+        &quot;date_added&quot;: &quot;2026-10-20T12:07:31Z&quot;
+      }
+    ]
+  }
+}</pre>
+<p>This screenshot displays stored results from an actual API execution. It is not a simulated API response or a Postman GUI screenshot.</p></article>

@@ -1,0 +1,1328 @@
+{
+  "info": {
+    "name": "vulnerabilities (Marc Bteich)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Developed by: Marc Bteich. Start all services and provision accounts with database.seed or the combined Users folder. Private passwords/service_key must be set locally. Run folders in order; destructive test data is labelled."
+  },
+  "variable": [
+    {
+      "key": "base_users",
+      "value": "http://127.0.0.1:5001"
+    },
+    {
+      "key": "base_assets",
+      "value": "http://127.0.0.1:5002"
+    },
+    {
+      "key": "base_incidents",
+      "value": "http://127.0.0.1:5003"
+    },
+    {
+      "key": "base_threats",
+      "value": "http://127.0.0.1:5004"
+    },
+    {
+      "key": "base_logs",
+      "value": "http://127.0.0.1:5005"
+    },
+    {
+      "key": "base_reports",
+      "value": "http://127.0.0.1:5006"
+    },
+    {
+      "key": "base_vulnerabilities",
+      "value": "http://127.0.0.1:5007"
+    },
+    {
+      "key": "base_notifications",
+      "value": "http://127.0.0.1:5008"
+    },
+    {
+      "key": "base_playbooks",
+      "value": "http://127.0.0.1:5009"
+    },
+    {
+      "key": "admin_username",
+      "value": "admin"
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "token_admin",
+      "value": ""
+    },
+    {
+      "key": "analyst_username",
+      "value": "lara"
+    },
+    {
+      "key": "analyst_password",
+      "value": ""
+    },
+    {
+      "key": "token_analyst",
+      "value": ""
+    },
+    {
+      "key": "auditor_username",
+      "value": "nadia"
+    },
+    {
+      "key": "auditor_password",
+      "value": ""
+    },
+    {
+      "key": "token_auditor",
+      "value": ""
+    },
+    {
+      "key": "user_username",
+      "value": "rami"
+    },
+    {
+      "key": "user_password",
+      "value": ""
+    },
+    {
+      "key": "token_user",
+      "value": ""
+    },
+    {
+      "key": "service_key",
+      "value": ""
+    },
+    {
+      "key": "owner_id",
+      "value": ""
+    },
+    {
+      "key": "analyst_id",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "auditor_id",
+      "value": ""
+    },
+    {
+      "key": "threat_id",
+      "value": ""
+    },
+    {
+      "key": "vulnerability_id",
+      "value": ""
+    },
+    {
+      "key": "playbook_id",
+      "value": ""
+    },
+    {
+      "key": "action_id",
+      "value": ""
+    },
+    {
+      "key": "vulnerability_asset_id",
+      "value": ""
+    },
+    {
+      "key": "indicator_domain",
+      "value": "postman.example.test"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Login existing accounts",
+      "item": [
+        {
+          "name": "Login admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login admin. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{admin_username}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_admin\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"owner_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login analyst",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login analyst. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{analyst_username}}\",\n  \"password\": \"{{analyst_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_analyst\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"analyst_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login auditor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login auditor. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{auditor_username}}\",\n  \"password\": \"{{auditor_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_auditor\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"auditor_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_users}}/users/login",
+            "description": "Developed by: Marc Bteich. Login user. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{user_username}}\",\n  \"password\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"token_user\",body.data.token);",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"user_id\",body.data.user.id);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1. Relationships and lifecycle",
+      "item": [
+        {
+          "name": "Create affected asset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_assets}}/assets",
+            "description": "Developed by: Marc Bteich. Create affected asset. Expected HTTP 201. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_name\": \"Postman vulnerability fixture\",\n  \"asset_type\": \"Server\",\n  \"ip_address\": \"192.0.2.220\",\n  \"owner_id\": {{owner_id}},\n  \"department\": \"Lab\",\n  \"criticality\": \"High\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"vulnerability_asset_id\",body.data.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Critical vulnerability",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Create Critical vulnerability. Expected HTTP 201. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Synthetic Postman vulnerability\",\n  \"description\": \"Lab scenario only\",\n  \"cve_id\": \"CVE-2026-12345\",\n  \"cvss_score\": 9.8,\n  \"severity\": \"Critical\",\n  \"asset_id\": {{vulnerability_asset_id}},\n  \"discovery_source\": \"Postman lab\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "if (pm.response.code < 300) pm.collectionVariables.set(\"vulnerability_id\",body.data.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List vulnerabilities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. List vulnerabilities. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get vulnerability",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/{{vulnerability_id}}",
+            "description": "Developed by: Marc Bteich. Get vulnerability. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search cve=CVE-2026-12345",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/search?cve=CVE-2026-12345",
+            "description": "Developed by: Marc Bteich. Search cve=CVE-2026-12345. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search severity=Critical",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/search?severity=Critical",
+            "description": "Developed by: Marc Bteich. Search severity=Critical. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search asset={{vulnerability_asset_id}}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/search?asset={{vulnerability_asset_id}}",
+            "description": "Developed by: Marc Bteich. Search asset={{vulnerability_asset_id}}. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search status=Open",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/search?status=Open",
+            "description": "Developed by: Marc Bteich. Search status=Open. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cannot skip lifecycle",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/{{vulnerability_id}}",
+            "description": "Developed by: Marc Bteich. Cannot skip lifecycle. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Closed\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Transition Under Investigation",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/{{vulnerability_id}}",
+            "description": "Developed by: Marc Bteich. Transition Under Investigation. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Under Investigation\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Transition In Progress",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/{{vulnerability_id}}",
+            "description": "Developed by: Marc Bteich. Transition In Progress. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"In Progress\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Transition Resolved",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/{{vulnerability_id}}",
+            "description": "Developed by: Marc Bteich. Transition Resolved. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Resolved\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "pm.test(\"Automatic resolution date\", () => pm.expect(body.data.resolution_date).to.be.a(\"string\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Transition Closed",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/{{vulnerability_id}}",
+            "description": "Developed by: Marc Bteich. Transition Closed. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Closed\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});",
+                  "pm.test(\"Automatic resolution date\", () => pm.expect(body.data.resolution_date).to.be.a(\"string\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Internal stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Service-Key",
+                "value": "{{service_key}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/internal/stats",
+            "description": "Developed by: Marc Bteich. Internal stats. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Critical vulnerability notification",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_notifications}}/notifications/search?type=Vulnerability%20Alert",
+            "description": "Developed by: Marc Bteich. Critical vulnerability notification. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Linked asset cannot be deleted",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{vulnerability_asset_id}}",
+            "description": "Developed by: Marc Bteich. Linked asset cannot be deleted. Expected HTTP 409. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Negative tests",
+      "item": [
+        {
+          "name": "No token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. No token. Expected HTTP 401. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "User denied",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_user}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. User denied. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analyst create denied",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_analyst}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Analyst create denied. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Synthetic Postman vulnerability\",\n  \"description\": \"Lab scenario only\",\n  \"cve_id\": \"CVE-2026-12345\",\n  \"cvss_score\": 9.8,\n  \"severity\": \"Critical\",\n  \"asset_id\": {{vulnerability_asset_id}},\n  \"discovery_source\": \"Postman lab\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Auditor update denied",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_auditor}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/{{vulnerability_id}}",
+            "description": "Developed by: Marc Bteich. Auditor update denied. Expected HTTP 403. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"x\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Missing vulnerability",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/2147483647",
+            "description": "Developed by: Marc Bteich. Missing vulnerability. Expected HTTP 404. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Empty body",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Empty body. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invalid CVE",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Invalid CVE. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Synthetic Postman vulnerability\",\n  \"description\": \"Lab scenario only\",\n  \"cve_id\": \"CVE-26-1\",\n  \"cvss_score\": 9.8,\n  \"severity\": \"Critical\",\n  \"asset_id\": {{vulnerability_asset_id}},\n  \"discovery_source\": \"Postman lab\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invalid CVSS",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Invalid CVSS. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Synthetic Postman vulnerability\",\n  \"description\": \"Lab scenario only\",\n  \"cve_id\": \"CVE-2026-12345\",\n  \"cvss_score\": 10.1,\n  \"severity\": \"Critical\",\n  \"asset_id\": {{vulnerability_asset_id}},\n  \"discovery_source\": \"Postman lab\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Wrong type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Wrong type. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Synthetic Postman vulnerability\",\n  \"description\": \"Lab scenario only\",\n  \"cve_id\": \"CVE-2026-12345\",\n  \"cvss_score\": true,\n  \"severity\": \"Critical\",\n  \"asset_id\": {{vulnerability_asset_id}},\n  \"discovery_source\": \"Postman lab\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Missing asset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Missing asset. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Synthetic Postman vulnerability\",\n  \"description\": \"Lab scenario only\",\n  \"cve_id\": \"CVE-2026-12345\",\n  \"cvss_score\": 9.8,\n  \"severity\": \"Critical\",\n  \"asset_id\": 2147483647,\n  \"discovery_source\": \"Postman lab\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invalid severity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities",
+            "description": "Developed by: Marc Bteich. Invalid severity. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Synthetic Postman vulnerability\",\n  \"description\": \"Lab scenario only\",\n  \"cve_id\": \"CVE-2026-12345\",\n  \"cvss_score\": 9.8,\n  \"severity\": \"bad\",\n  \"asset_id\": {{vulnerability_asset_id}},\n  \"discovery_source\": \"Postman lab\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Closed cannot reopen",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/{{vulnerability_id}}",
+            "description": "Developed by: Marc Bteich. Closed cannot reopen. Expected HTTP 400. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Open\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"error\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Cleanup",
+      "item": [
+        {
+          "name": "Delete vulnerability",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_vulnerabilities}}/vulnerabilities/{{vulnerability_id}}",
+            "description": "Developed by: Marc Bteich. Delete vulnerability. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete affected asset",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": "{{base_assets}}/assets/{{vulnerability_asset_id}}",
+            "description": "Developed by: Marc Bteich. Delete affected asset. Expected HTTP 200. Input/body and authentication are defined in this request; successful responses use status/message/data and errors use status/message."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body=pm.response.json();",
+                  "pm.test(\"Response envelope\", () => {pm.expect(body.status).to.eql(\"success\");pm.expect(body.message).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

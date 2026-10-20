@@ -1,0 +1,1700 @@
+{
+  "source": "Actual Newman/Postman Runtime execution; secrets redacted",
+  "collection": "assets.postman_collection.json",
+  "executed_at": "2026-10-20T12:07:40.066Z",
+  "requests": {
+    "total": 55,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 112,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "records": [
+    {
+      "name": "Login admin",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 1,
+            "full_name": "Lab Admin",
+            "username": "admin",
+            "email": "admin@example.test",
+            "department": "Security Lab",
+            "role": "admin",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:29Z",
+            "last_login": "2026-10-20T12:07:35Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "lara",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 3,
+            "full_name": "Lab Lara",
+            "username": "lara",
+            "email": "lara@example.test",
+            "department": "Security Lab",
+            "role": "analyst",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:35Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login auditor",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "nadia",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 4,
+            "full_name": "Lab Nadia",
+            "username": "nadia",
+            "email": "nadia@example.test",
+            "department": "Security Lab",
+            "role": "auditor",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:36Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "rami",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 5,
+            "full_name": "Lab Rami",
+            "username": "rami",
+            "email": "rami@example.test",
+            "department": "Security Lab",
+            "role": "user",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:36Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create asset",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Lab Server",
+        "asset_type": "Server",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "Critical",
+        "status": "Active"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Asset created successfully",
+        "data": {
+          "id": 7,
+          "asset_name": "Postman Lab Server",
+          "asset_type": "Server",
+          "ip_address": "192.0.2.10",
+          "operating_system": "Linux",
+          "owner_id": 1,
+          "department": "Security",
+          "location": "Lab",
+          "criticality": "Critical",
+          "status": "Active"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create Workstation",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Workstation",
+        "asset_type": "Workstation",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "Low",
+        "status": "Active"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Asset created successfully",
+        "data": {
+          "id": 8,
+          "asset_name": "Postman Workstation",
+          "asset_type": "Workstation",
+          "ip_address": "192.0.2.10",
+          "operating_system": "Linux",
+          "owner_id": 1,
+          "department": "Security",
+          "location": "Lab",
+          "criticality": "Low",
+          "status": "Active"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create Database",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Database",
+        "asset_type": "Database",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "Medium",
+        "status": "Inactive"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Asset created successfully",
+        "data": {
+          "id": 9,
+          "asset_name": "Postman Database",
+          "asset_type": "Database",
+          "ip_address": "192.0.2.10",
+          "operating_system": "Linux",
+          "owner_id": 1,
+          "department": "Security",
+          "location": "Lab",
+          "criticality": "Medium",
+          "status": "Inactive"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create Application",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Application",
+        "asset_type": "Application",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "High",
+        "status": "Under Maintenance"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Asset created successfully",
+        "data": {
+          "id": 10,
+          "asset_name": "Postman Application",
+          "asset_type": "Application",
+          "ip_address": "192.0.2.10",
+          "operating_system": "Linux",
+          "owner_id": 1,
+          "department": "Security",
+          "location": "Lab",
+          "criticality": "High",
+          "status": "Under Maintenance"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create Network Device",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Network Device",
+        "asset_type": "Network Device",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "High",
+        "status": "Active"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Asset created successfully",
+        "data": {
+          "id": 11,
+          "asset_name": "Postman Network Device",
+          "asset_type": "Network Device",
+          "ip_address": "192.0.2.10",
+          "operating_system": "Linux",
+          "owner_id": 1,
+          "department": "Security",
+          "location": "Lab",
+          "criticality": "High",
+          "status": "Active"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create Cloud Resource",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Cloud Resource",
+        "asset_type": "Cloud Resource",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "Critical",
+        "status": "Active"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Asset created successfully",
+        "data": {
+          "id": 12,
+          "asset_name": "Postman Cloud Resource",
+          "asset_type": "Cloud Resource",
+          "ip_address": "192.0.2.10",
+          "operating_system": "Linux",
+          "owner_id": 1,
+          "department": "Security",
+          "location": "Lab",
+          "criticality": "Critical",
+          "status": "Active"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "List assets (auditor)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Assets retrieved successfully",
+        "data": {
+          "count": 12,
+          "assets": [
+            {
+              "id": 1,
+              "asset_name": "Seed Server",
+              "asset_type": "Server",
+              "ip_address": "192.0.2.100",
+              "operating_system": "Lab Linux",
+              "owner_id": 1,
+              "department": "Security Lab",
+              "location": "University lab",
+              "criticality": "Low",
+              "status": "Active"
+            },
+            {
+              "id": 2,
+              "asset_name": "Seed Workstation",
+              "asset_type": "Workstation",
+              "ip_address": "192.0.2.101",
+              "operating_system": "Lab Linux",
+              "owner_id": 1,
+              "department": "Research Lab",
+              "location": "University lab",
+              "criticality": "Medium",
+              "status": "Inactive"
+            },
+            {
+              "id": 3,
+              "asset_name": "Seed Database",
+              "asset_type": "Database",
+              "ip_address": "192.0.2.102",
+              "operating_system": null,
+              "owner_id": 1,
+              "department": "Security Lab",
+              "location": "University lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 4,
+              "asset_name": "Seed Application",
+              "asset_type": "Application",
+              "ip_address": "192.0.2.103",
+              "operating_system": null,
+              "owner_id": 1,
+              "department": "Research Lab",
+              "location": "University lab",
+              "criticality": "Critical",
+              "status": "Active"
+            },
+            {
+              "id": 5,
+              "asset_name": "Seed Network Device",
+              "asset_type": "Network Device",
+              "ip_address": "192.0.2.104",
+              "operating_system": null,
+              "owner_id": 1,
+              "department": "Security Lab",
+              "location": "University lab",
+              "criticality": "Low",
+              "status": "Inactive"
+            },
+            {
+              "id": 6,
+              "asset_name": "Seed Cloud Resource",
+              "asset_type": "Cloud Resource",
+              "ip_address": "192.0.2.105",
+              "operating_system": null,
+              "owner_id": 1,
+              "department": "Research Lab",
+              "location": "University lab",
+              "criticality": "Medium",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 7,
+              "asset_name": "Postman Lab Server",
+              "asset_type": "Server",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Critical",
+              "status": "Active"
+            },
+            {
+              "id": 8,
+              "asset_name": "Postman Workstation",
+              "asset_type": "Workstation",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Low",
+              "status": "Active"
+            },
+            {
+              "id": 9,
+              "asset_name": "Postman Database",
+              "asset_type": "Database",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Medium",
+              "status": "Inactive"
+            },
+            {
+              "id": 10,
+              "asset_name": "Postman Application",
+              "asset_type": "Application",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 11,
+              "asset_name": "Postman Network Device",
+              "asset_type": "Network Device",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Active"
+            },
+            {
+              "id": 12,
+              "asset_name": "Postman Cloud Resource",
+              "asset_type": "Cloud Resource",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Critical",
+              "status": "Active"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get asset before update (analyst)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/7",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset retrieved successfully",
+        "data": {
+          "id": 7,
+          "asset_name": "Postman Lab Server",
+          "asset_type": "Server",
+          "ip_address": "192.0.2.10",
+          "operating_system": "Linux",
+          "owner_id": 1,
+          "department": "Security",
+          "location": "Lab",
+          "criticality": "Critical",
+          "status": "Active"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Update asset (admin)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5002/assets/7",
+      "request": {
+        "asset_name": "Updated Postman Server",
+        "department": "IT",
+        "criticality": "High",
+        "status": "Under Maintenance"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset updated successfully",
+        "data": {
+          "id": 7,
+          "asset_name": "Updated Postman Server",
+          "asset_type": "Server",
+          "ip_address": "192.0.2.10",
+          "operating_system": "Linux",
+          "owner_id": 1,
+          "department": "IT",
+          "location": "Lab",
+          "criticality": "High",
+          "status": "Under Maintenance"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get asset after update",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/7",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset retrieved successfully",
+        "data": {
+          "id": 7,
+          "asset_name": "Updated Postman Server",
+          "asset_type": "Server",
+          "ip_address": "192.0.2.10",
+          "operating_system": "Linux",
+          "owner_id": 1,
+          "department": "IT",
+          "location": "Lab",
+          "criticality": "High",
+          "status": "Under Maintenance"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by name",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/search?name=Postman",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset search completed",
+        "data": {
+          "count": 6,
+          "assets": [
+            {
+              "id": 7,
+              "asset_name": "Updated Postman Server",
+              "asset_type": "Server",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "IT",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 8,
+              "asset_name": "Postman Workstation",
+              "asset_type": "Workstation",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Low",
+              "status": "Active"
+            },
+            {
+              "id": 9,
+              "asset_name": "Postman Database",
+              "asset_type": "Database",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Medium",
+              "status": "Inactive"
+            },
+            {
+              "id": 10,
+              "asset_name": "Postman Application",
+              "asset_type": "Application",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 11,
+              "asset_name": "Postman Network Device",
+              "asset_type": "Network Device",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Active"
+            },
+            {
+              "id": 12,
+              "asset_name": "Postman Cloud Resource",
+              "asset_type": "Cloud Resource",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Critical",
+              "status": "Active"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by type",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/search?type=Server",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset search completed",
+        "data": {
+          "count": 2,
+          "assets": [
+            {
+              "id": 1,
+              "asset_name": "Seed Server",
+              "asset_type": "Server",
+              "ip_address": "192.0.2.100",
+              "operating_system": "Lab Linux",
+              "owner_id": 1,
+              "department": "Security Lab",
+              "location": "University lab",
+              "criticality": "Low",
+              "status": "Active"
+            },
+            {
+              "id": 7,
+              "asset_name": "Updated Postman Server",
+              "asset_type": "Server",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "IT",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by IP",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/search?ip=192.0.2.10",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset search completed",
+        "data": {
+          "count": 6,
+          "assets": [
+            {
+              "id": 7,
+              "asset_name": "Updated Postman Server",
+              "asset_type": "Server",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "IT",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 8,
+              "asset_name": "Postman Workstation",
+              "asset_type": "Workstation",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Low",
+              "status": "Active"
+            },
+            {
+              "id": 9,
+              "asset_name": "Postman Database",
+              "asset_type": "Database",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Medium",
+              "status": "Inactive"
+            },
+            {
+              "id": 10,
+              "asset_name": "Postman Application",
+              "asset_type": "Application",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 11,
+              "asset_name": "Postman Network Device",
+              "asset_type": "Network Device",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Active"
+            },
+            {
+              "id": 12,
+              "asset_name": "Postman Cloud Resource",
+              "asset_type": "Cloud Resource",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Critical",
+              "status": "Active"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by department",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/search?department=IT",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset search completed",
+        "data": {
+          "count": 9,
+          "assets": [
+            {
+              "id": 1,
+              "asset_name": "Seed Server",
+              "asset_type": "Server",
+              "ip_address": "192.0.2.100",
+              "operating_system": "Lab Linux",
+              "owner_id": 1,
+              "department": "Security Lab",
+              "location": "University lab",
+              "criticality": "Low",
+              "status": "Active"
+            },
+            {
+              "id": 3,
+              "asset_name": "Seed Database",
+              "asset_type": "Database",
+              "ip_address": "192.0.2.102",
+              "operating_system": null,
+              "owner_id": 1,
+              "department": "Security Lab",
+              "location": "University lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 5,
+              "asset_name": "Seed Network Device",
+              "asset_type": "Network Device",
+              "ip_address": "192.0.2.104",
+              "operating_system": null,
+              "owner_id": 1,
+              "department": "Security Lab",
+              "location": "University lab",
+              "criticality": "Low",
+              "status": "Inactive"
+            },
+            {
+              "id": 7,
+              "asset_name": "Updated Postman Server",
+              "asset_type": "Server",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "IT",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 8,
+              "asset_name": "Postman Workstation",
+              "asset_type": "Workstation",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Low",
+              "status": "Active"
+            },
+            {
+              "id": 9,
+              "asset_name": "Postman Database",
+              "asset_type": "Database",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Medium",
+              "status": "Inactive"
+            },
+            {
+              "id": 10,
+              "asset_name": "Postman Application",
+              "asset_type": "Application",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 11,
+              "asset_name": "Postman Network Device",
+              "asset_type": "Network Device",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Active"
+            },
+            {
+              "id": 12,
+              "asset_name": "Postman Cloud Resource",
+              "asset_type": "Cloud Resource",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "Critical",
+              "status": "Active"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by criticality",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/search?criticality=High",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset search completed",
+        "data": {
+          "count": 4,
+          "assets": [
+            {
+              "id": 3,
+              "asset_name": "Seed Database",
+              "asset_type": "Database",
+              "ip_address": "192.0.2.102",
+              "operating_system": null,
+              "owner_id": 1,
+              "department": "Security Lab",
+              "location": "University lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 7,
+              "asset_name": "Updated Postman Server",
+              "asset_type": "Server",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "IT",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 10,
+              "asset_name": "Postman Application",
+              "asset_type": "Application",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            },
+            {
+              "id": 11,
+              "asset_name": "Postman Network Device",
+              "asset_type": "Network Device",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "Security",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Active"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by combined",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/search?type=Server&department=IT&criticality=High",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset search completed",
+        "data": {
+          "count": 1,
+          "assets": [
+            {
+              "id": 7,
+              "asset_name": "Updated Postman Server",
+              "asset_type": "Server",
+              "ip_address": "192.0.2.10",
+              "operating_system": "Linux",
+              "owner_id": 1,
+              "department": "IT",
+              "location": "Lab",
+              "criticality": "High",
+              "status": "Under Maintenance"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by no matches",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/search?name=NoSuchAsset987",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset search completed",
+        "data": {
+          "count": 0,
+          "assets": []
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Internal statistics",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/internal/stats",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "total_assets": 12,
+          "critical_assets": 2,
+          "by_type": {
+            "Server": 2,
+            "Workstation": 2,
+            "Database": 2,
+            "Application": 2,
+            "Network Device": 2,
+            "Cloud Resource": 2
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Internal asset lookup",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/internal/assets/7",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "id": 7,
+          "asset_name": "Updated Postman Server",
+          "asset_type": "Server",
+          "ip_address": "192.0.2.10",
+          "operating_system": "Linux",
+          "owner_id": 1,
+          "department": "IT",
+          "location": "Lab",
+          "criticality": "High",
+          "status": "Under Maintenance"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Inspect Assets audit records",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?service=assets",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "7 log(s) match the search criteria",
+        "data": {
+          "count": 7,
+          "logs": [
+            {
+              "id": 15,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_UPDATED",
+              "description": "Updated asset 7: asset_name, criticality, department, status",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T12:07:37Z"
+            },
+            {
+              "id": 14,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 12",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T12:07:36Z"
+            },
+            {
+              "id": 13,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 11",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T12:07:36Z"
+            },
+            {
+              "id": 12,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 10",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T12:07:36Z"
+            },
+            {
+              "id": 11,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 9",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T12:07:36Z"
+            },
+            {
+              "id": 10,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 8",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T12:07:36Z"
+            },
+            {
+              "id": 9,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 7",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T12:07:36Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Missing token",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "Employee forbidden",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/7",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Analyst cannot list all",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Auditor cannot update",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5002/assets/7",
+      "request": {
+        "status": "Inactive"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Analyst cannot delete",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5002/assets/7",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Missing asset",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/2147483647",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Asset with id 2147483647 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Missing asset update",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5002/assets/2147483647",
+      "request": {
+        "status": "Inactive"
+      },
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Asset with id 2147483647 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Missing asset deletion",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5002/assets/2147483647",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Asset with id 2147483647 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Empty body",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {},
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Request body cannot be empty"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid JSON",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": "{invalid",
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Request body must be a valid JSON object"
+      },
+      "error": null
+    },
+    {
+      "name": "Internal statistics reject JWT",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/internal/stats",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "This endpoint is only available to internal services"
+      },
+      "error": null
+    },
+    {
+      "name": "invalid IP",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Lab Server",
+        "asset_type": "Server",
+        "ip_address": "999.1.2.3",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "Critical",
+        "status": "Active"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "'ip_address' must be an IPv4 or IPv6 address"
+      },
+      "error": null
+    },
+    {
+      "name": "invalid type",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Lab Server",
+        "asset_type": "Invalid",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "Critical",
+        "status": "Active"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid asset_type 'Invalid'. Allowed values: Server, Workstation, Database, Application, Network Device, Cloud Resource"
+      },
+      "error": null
+    },
+    {
+      "name": "invalid criticality",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Lab Server",
+        "asset_type": "Server",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "Urgent",
+        "status": "Active"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid criticality 'Urgent'. Allowed values: Low, Medium, High, Critical"
+      },
+      "error": null
+    },
+    {
+      "name": "invalid status",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Lab Server",
+        "asset_type": "Server",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "Critical",
+        "status": "Broken"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid status 'Broken'. Allowed values: Active, Inactive, Under Maintenance"
+      },
+      "error": null
+    },
+    {
+      "name": "nonexistent owner",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Lab Server",
+        "asset_type": "Server",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 2147483647,
+        "location": "Lab",
+        "criticality": "Critical",
+        "status": "Active"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "User with id 2147483647 does not exist"
+      },
+      "error": null
+    },
+    {
+      "name": "wrong owner type",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Lab Server",
+        "asset_type": "Server",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": true,
+        "location": "Lab",
+        "criticality": "Critical",
+        "status": "Active"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "'owner_id' must be a positive 64-bit integer"
+      },
+      "error": null
+    },
+    {
+      "name": "unknown field",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman Lab Server",
+        "asset_type": "Server",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "Critical",
+        "status": "Active",
+        "surprise": "x"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Unexpected field(s): surprise"
+      },
+      "error": null
+    },
+    {
+      "name": "missing name",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "",
+        "asset_type": "Server",
+        "ip_address": "192.0.2.10",
+        "operating_system": "Linux",
+        "department": "Security",
+        "owner_id": 1,
+        "location": "Lab",
+        "criticality": "Critical",
+        "status": "Active"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Missing required field(s): asset_name"
+      },
+      "error": null
+    },
+    {
+      "name": "Reject empty search",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/search",
+      "request": null,
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Provide at least one search criterion"
+      },
+      "error": null
+    },
+    {
+      "name": "Reject invalid search enum",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/search?criticality=Urgent",
+      "request": null,
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid criticality 'Urgent'. Allowed values: Low, Medium, High, Critical"
+      },
+      "error": null
+    },
+    {
+      "name": "SQL injection text returns no matches",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/search?name=%27%20OR%201%3D1%20--",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset search completed",
+        "data": {
+          "count": 0,
+          "assets": []
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Delete asset (admin)",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5002/assets/7",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset 7 deleted successfully",
+        "data": null
+      },
+      "error": null
+    },
+    {
+      "name": "Deleted asset returns 404",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/7",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Asset with id 7 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Verify deletion audit event",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?service=assets&action=ASSET_DELETED",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "1 log(s) match the search criteria",
+        "data": {
+          "count": 1,
+          "logs": [
+            {
+              "id": 20,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_DELETED",
+              "description": "Deleted asset 7",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T12:07:39Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create linked asset",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman FK fixture",
+        "asset_type": "Server",
+        "ip_address": "192.0.2.220",
+        "owner_id": 1,
+        "department": "Lab",
+        "criticality": "High"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Asset created successfully",
+        "data": {
+          "id": 13,
+          "asset_name": "Postman FK fixture",
+          "asset_type": "Server",
+          "ip_address": "192.0.2.220",
+          "operating_system": null,
+          "owner_id": 1,
+          "department": "Lab",
+          "location": null,
+          "criticality": "High",
+          "status": "Active"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Link vulnerability",
+      "method": "POST",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": {
+        "title": "Synthetic Postman vulnerability",
+        "description": "Lab scenario only",
+        "cve_id": "CVE-2026-12345",
+        "cvss_score": 9.8,
+        "severity": "Low",
+        "asset_id": 13,
+        "discovery_source": "Postman lab"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Vulnerability created",
+        "data": {
+          "id": 6,
+          "title": "Synthetic Postman vulnerability",
+          "description": "Lab scenario only",
+          "cve_id": "CVE-2026-12345",
+          "cvss_score": 9.8,
+          "severity": "Low",
+          "asset_id": 13,
+          "discovery_source": "Postman lab",
+          "status": "Open",
+          "created_at": "2026-10-20T12:07:39Z",
+          "resolution_date": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Linked vulnerability prevents deletion",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5002/assets/13",
+      "request": null,
+      "status": 409,
+      "response": {
+        "status": "error",
+        "message": "Operation violates a database constraint (duplicate or linked record)"
+      },
+      "error": null
+    },
+    {
+      "name": "Linked asset preserved",
+      "method": "GET",
+      "url": "http://127.0.0.1:5002/assets/13",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset retrieved successfully",
+        "data": {
+          "id": 13,
+          "asset_name": "Postman FK fixture",
+          "asset_type": "Server",
+          "ip_address": "192.0.2.220",
+          "operating_system": null,
+          "owner_id": 1,
+          "department": "Lab",
+          "location": null,
+          "criticality": "High",
+          "status": "Active"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Remove fixture vulnerability",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5007/vulnerabilities/6",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Vulnerability deleted",
+        "data": null
+      },
+      "error": null
+    },
+    {
+      "name": "Remove fixture asset",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5002/assets/13",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset 13 deleted successfully",
+        "data": null
+      },
+      "error": null
+    }
+  ]
+}

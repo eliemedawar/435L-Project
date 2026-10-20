@@ -1,0 +1,841 @@
+{
+  "source": "Actual Newman/Postman Runtime execution; secrets redacted",
+  "collection": "threats.postman_collection.json",
+  "executed_at": "2026-10-20T12:07:44.605Z",
+  "requests": {
+    "total": 31,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 62,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "records": [
+    {
+      "name": "Login admin",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 1,
+            "full_name": "Lab Admin",
+            "username": "admin",
+            "email": "admin@example.test",
+            "department": "Security Lab",
+            "role": "admin",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:29Z",
+            "last_login": "2026-10-20T12:07:41Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "lara",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 3,
+            "full_name": "Lab Lara",
+            "username": "lara",
+            "email": "lara@example.test",
+            "department": "Security Lab",
+            "role": "analyst",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:41Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login auditor",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "nadia",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 4,
+            "full_name": "Lab Nadia",
+            "username": "nadia",
+            "email": "nadia@example.test",
+            "department": "Security Lab",
+            "role": "auditor",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:42Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "rami",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 5,
+            "full_name": "Lab Rami",
+            "username": "rami",
+            "email": "rami@example.test",
+            "department": "Security Lab",
+            "role": "user",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:42Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create Critical threat",
+      "method": "POST",
+      "url": "http://127.0.0.1:5004/threats",
+      "request": {
+        "threat_type": "Domain",
+        "threat_value": "postman.example.test",
+        "description": "Synthetic Postman lab indicator",
+        "severity": "Critical",
+        "source": "Postman lab"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Threat created",
+        "data": {
+          "id": 9,
+          "threat_type": "Domain",
+          "threat_value": "postman.example.test",
+          "description": "Synthetic Postman lab indicator",
+          "severity": "Critical",
+          "source": "Postman lab",
+          "date_added": "2026-10-20T12:07:42Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Duplicate normalized threat",
+      "method": "POST",
+      "url": "http://127.0.0.1:5004/threats",
+      "request": {
+        "threat_type": "Domain",
+        "threat_value": "postman.example.test",
+        "description": "Synthetic Postman lab indicator",
+        "severity": "Critical",
+        "source": "Postman lab"
+      },
+      "status": 409,
+      "response": {
+        "status": "error",
+        "message": "Threat type/value pair already exists"
+      },
+      "error": null
+    },
+    {
+      "name": "List threats",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 9,
+          "threats": [
+            {
+              "id": 1,
+              "threat_type": "IP Address",
+              "threat_value": "192.0.2.200",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Low",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 2,
+              "threat_type": "IP Address",
+              "threat_value": "2001:db8::200",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Medium",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 3,
+              "threat_type": "Domain",
+              "threat_value": "indicator.example.test",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "High",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 4,
+              "threat_type": "File Hash",
+              "threat_value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Critical",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 5,
+              "threat_type": "File Hash",
+              "threat_value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Low",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 6,
+              "threat_type": "File Hash",
+              "threat_value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Medium",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 7,
+              "threat_type": "Malware Signature",
+              "threat_value": "LAB-SIGNATURE-EXAMPLE",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "High",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 8,
+              "threat_type": "Other",
+              "threat_value": "LAB-INDICATOR-EXAMPLE",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Critical",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 9,
+              "threat_type": "Domain",
+              "threat_value": "postman.example.test",
+              "description": "Synthetic Postman lab indicator",
+              "severity": "Critical",
+              "source": "Postman lab",
+              "date_added": "2026-10-20T12:07:42Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get threat",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats/9",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "id": 9,
+          "threat_type": "Domain",
+          "threat_value": "postman.example.test",
+          "description": "Synthetic Postman lab indicator",
+          "severity": "Critical",
+          "source": "Postman lab",
+          "date_added": "2026-10-20T12:07:42Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search type=Domain",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats/search?type=Domain",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 2,
+          "threats": [
+            {
+              "id": 3,
+              "threat_type": "Domain",
+              "threat_value": "indicator.example.test",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "High",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 9,
+              "threat_type": "Domain",
+              "threat_value": "postman.example.test",
+              "description": "Synthetic Postman lab indicator",
+              "severity": "Critical",
+              "source": "Postman lab",
+              "date_added": "2026-10-20T12:07:42Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search value=postman",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats/search?value=postman",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 1,
+          "threats": [
+            {
+              "id": 9,
+              "threat_type": "Domain",
+              "threat_value": "postman.example.test",
+              "description": "Synthetic Postman lab indicator",
+              "severity": "Critical",
+              "source": "Postman lab",
+              "date_added": "2026-10-20T12:07:42Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search severity=Critical",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats/search?severity=Critical",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 3,
+          "threats": [
+            {
+              "id": 4,
+              "threat_type": "File Hash",
+              "threat_value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Critical",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 8,
+              "threat_type": "Other",
+              "threat_value": "LAB-INDICATOR-EXAMPLE",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Critical",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 9,
+              "threat_type": "Domain",
+              "threat_value": "postman.example.test",
+              "description": "Synthetic Postman lab indicator",
+              "severity": "Critical",
+              "source": "Postman lab",
+              "date_added": "2026-10-20T12:07:42Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search source=Postman",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats/search?source=Postman",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 1,
+          "threats": [
+            {
+              "id": 9,
+              "threat_type": "Domain",
+              "threat_value": "postman.example.test",
+              "description": "Synthetic Postman lab indicator",
+              "severity": "Critical",
+              "source": "Postman lab",
+              "date_added": "2026-10-20T12:07:42Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search type=Domain&severity=Critical",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats/search?type=Domain&severity=Critical",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 1,
+          "threats": [
+            {
+              "id": 9,
+              "threat_type": "Domain",
+              "threat_value": "postman.example.test",
+              "description": "Synthetic Postman lab indicator",
+              "severity": "Critical",
+              "source": "Postman lab",
+              "date_added": "2026-10-20T12:07:42Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Update threat",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5004/threats/9",
+      "request": {
+        "description": "Reviewed",
+        "severity": "High",
+        "source": "Reviewed lab"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Threat updated",
+        "data": {
+          "id": 9,
+          "threat_type": "Domain",
+          "threat_value": "postman.example.test",
+          "description": "Reviewed",
+          "severity": "High",
+          "source": "Reviewed lab",
+          "date_added": "2026-10-20T12:07:42Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Internal stats",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/internal/stats",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "total_threats": 9,
+          "by_severity": {
+            "Low": 2,
+            "Medium": 2,
+            "High": 3,
+            "Critical": 2
+          },
+          "by_type": {
+            "IP Address": 2,
+            "Domain": 2,
+            "File Hash": 3,
+            "Malware Signature": 1,
+            "Other": 1
+          },
+          "recently_added": [
+            {
+              "id": 9,
+              "threat_type": "Domain",
+              "threat_value": "postman.example.test",
+              "description": "Reviewed",
+              "severity": "High",
+              "source": "Reviewed lab",
+              "date_added": "2026-10-20T12:07:42Z"
+            },
+            {
+              "id": 8,
+              "threat_type": "Other",
+              "threat_value": "LAB-INDICATOR-EXAMPLE",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Critical",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 7,
+              "threat_type": "Malware Signature",
+              "threat_value": "LAB-SIGNATURE-EXAMPLE",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "High",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 6,
+              "threat_type": "File Hash",
+              "threat_value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Medium",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 5,
+              "threat_type": "File Hash",
+              "threat_value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Low",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Critical threat notification",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/search?type=Threat%20Alert",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "3 notification(s) match the search criteria",
+        "data": {
+          "count": 3,
+          "notifications": [
+            {
+              "id": 7,
+              "user_id": 2,
+              "title": "Critical threat #9",
+              "message": "postman.example.test",
+              "notification_type": "Threat Alert",
+              "severity": "Critical",
+              "status": "Unread",
+              "created_at": "2026-10-20T12:07:42Z",
+              "read_at": null
+            },
+            {
+              "id": 6,
+              "user_id": 1,
+              "title": "Critical threat #9",
+              "message": "postman.example.test",
+              "notification_type": "Threat Alert",
+              "severity": "Critical",
+              "status": "Unread",
+              "created_at": "2026-10-20T12:07:42Z",
+              "read_at": null
+            },
+            {
+              "id": 4,
+              "user_id": 1,
+              "title": "Seed Threat Alert",
+              "message": "Synthetic sample notification",
+              "notification_type": "Threat Alert",
+              "severity": "Critical",
+              "status": "Read",
+              "created_at": "2026-10-20T12:07:31Z",
+              "read_at": "2026-10-20T12:07:31Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Threat audit records",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?service=threats",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "2 log(s) match the search criteria",
+        "data": {
+          "count": 2,
+          "logs": [
+            {
+              "id": 30,
+              "user_id": 1,
+              "username": "admin",
+              "action": "THREAT_UPDATED",
+              "description": "Updated threat 9",
+              "severity": "Information",
+              "related_service": "threats",
+              "timestamp": "2026-10-20T12:07:43Z"
+            },
+            {
+              "id": 29,
+              "user_id": 1,
+              "username": "admin",
+              "action": "THREAT_CREATED",
+              "description": "Created threat 9",
+              "severity": "Information",
+              "related_service": "threats",
+              "timestamp": "2026-10-20T12:07:42Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "No token",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "User denied",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Auditor search denied",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats/search?source=Lab",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Analyst update denied",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5004/threats/9",
+      "request": {
+        "severity": "Low"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Missing threat",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats/2147483647",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Threat 2147483647 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Empty body",
+      "method": "POST",
+      "url": "http://127.0.0.1:5004/threats",
+      "request": {},
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Request body cannot be empty"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid enum",
+      "method": "POST",
+      "url": "http://127.0.0.1:5004/threats",
+      "request": {
+        "threat_type": "Domain",
+        "threat_value": "postman.example.test",
+        "description": "Synthetic Postman lab indicator",
+        "severity": "Urgent",
+        "source": "Postman lab"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid severity 'Urgent'. Allowed values: Low, Medium, High, Critical"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid IP",
+      "method": "POST",
+      "url": "http://127.0.0.1:5004/threats",
+      "request": {
+        "threat_type": "IP Address",
+        "threat_value": "999.2.3.4",
+        "description": "Synthetic Postman lab indicator",
+        "severity": "Critical",
+        "source": "Postman lab"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid IP threat value"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid domain",
+      "method": "POST",
+      "url": "http://127.0.0.1:5004/threats",
+      "request": {
+        "threat_type": "Domain",
+        "threat_value": "https://invalid.test",
+        "description": "Synthetic Postman lab indicator",
+        "severity": "Critical",
+        "source": "Postman lab"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid domain threat value"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid hash",
+      "method": "POST",
+      "url": "http://127.0.0.1:5004/threats",
+      "request": {
+        "threat_type": "File Hash",
+        "threat_value": "xyz",
+        "description": "Synthetic Postman lab indicator",
+        "severity": "Critical",
+        "source": "Postman lab"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "File Hash must be MD5, SHA1 or SHA256 hexadecimal"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid search",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats/search?severity=bad",
+      "request": null,
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid severity 'bad'. Allowed values: Low, Medium, High, Critical"
+      },
+      "error": null
+    },
+    {
+      "name": "JWT denied internal stats",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/internal/stats",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "This endpoint is only available to internal services"
+      },
+      "error": null
+    },
+    {
+      "name": "Delete threat",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5004/threats/9",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Threat deleted",
+        "data": null
+      },
+      "error": null
+    },
+    {
+      "name": "Deleted threat",
+      "method": "GET",
+      "url": "http://127.0.0.1:5004/threats/9",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Threat 9 not found"
+      },
+      "error": null
+    }
+  ]
+}

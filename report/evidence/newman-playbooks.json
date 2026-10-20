@@ -1,0 +1,697 @@
+{
+  "source": "Actual Newman/Postman Runtime execution; secrets redacted",
+  "collection": "playbooks.postman_collection.json",
+  "executed_at": "2026-10-20T12:07:53.709Z",
+  "requests": {
+    "total": 27,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 57,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "records": [
+    {
+      "name": "Login admin",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 1,
+            "full_name": "Lab Admin",
+            "username": "admin",
+            "email": "admin@example.test",
+            "department": "Security Lab",
+            "role": "admin",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:29Z",
+            "last_login": "2026-10-20T12:07:50Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "lara",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 3,
+            "full_name": "Lab Lara",
+            "username": "lara",
+            "email": "lara@example.test",
+            "department": "Security Lab",
+            "role": "analyst",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:51Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login auditor",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "nadia",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 4,
+            "full_name": "Lab Nadia",
+            "username": "nadia",
+            "email": "nadia@example.test",
+            "department": "Security Lab",
+            "role": "auditor",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:51Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "rami",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 5,
+            "full_name": "Lab Rami",
+            "username": "rami",
+            "email": "rami@example.test",
+            "department": "Security Lab",
+            "role": "user",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:51Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create playbook",
+      "method": "POST",
+      "url": "http://127.0.0.1:5009/playbooks",
+      "request": {
+        "name": "Postman laboratory response",
+        "description": "Lab procedure",
+        "incident_category": "Malware",
+        "severity": "High"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Playbook created",
+        "data": {
+          "id": 8,
+          "name": "Postman laboratory response",
+          "description": "Lab procedure",
+          "incident_category": "Malware",
+          "severity": "High",
+          "created_by": 1,
+          "created_at": "2026-10-20T12:07:51Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "List playbooks",
+      "method": "GET",
+      "url": "http://127.0.0.1:5009/playbooks",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 8,
+          "playbooks": [
+            {
+              "id": 1,
+              "name": "Seed Malware response",
+              "description": "Ordered laboratory response procedure",
+              "incident_category": "Malware",
+              "severity": "Low",
+              "created_by": 1,
+              "created_at": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 2,
+              "name": "Seed Unauthorized Access response",
+              "description": "Ordered laboratory response procedure",
+              "incident_category": "Unauthorized Access",
+              "severity": "Medium",
+              "created_by": 1,
+              "created_at": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 3,
+              "name": "Seed Phishing response",
+              "description": "Ordered laboratory response procedure",
+              "incident_category": "Phishing",
+              "severity": "High",
+              "created_by": 1,
+              "created_at": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 4,
+              "name": "Seed Data Leakage response",
+              "description": "Ordered laboratory response procedure",
+              "incident_category": "Data Leakage",
+              "severity": "Critical",
+              "created_by": 1,
+              "created_at": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 5,
+              "name": "Seed Account Compromise response",
+              "description": "Ordered laboratory response procedure",
+              "incident_category": "Account Compromise",
+              "severity": "Low",
+              "created_by": 1,
+              "created_at": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 6,
+              "name": "Seed Denial of Service response",
+              "description": "Ordered laboratory response procedure",
+              "incident_category": "Denial of Service",
+              "severity": "Medium",
+              "created_by": 1,
+              "created_at": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 7,
+              "name": "Seed Other response",
+              "description": "Ordered laboratory response procedure",
+              "incident_category": "Other",
+              "severity": "High",
+              "created_by": 1,
+              "created_at": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 8,
+              "name": "Postman laboratory response",
+              "description": "Lab procedure",
+              "incident_category": "Malware",
+              "severity": "High",
+              "created_by": 1,
+              "created_at": "2026-10-20T12:07:51Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Add second step first",
+      "method": "POST",
+      "url": "http://127.0.0.1:5009/playbooks/8/actions",
+      "request": {
+        "description": "Contain host",
+        "step_number": 2
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Action created",
+        "data": {
+          "id": 22,
+          "playbook_id": 8,
+          "description": "Contain host",
+          "step_number": 2,
+          "status": "Pending",
+          "assigned_user_id": null,
+          "completion_date": null,
+          "execution_history": [
+            {
+              "actor_id": 3,
+              "at": "2026-10-20T12:07:52Z",
+              "from_status": null,
+              "to_status": "Pending",
+              "assigned_user_id": null,
+              "completion_date": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Add first step",
+      "method": "POST",
+      "url": "http://127.0.0.1:5009/playbooks/8/actions",
+      "request": {
+        "description": "Collect evidence",
+        "step_number": 1
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Action created",
+        "data": {
+          "id": 23,
+          "playbook_id": 8,
+          "description": "Collect evidence",
+          "step_number": 1,
+          "status": "Pending",
+          "assigned_user_id": null,
+          "completion_date": null,
+          "execution_history": [
+            {
+              "actor_id": 3,
+              "at": "2026-10-20T12:07:52Z",
+              "from_status": null,
+              "to_status": "Pending",
+              "assigned_user_id": null,
+              "completion_date": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Verify ordered actions",
+      "method": "GET",
+      "url": "http://127.0.0.1:5009/playbooks/8",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "id": 8,
+          "name": "Postman laboratory response",
+          "description": "Lab procedure",
+          "incident_category": "Malware",
+          "severity": "High",
+          "created_by": 1,
+          "created_at": "2026-10-20T12:07:51Z",
+          "actions": [
+            {
+              "id": 23,
+              "playbook_id": 8,
+              "description": "Collect evidence",
+              "step_number": 1,
+              "status": "Pending",
+              "assigned_user_id": null,
+              "completion_date": null,
+              "execution_history": [
+                {
+                  "actor_id": 3,
+                  "at": "2026-10-20T12:07:52Z",
+                  "from_status": null,
+                  "to_status": "Pending",
+                  "assigned_user_id": null,
+                  "completion_date": null
+                }
+              ]
+            },
+            {
+              "id": 22,
+              "playbook_id": 8,
+              "description": "Contain host",
+              "step_number": 2,
+              "status": "Pending",
+              "assigned_user_id": null,
+              "completion_date": null,
+              "execution_history": [
+                {
+                  "actor_id": 3,
+                  "at": "2026-10-20T12:07:52Z",
+                  "from_status": null,
+                  "to_status": "Pending",
+                  "assigned_user_id": null,
+                  "completion_date": null
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Duplicate step rejected",
+      "method": "POST",
+      "url": "http://127.0.0.1:5009/playbooks/8/actions",
+      "request": {
+        "description": "Duplicate",
+        "step_number": 1
+      },
+      "status": 409,
+      "response": {
+        "status": "error",
+        "message": "Step number already exists in this playbook"
+      },
+      "error": null
+    },
+    {
+      "name": "Cannot skip Pending",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5009/actions/23/status",
+      "request": {
+        "status": "Completed"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid action transition: Pending -> Completed"
+      },
+      "error": null
+    },
+    {
+      "name": "Start assigned action",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5009/actions/23/status",
+      "request": {
+        "status": "In Progress",
+        "assigned_user_id": 3
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Action updated",
+        "data": {
+          "id": 23,
+          "playbook_id": 8,
+          "description": "Collect evidence",
+          "step_number": 1,
+          "status": "In Progress",
+          "assigned_user_id": 3,
+          "completion_date": null,
+          "execution_history": [
+            {
+              "actor_id": 3,
+              "at": "2026-10-20T12:07:52Z",
+              "from_status": null,
+              "to_status": "Pending",
+              "assigned_user_id": null,
+              "completion_date": null
+            },
+            {
+              "actor_id": 3,
+              "at": "2026-10-20T12:07:52Z",
+              "from_status": "Pending",
+              "to_status": "In Progress",
+              "assigned_user_id": 3,
+              "completion_date": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Complete action",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5009/actions/23/status",
+      "request": {
+        "status": "Completed"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Action updated",
+        "data": {
+          "id": 23,
+          "playbook_id": 8,
+          "description": "Collect evidence",
+          "step_number": 1,
+          "status": "Completed",
+          "assigned_user_id": 3,
+          "completion_date": "2026-10-20T12:07:52Z",
+          "execution_history": [
+            {
+              "actor_id": 3,
+              "at": "2026-10-20T12:07:52Z",
+              "from_status": null,
+              "to_status": "Pending",
+              "assigned_user_id": null,
+              "completion_date": null
+            },
+            {
+              "actor_id": 3,
+              "at": "2026-10-20T12:07:52Z",
+              "from_status": "Pending",
+              "to_status": "In Progress",
+              "assigned_user_id": 3,
+              "completion_date": null
+            },
+            {
+              "actor_id": 3,
+              "at": "2026-10-20T12:07:52Z",
+              "from_status": "In Progress",
+              "to_status": "Completed",
+              "assigned_user_id": 3,
+              "completion_date": "2026-10-20T12:07:52Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "No token",
+      "method": "GET",
+      "url": "http://127.0.0.1:5009/playbooks",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "User denied",
+      "method": "GET",
+      "url": "http://127.0.0.1:5009/playbooks",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Analyst create denied",
+      "method": "POST",
+      "url": "http://127.0.0.1:5009/playbooks",
+      "request": {
+        "name": "Postman laboratory response",
+        "description": "Lab procedure",
+        "incident_category": "Malware",
+        "severity": "High"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Auditor action denied",
+      "method": "POST",
+      "url": "http://127.0.0.1:5009/playbooks/8/actions",
+      "request": {
+        "description": "x",
+        "step_number": 3
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Missing playbook",
+      "method": "GET",
+      "url": "http://127.0.0.1:5009/playbooks/2147483647",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Playbook 2147483647 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Missing action",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5009/actions/2147483647/status",
+      "request": {
+        "status": "In Progress"
+      },
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Response action 2147483647 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid step",
+      "method": "POST",
+      "url": "http://127.0.0.1:5009/playbooks/8/actions",
+      "request": {
+        "description": "x",
+        "step_number": 0
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "step_number must be a positive 64-bit integer"
+      },
+      "error": null
+    },
+    {
+      "name": "Missing assigned user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5009/playbooks/8/actions",
+      "request": {
+        "description": "x",
+        "step_number": 3,
+        "assigned_user_id": 2147483647
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Assigned user does not exist"
+      },
+      "error": null
+    },
+    {
+      "name": "Completed cannot change",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5009/actions/23/status",
+      "request": {
+        "status": "Pending"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Completed action cannot change"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid category",
+      "method": "POST",
+      "url": "http://127.0.0.1:5009/playbooks",
+      "request": {
+        "name": "Postman laboratory response",
+        "description": "Lab procedure",
+        "incident_category": "bad",
+        "severity": "High"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid incident_category 'bad'. Allowed values: Malware, Unauthorized Access, Phishing, Data Leakage, Account Compromise, Denial of Service, Other"
+      },
+      "error": null
+    },
+    {
+      "name": "Empty body",
+      "method": "POST",
+      "url": "http://127.0.0.1:5009/playbooks",
+      "request": {},
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Request body cannot be empty"
+      },
+      "error": null
+    },
+    {
+      "name": "Delete playbook",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5009/playbooks/8",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Playbook deleted",
+        "data": null
+      },
+      "error": null
+    },
+    {
+      "name": "Deleted playbook",
+      "method": "GET",
+      "url": "http://127.0.0.1:5009/playbooks/8",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Playbook 8 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Cascaded action missing",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5009/actions/23/status",
+      "request": {
+        "status": "In Progress"
+      },
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Response action 23 not found"
+      },
+      "error": null
+    }
+  ]
+}

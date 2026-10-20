@@ -1,0 +1,34 @@
+digraph Architecture {
+      graph [rankdir=TB,bgcolor="white",fontname="Arial",label="Security backend architecture — Marc Bteich",labelloc=t,pad=0.3,nodesep=0.7,ranksep=0.65];
+      node [shape=box,style="rounded,filled",fillcolor="#eff6ff",fontname="Arial",margin=0.18];
+      edge [fontname="Arial",fontsize=11,color="#475569"];
+      client [label="API clients: Postman / Newman
+Bearer JWT on public protected endpoints",fillcolor="#dcfce7"];
+      common [label="Shared Python package (Elie)
+JWT / RBAC • errors • config • SQLAlchemy • HTTP helpers",fillcolor="#f1f5f9"];
+      reports [label="6 Reports — 5006
+Elie: summary / incidents / activity
+Marc: assets / threats / vulnerabilities",fillcolor="#dbeafe"];
+      data [shape=plain,label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="12">
+        <TR><TD COLSPAN="2" BGCOLOR="#dbeafe"><B>Eight independent data-service Flask apps</B></TD></TR>
+        <TR><TD>1 Users — 5001 (Elie)</TD><TD>2 Assets — 5002 (Marc)</TD></TR>
+        <TR><TD>3 Incidents — 5003 (Elie)</TD><TD>4 Threats — 5004 (Marc)</TD></TR>
+        <TR><TD>5 Audit Logs — 5005 (Elie)</TD><TD>7 Vulnerabilities — 5007 (Marc)</TD></TR>
+        <TR><TD>8 Notifications — 5008 (Elie)</TD><TD>9 Playbooks — 5009 (Marc)</TD></TR>
+      </TABLE>>];
+      internal [label="Service-to-service HTTP: X-Service-Key
+Verify users / assets; write audit events; send alerts
+Reports collect /internal/stats; no report table queries",fillcolor="#f8fafc"];
+      database [label="One shared SQLite database
+10 tables • PK / FK / CHECK / UNIQUE
+Action execution history saved atomically",shape=cylinder,fillcolor="#fef3c7"];
+      client -> data [label="REST requests"];
+      client -> reports [label="admin / auditor"];
+      common -> data [style=dashed,label="import/reuse",constraint=false];
+      common -> reports [style=dashed,label="import/reuse",constraint=false];
+      {rank=same;data;reports;}
+      reports -> data [label="HTTP statistics",color="#2563eb",constraint=false];
+      data -> database [label="ORM / bound values"];
+      data -> internal [style=dotted,label="internal API calls"];
+      {rank=same;database;internal;}
+    }

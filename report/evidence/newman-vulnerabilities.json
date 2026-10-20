@@ -1,0 +1,903 @@
+{
+  "source": "Actual Newman/Postman Runtime execution; secrets redacted",
+  "collection": "vulnerabilities.postman_collection.json",
+  "executed_at": "2026-10-20T12:07:49.364Z",
+  "requests": {
+    "total": 34,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 70,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "records": [
+    {
+      "name": "Login admin",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 1,
+            "full_name": "Lab Admin",
+            "username": "admin",
+            "email": "admin@example.test",
+            "department": "Security Lab",
+            "role": "admin",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:29Z",
+            "last_login": "2026-10-20T12:07:46Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "lara",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 3,
+            "full_name": "Lab Lara",
+            "username": "lara",
+            "email": "lara@example.test",
+            "department": "Security Lab",
+            "role": "analyst",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:46Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login auditor",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "nadia",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 4,
+            "full_name": "Lab Nadia",
+            "username": "nadia",
+            "email": "nadia@example.test",
+            "department": "Security Lab",
+            "role": "auditor",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:46Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "rami",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 5,
+            "full_name": "Lab Rami",
+            "username": "rami",
+            "email": "rami@example.test",
+            "department": "Security Lab",
+            "role": "user",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:47Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create affected asset",
+      "method": "POST",
+      "url": "http://127.0.0.1:5002/assets",
+      "request": {
+        "asset_name": "Postman vulnerability fixture",
+        "asset_type": "Server",
+        "ip_address": "192.0.2.220",
+        "owner_id": 1,
+        "department": "Lab",
+        "criticality": "High"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Asset created successfully",
+        "data": {
+          "id": 13,
+          "asset_name": "Postman vulnerability fixture",
+          "asset_type": "Server",
+          "ip_address": "192.0.2.220",
+          "operating_system": null,
+          "owner_id": 1,
+          "department": "Lab",
+          "location": null,
+          "criticality": "High",
+          "status": "Active"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create Critical vulnerability",
+      "method": "POST",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": {
+        "title": "Synthetic Postman vulnerability",
+        "description": "Lab scenario only",
+        "cve_id": "CVE-2026-12345",
+        "cvss_score": 9.8,
+        "severity": "Critical",
+        "asset_id": 13,
+        "discovery_source": "Postman lab"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Vulnerability created",
+        "data": {
+          "id": 6,
+          "title": "Synthetic Postman vulnerability",
+          "description": "Lab scenario only",
+          "cve_id": "CVE-2026-12345",
+          "cvss_score": 9.8,
+          "severity": "Critical",
+          "asset_id": 13,
+          "discovery_source": "Postman lab",
+          "status": "Open",
+          "created_at": "2026-10-20T12:07:47Z",
+          "resolution_date": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "List vulnerabilities",
+      "method": "GET",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 6,
+          "vulnerabilities": [
+            {
+              "id": 1,
+              "title": "Seed remediation scenario 1",
+              "description": "Synthetic CVE-format lab example; no real CVE claim",
+              "cve_id": "CVE-2026-9000",
+              "cvss_score": 2.1,
+              "severity": "Low",
+              "asset_id": 1,
+              "discovery_source": "Lab scanner simulation dataset",
+              "status": "Open",
+              "created_at": "2026-10-13T12:07:31Z",
+              "resolution_date": null
+            },
+            {
+              "id": 2,
+              "title": "Seed remediation scenario 2",
+              "description": "Synthetic CVE-format lab example; no real CVE claim",
+              "cve_id": "CVE-2026-9001",
+              "cvss_score": 5.5,
+              "severity": "Medium",
+              "asset_id": 2,
+              "discovery_source": "Lab scanner simulation dataset",
+              "status": "Under Investigation",
+              "created_at": "2026-10-13T12:07:31Z",
+              "resolution_date": null
+            },
+            {
+              "id": 3,
+              "title": "Seed remediation scenario 3",
+              "description": "Synthetic CVE-format lab example; no real CVE claim",
+              "cve_id": "CVE-2026-9002",
+              "cvss_score": 8.1,
+              "severity": "High",
+              "asset_id": 3,
+              "discovery_source": "Lab scanner simulation dataset",
+              "status": "In Progress",
+              "created_at": "2026-10-13T12:07:31Z",
+              "resolution_date": null
+            },
+            {
+              "id": 4,
+              "title": "Seed remediation scenario 4",
+              "description": "Synthetic CVE-format lab example; no real CVE claim",
+              "cve_id": "CVE-2026-9003",
+              "cvss_score": 9.8,
+              "severity": "Critical",
+              "asset_id": 4,
+              "discovery_source": "Lab scanner simulation dataset",
+              "status": "Resolved",
+              "created_at": "2026-10-13T12:07:31Z",
+              "resolution_date": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 5,
+              "title": "Seed remediation scenario 5",
+              "description": "Synthetic CVE-format lab example; no real CVE claim",
+              "cve_id": "CVE-2026-9004",
+              "cvss_score": 7.5,
+              "severity": "Low",
+              "asset_id": 5,
+              "discovery_source": "Lab scanner simulation dataset",
+              "status": "Closed",
+              "created_at": "2026-10-13T12:07:31Z",
+              "resolution_date": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 6,
+              "title": "Synthetic Postman vulnerability",
+              "description": "Lab scenario only",
+              "cve_id": "CVE-2026-12345",
+              "cvss_score": 9.8,
+              "severity": "Critical",
+              "asset_id": 13,
+              "discovery_source": "Postman lab",
+              "status": "Open",
+              "created_at": "2026-10-20T12:07:47Z",
+              "resolution_date": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get vulnerability",
+      "method": "GET",
+      "url": "http://127.0.0.1:5007/vulnerabilities/6",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "id": 6,
+          "title": "Synthetic Postman vulnerability",
+          "description": "Lab scenario only",
+          "cve_id": "CVE-2026-12345",
+          "cvss_score": 9.8,
+          "severity": "Critical",
+          "asset_id": 13,
+          "discovery_source": "Postman lab",
+          "status": "Open",
+          "created_at": "2026-10-20T12:07:47Z",
+          "resolution_date": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search cve=CVE-2026-12345",
+      "method": "GET",
+      "url": "http://127.0.0.1:5007/vulnerabilities/search?cve=CVE-2026-12345",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 1,
+          "vulnerabilities": [
+            {
+              "id": 6,
+              "title": "Synthetic Postman vulnerability",
+              "description": "Lab scenario only",
+              "cve_id": "CVE-2026-12345",
+              "cvss_score": 9.8,
+              "severity": "Critical",
+              "asset_id": 13,
+              "discovery_source": "Postman lab",
+              "status": "Open",
+              "created_at": "2026-10-20T12:07:47Z",
+              "resolution_date": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search severity=Critical",
+      "method": "GET",
+      "url": "http://127.0.0.1:5007/vulnerabilities/search?severity=Critical",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 2,
+          "vulnerabilities": [
+            {
+              "id": 4,
+              "title": "Seed remediation scenario 4",
+              "description": "Synthetic CVE-format lab example; no real CVE claim",
+              "cve_id": "CVE-2026-9003",
+              "cvss_score": 9.8,
+              "severity": "Critical",
+              "asset_id": 4,
+              "discovery_source": "Lab scanner simulation dataset",
+              "status": "Resolved",
+              "created_at": "2026-10-13T12:07:31Z",
+              "resolution_date": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 6,
+              "title": "Synthetic Postman vulnerability",
+              "description": "Lab scenario only",
+              "cve_id": "CVE-2026-12345",
+              "cvss_score": 9.8,
+              "severity": "Critical",
+              "asset_id": 13,
+              "discovery_source": "Postman lab",
+              "status": "Open",
+              "created_at": "2026-10-20T12:07:47Z",
+              "resolution_date": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search asset=13",
+      "method": "GET",
+      "url": "http://127.0.0.1:5007/vulnerabilities/search?asset=13",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 1,
+          "vulnerabilities": [
+            {
+              "id": 6,
+              "title": "Synthetic Postman vulnerability",
+              "description": "Lab scenario only",
+              "cve_id": "CVE-2026-12345",
+              "cvss_score": 9.8,
+              "severity": "Critical",
+              "asset_id": 13,
+              "discovery_source": "Postman lab",
+              "status": "Open",
+              "created_at": "2026-10-20T12:07:47Z",
+              "resolution_date": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search status=Open",
+      "method": "GET",
+      "url": "http://127.0.0.1:5007/vulnerabilities/search?status=Open",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "count": 2,
+          "vulnerabilities": [
+            {
+              "id": 1,
+              "title": "Seed remediation scenario 1",
+              "description": "Synthetic CVE-format lab example; no real CVE claim",
+              "cve_id": "CVE-2026-9000",
+              "cvss_score": 2.1,
+              "severity": "Low",
+              "asset_id": 1,
+              "discovery_source": "Lab scanner simulation dataset",
+              "status": "Open",
+              "created_at": "2026-10-13T12:07:31Z",
+              "resolution_date": null
+            },
+            {
+              "id": 6,
+              "title": "Synthetic Postman vulnerability",
+              "description": "Lab scenario only",
+              "cve_id": "CVE-2026-12345",
+              "cvss_score": 9.8,
+              "severity": "Critical",
+              "asset_id": 13,
+              "discovery_source": "Postman lab",
+              "status": "Open",
+              "created_at": "2026-10-20T12:07:47Z",
+              "resolution_date": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Cannot skip lifecycle",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5007/vulnerabilities/6",
+      "request": {
+        "status": "Closed"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid transition from Open; next status is Under Investigation"
+      },
+      "error": null
+    },
+    {
+      "name": "Transition Under Investigation",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5007/vulnerabilities/6",
+      "request": {
+        "status": "Under Investigation"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Vulnerability updated",
+        "data": {
+          "id": 6,
+          "title": "Synthetic Postman vulnerability",
+          "description": "Lab scenario only",
+          "cve_id": "CVE-2026-12345",
+          "cvss_score": 9.8,
+          "severity": "Critical",
+          "asset_id": 13,
+          "discovery_source": "Postman lab",
+          "status": "Under Investigation",
+          "created_at": "2026-10-20T12:07:47Z",
+          "resolution_date": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Transition In Progress",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5007/vulnerabilities/6",
+      "request": {
+        "status": "In Progress"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Vulnerability updated",
+        "data": {
+          "id": 6,
+          "title": "Synthetic Postman vulnerability",
+          "description": "Lab scenario only",
+          "cve_id": "CVE-2026-12345",
+          "cvss_score": 9.8,
+          "severity": "Critical",
+          "asset_id": 13,
+          "discovery_source": "Postman lab",
+          "status": "In Progress",
+          "created_at": "2026-10-20T12:07:47Z",
+          "resolution_date": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Transition Resolved",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5007/vulnerabilities/6",
+      "request": {
+        "status": "Resolved"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Vulnerability updated",
+        "data": {
+          "id": 6,
+          "title": "Synthetic Postman vulnerability",
+          "description": "Lab scenario only",
+          "cve_id": "CVE-2026-12345",
+          "cvss_score": 9.8,
+          "severity": "Critical",
+          "asset_id": 13,
+          "discovery_source": "Postman lab",
+          "status": "Resolved",
+          "created_at": "2026-10-20T12:07:47Z",
+          "resolution_date": "2026-10-20T12:07:47Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Transition Closed",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5007/vulnerabilities/6",
+      "request": {
+        "status": "Closed"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Vulnerability updated",
+        "data": {
+          "id": 6,
+          "title": "Synthetic Postman vulnerability",
+          "description": "Lab scenario only",
+          "cve_id": "CVE-2026-12345",
+          "cvss_score": 9.8,
+          "severity": "Critical",
+          "asset_id": 13,
+          "discovery_source": "Postman lab",
+          "status": "Closed",
+          "created_at": "2026-10-20T12:07:47Z",
+          "resolution_date": "2026-10-20T12:07:47Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Internal stats",
+      "method": "GET",
+      "url": "http://127.0.0.1:5007/internal/stats",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "OK",
+        "data": {
+          "total_vulnerabilities": 6,
+          "critical_vulnerabilities": 2,
+          "by_severity": {
+            "Low": 2,
+            "Medium": 1,
+            "High": 1,
+            "Critical": 2
+          },
+          "by_status": {
+            "Open": 1,
+            "Under Investigation": 1,
+            "In Progress": 1,
+            "Resolved": 1,
+            "Closed": 2
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Critical vulnerability notification",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/search?type=Vulnerability%20Alert",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "3 notification(s) match the search criteria",
+        "data": {
+          "count": 3,
+          "notifications": [
+            {
+              "id": 9,
+              "user_id": 2,
+              "title": "Critical vulnerability #6",
+              "message": "Synthetic Postman vulnerability",
+              "notification_type": "Vulnerability Alert",
+              "severity": "Critical",
+              "status": "Unread",
+              "created_at": "2026-10-20T12:07:47Z",
+              "read_at": null
+            },
+            {
+              "id": 8,
+              "user_id": 1,
+              "title": "Critical vulnerability #6",
+              "message": "Synthetic Postman vulnerability",
+              "notification_type": "Vulnerability Alert",
+              "severity": "Critical",
+              "status": "Unread",
+              "created_at": "2026-10-20T12:07:47Z",
+              "read_at": null
+            },
+            {
+              "id": 5,
+              "user_id": 1,
+              "title": "Seed Vulnerability Alert",
+              "message": "Synthetic sample notification",
+              "notification_type": "Vulnerability Alert",
+              "severity": "Low",
+              "status": "Unread",
+              "created_at": "2026-10-20T12:07:31Z",
+              "read_at": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Linked asset cannot be deleted",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5002/assets/13",
+      "request": null,
+      "status": 409,
+      "response": {
+        "status": "error",
+        "message": "Operation violates a database constraint (duplicate or linked record)"
+      },
+      "error": null
+    },
+    {
+      "name": "No token",
+      "method": "GET",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "User denied",
+      "method": "GET",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Analyst create denied",
+      "method": "POST",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": {
+        "title": "Synthetic Postman vulnerability",
+        "description": "Lab scenario only",
+        "cve_id": "CVE-2026-12345",
+        "cvss_score": 9.8,
+        "severity": "Critical",
+        "asset_id": 13,
+        "discovery_source": "Postman lab"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Auditor update denied",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5007/vulnerabilities/6",
+      "request": {
+        "description": "x"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Missing vulnerability",
+      "method": "GET",
+      "url": "http://127.0.0.1:5007/vulnerabilities/2147483647",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Vulnerability 2147483647 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Empty body",
+      "method": "POST",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": {},
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Request body cannot be empty"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid CVE",
+      "method": "POST",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": {
+        "title": "Synthetic Postman vulnerability",
+        "description": "Lab scenario only",
+        "cve_id": "CVE-26-1",
+        "cvss_score": 9.8,
+        "severity": "Critical",
+        "asset_id": 13,
+        "discovery_source": "Postman lab"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "CVE must match CVE-YYYY-NNNN or a longer numeric suffix"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid CVSS",
+      "method": "POST",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": {
+        "title": "Synthetic Postman vulnerability",
+        "description": "Lab scenario only",
+        "cve_id": "CVE-2026-12345",
+        "cvss_score": 10.1,
+        "severity": "Critical",
+        "asset_id": 13,
+        "discovery_source": "Postman lab"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "cvss_score must be a finite number from 0.0 to 10.0"
+      },
+      "error": null
+    },
+    {
+      "name": "Wrong type",
+      "method": "POST",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": {
+        "title": "Synthetic Postman vulnerability",
+        "description": "Lab scenario only",
+        "cve_id": "CVE-2026-12345",
+        "cvss_score": true,
+        "severity": "Critical",
+        "asset_id": 13,
+        "discovery_source": "Postman lab"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "cvss_score must be a finite number from 0.0 to 10.0"
+      },
+      "error": null
+    },
+    {
+      "name": "Missing asset",
+      "method": "POST",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": {
+        "title": "Synthetic Postman vulnerability",
+        "description": "Lab scenario only",
+        "cve_id": "CVE-2026-12345",
+        "cvss_score": 9.8,
+        "severity": "Critical",
+        "asset_id": 2147483647,
+        "discovery_source": "Postman lab"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Affected asset does not exist"
+      },
+      "error": null
+    },
+    {
+      "name": "Invalid severity",
+      "method": "POST",
+      "url": "http://127.0.0.1:5007/vulnerabilities",
+      "request": {
+        "title": "Synthetic Postman vulnerability",
+        "description": "Lab scenario only",
+        "cve_id": "CVE-2026-12345",
+        "cvss_score": 9.8,
+        "severity": "bad",
+        "asset_id": 13,
+        "discovery_source": "Postman lab"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid severity 'bad'. Allowed values: Low, Medium, High, Critical"
+      },
+      "error": null
+    },
+    {
+      "name": "Closed cannot reopen",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5007/vulnerabilities/6",
+      "request": {
+        "status": "Open"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid transition from Closed; next status is None"
+      },
+      "error": null
+    },
+    {
+      "name": "Delete vulnerability",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5007/vulnerabilities/6",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Vulnerability deleted",
+        "data": null
+      },
+      "error": null
+    },
+    {
+      "name": "Delete affected asset",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5002/assets/13",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset 13 deleted successfully",
+        "data": null
+      },
+      "error": null
+    }
+  ]
+}

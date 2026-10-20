@@ -1,0 +1,380 @@
+[
+  {
+    "service": "users",
+    "method": "POST",
+    "path": "/users/register",
+    "roles": "public"
+  },
+  {
+    "service": "users",
+    "method": "POST",
+    "path": "/users/login",
+    "roles": "public"
+  },
+  {
+    "service": "users",
+    "method": "PUT",
+    "path": "/users/{user_id}",
+    "roles": "admin,user"
+  },
+  {
+    "service": "users",
+    "method": "DELETE",
+    "path": "/users/{user_id}",
+    "roles": "admin"
+  },
+  {
+    "service": "users",
+    "method": "GET",
+    "path": "/users",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "users",
+    "method": "GET",
+    "path": "/users/{username}",
+    "roles": "admin,auditor,user"
+  },
+  {
+    "service": "users",
+    "method": "GET",
+    "path": "/internal/users/{user_id}",
+    "roles": "internal service only"
+  },
+  {
+    "service": "users",
+    "method": "GET",
+    "path": "/internal/users",
+    "roles": "internal service only"
+  },
+  {
+    "service": "users",
+    "method": "GET",
+    "path": "/internal/stats",
+    "roles": "internal service only"
+  },
+  {
+    "service": "assets",
+    "method": "POST",
+    "path": "/assets",
+    "roles": "admin"
+  },
+  {
+    "service": "assets",
+    "method": "PUT",
+    "path": "/assets/{asset_id}",
+    "roles": "admin"
+  },
+  {
+    "service": "assets",
+    "method": "DELETE",
+    "path": "/assets/{asset_id}",
+    "roles": "admin"
+  },
+  {
+    "service": "assets",
+    "method": "GET",
+    "path": "/assets",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "assets",
+    "method": "GET",
+    "path": "/assets/{asset_id}",
+    "roles": "admin,analyst,auditor"
+  },
+  {
+    "service": "assets",
+    "method": "GET",
+    "path": "/assets/search",
+    "roles": "admin,analyst,auditor"
+  },
+  {
+    "service": "assets",
+    "method": "GET",
+    "path": "/internal/stats",
+    "roles": "internal service only"
+  },
+  {
+    "service": "assets",
+    "method": "GET",
+    "path": "/internal/assets/{asset_id}",
+    "roles": "internal service only"
+  },
+  {
+    "service": "incidents",
+    "method": "POST",
+    "path": "/incidents",
+    "roles": "admin,user"
+  },
+  {
+    "service": "incidents",
+    "method": "GET",
+    "path": "/incidents",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "incidents",
+    "method": "GET",
+    "path": "/incidents/{incident_id}",
+    "roles": "admin,auditor,analyst,user"
+  },
+  {
+    "service": "incidents",
+    "method": "PUT",
+    "path": "/incidents/{incident_id}/assign",
+    "roles": "admin"
+  },
+  {
+    "service": "incidents",
+    "method": "PUT",
+    "path": "/incidents/{incident_id}/status",
+    "roles": "admin,analyst"
+  },
+  {
+    "service": "incidents",
+    "method": "POST",
+    "path": "/incidents/{incident_id}/notes",
+    "roles": "admin,analyst"
+  },
+  {
+    "service": "incidents",
+    "method": "GET",
+    "path": "/internal/stats",
+    "roles": "internal service only"
+  },
+  {
+    "service": "threats",
+    "method": "POST",
+    "path": "/threats",
+    "roles": "admin"
+  },
+  {
+    "service": "threats",
+    "method": "GET",
+    "path": "/threats",
+    "roles": "admin,analyst,auditor"
+  },
+  {
+    "service": "threats",
+    "method": "GET",
+    "path": "/threats/{record_id}",
+    "roles": "admin,analyst,auditor"
+  },
+  {
+    "service": "threats",
+    "method": "GET",
+    "path": "/threats/search",
+    "roles": "admin,analyst"
+  },
+  {
+    "service": "threats",
+    "method": "PUT",
+    "path": "/threats/{record_id}",
+    "roles": "admin"
+  },
+  {
+    "service": "threats",
+    "method": "DELETE",
+    "path": "/threats/{record_id}",
+    "roles": "admin"
+  },
+  {
+    "service": "threats",
+    "method": "GET",
+    "path": "/internal/stats",
+    "roles": "internal service only"
+  },
+  {
+    "service": "logs",
+    "method": "POST",
+    "path": "/logs",
+    "roles": "admin"
+  },
+  {
+    "service": "logs",
+    "method": "GET",
+    "path": "/logs",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "logs",
+    "method": "GET",
+    "path": "/logs/search",
+    "roles": "admin,auditor,analyst"
+  },
+  {
+    "service": "logs",
+    "method": "GET",
+    "path": "/logs/user/{user_id}",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "logs",
+    "method": "GET",
+    "path": "/logs/{log_id}",
+    "roles": "admin,auditor,analyst"
+  },
+  {
+    "service": "logs",
+    "method": "DELETE",
+    "path": "/logs/{log_id}",
+    "roles": "admin"
+  },
+  {
+    "service": "logs",
+    "method": "GET",
+    "path": "/internal/stats",
+    "roles": "internal service only"
+  },
+  {
+    "service": "reports",
+    "method": "GET",
+    "path": "/reports/summary",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "reports",
+    "method": "GET",
+    "path": "/reports/incidents",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "reports",
+    "method": "GET",
+    "path": "/reports/activity",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "reports",
+    "method": "GET",
+    "path": "/reports/assets",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "reports",
+    "method": "GET",
+    "path": "/reports/threats",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "reports",
+    "method": "GET",
+    "path": "/reports/vulnerabilities",
+    "roles": "admin,auditor"
+  },
+  {
+    "service": "vulnerabilities",
+    "method": "POST",
+    "path": "/vulnerabilities",
+    "roles": "admin"
+  },
+  {
+    "service": "vulnerabilities",
+    "method": "GET",
+    "path": "/vulnerabilities",
+    "roles": "admin,analyst,auditor"
+  },
+  {
+    "service": "vulnerabilities",
+    "method": "GET",
+    "path": "/vulnerabilities/{record_id}",
+    "roles": "admin,analyst,auditor"
+  },
+  {
+    "service": "vulnerabilities",
+    "method": "PUT",
+    "path": "/vulnerabilities/{record_id}",
+    "roles": "admin,analyst"
+  },
+  {
+    "service": "vulnerabilities",
+    "method": "GET",
+    "path": "/vulnerabilities/search",
+    "roles": "admin,analyst,auditor"
+  },
+  {
+    "service": "vulnerabilities",
+    "method": "DELETE",
+    "path": "/vulnerabilities/{record_id}",
+    "roles": "admin"
+  },
+  {
+    "service": "vulnerabilities",
+    "method": "GET",
+    "path": "/internal/stats",
+    "roles": "internal service only"
+  },
+  {
+    "service": "notifications",
+    "method": "POST",
+    "path": "/notifications",
+    "roles": "admin"
+  },
+  {
+    "service": "notifications",
+    "method": "GET",
+    "path": "/notifications/user/{user_id}",
+    "roles": "admin,analyst,user,auditor"
+  },
+  {
+    "service": "notifications",
+    "method": "GET",
+    "path": "/notifications/search",
+    "roles": "admin,analyst,auditor"
+  },
+  {
+    "service": "notifications",
+    "method": "GET",
+    "path": "/notifications/{notification_id}",
+    "roles": "admin,analyst,user,auditor"
+  },
+  {
+    "service": "notifications",
+    "method": "PUT",
+    "path": "/notifications/{notification_id}/read",
+    "roles": "admin,analyst,user"
+  },
+  {
+    "service": "notifications",
+    "method": "DELETE",
+    "path": "/notifications/{notification_id}",
+    "roles": "admin"
+  },
+  {
+    "service": "playbooks",
+    "method": "POST",
+    "path": "/playbooks",
+    "roles": "admin"
+  },
+  {
+    "service": "playbooks",
+    "method": "GET",
+    "path": "/playbooks",
+    "roles": "admin,analyst,auditor"
+  },
+  {
+    "service": "playbooks",
+    "method": "GET",
+    "path": "/playbooks/{record_id}",
+    "roles": "admin,analyst,auditor"
+  },
+  {
+    "service": "playbooks",
+    "method": "POST",
+    "path": "/playbooks/{record_id}/actions",
+    "roles": "admin,analyst"
+  },
+  {
+    "service": "playbooks",
+    "method": "PUT",
+    "path": "/actions/{record_id}/status",
+    "roles": "admin,analyst"
+  },
+  {
+    "service": "playbooks",
+    "method": "DELETE",
+    "path": "/playbooks/{record_id}",
+    "roles": "admin"
+  }
+]

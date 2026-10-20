@@ -1,0 +1,4 @@
+# Optional test/report tooling only. Backend requirements.txt is unchanged.
+python-docx==1.2.0
+Pillow==13.0.0
+playwright==1.64.0

@@ -1,0 +1,7 @@
+flowchart TB
+  Client[Postman / Newman: JWT] --> Common[Shared auth, RBAC, errors and clients]
+  Common --> Services[Nine independent Flask apps: ports 5001–5009]
+  Services --> DB[(Shared database: ten tables)]
+  Reports[Reports] -->|HTTP service key /internal/stats| Sources[Users, Assets, Incidents, Threats, Logs, Vulnerabilities]
+  B[Threats / Vulnerabilities] -->|HTTP Critical alerts| Notifications
+  Services -->|HTTP write events| Audit[Audit Logs]
