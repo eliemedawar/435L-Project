@@ -1,0 +1,125 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}table{border-collapse:collapse;background:white}td,th{border:1px solid #cbd5e1;padding:8px;text-align:left}th{background:#dbeafe}</style>
+<article>
+<h1>Marc Bteich – Search by department – GET /assets/search, HTTP 200</h1>
+<small>Genuine Newman execution report • 2026-10-20T12:07:40.066Z • source: newman-assets.json</small>
+<p>GET http://127.0.0.1:5002/assets/search?department=IT</p>
+<h2>Actual request body (credentials redacted)</h2><pre>null</pre>
+<h2>Actual response — HTTP 200</h2><pre>{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;message&quot;: &quot;Asset search completed&quot;,
+  &quot;data&quot;: {
+    &quot;count&quot;: 9,
+    &quot;assets&quot;: [
+      {
+        &quot;id&quot;: 1,
+        &quot;asset_name&quot;: &quot;Seed Server&quot;,
+        &quot;asset_type&quot;: &quot;Server&quot;,
+        &quot;ip_address&quot;: &quot;192.0.2.100&quot;,
+        &quot;operating_system&quot;: &quot;Lab Linux&quot;,
+        &quot;owner_id&quot;: 1,
+        &quot;department&quot;: &quot;Security Lab&quot;,
+        &quot;location&quot;: &quot;University lab&quot;,
+        &quot;criticality&quot;: &quot;Low&quot;,
+        &quot;status&quot;: &quot;Active&quot;
+      },
+      {
+        &quot;id&quot;: 3,
+        &quot;asset_name&quot;: &quot;Seed Database&quot;,
+        &quot;asset_type&quot;: &quot;Database&quot;,
+        &quot;ip_address&quot;: &quot;192.0.2.102&quot;,
+        &quot;operating_system&quot;: null,
+        &quot;owner_id&quot;: 1,
+        &quot;department&quot;: &quot;Security Lab&quot;,
+        &quot;location&quot;: &quot;University lab&quot;,
+        &quot;criticality&quot;: &quot;High&quot;,
+        &quot;status&quot;: &quot;Under Maintenance&quot;
+      },
+      {
+        &quot;id&quot;: 5,
+        &quot;asset_name&quot;: &quot;Seed Network Device&quot;,
+        &quot;asset_type&quot;: &quot;Network Device&quot;,
+        &quot;ip_address&quot;: &quot;192.0.2.104&quot;,
+        &quot;operating_system&quot;: null,
+        &quot;owner_id&quot;: 1,
+        &quot;department&quot;: &quot;Security Lab&quot;,
+        &quot;location&quot;: &quot;University lab&quot;,
+        &quot;criticality&quot;: &quot;Low&quot;,
+        &quot;status&quot;: &quot;Inactive&quot;
+      },
+      {
+        &quot;id&quot;: 7,
+        &quot;asset_name&quot;: &quot;Updated Postman Server&quot;,
+        &quot;asset_type&quot;: &quot;Server&quot;,
+        &quot;ip_address&quot;: &quot;192.0.2.10&quot;,
+        &quot;operating_system&quot;: &quot;Linux&quot;,
+        &quot;owner_id&quot;: 1,
+        &quot;department&quot;: &quot;IT&quot;,
+        &quot;location&quot;: &quot;Lab&quot;,
+        &quot;criticality&quot;: &quot;High&quot;,
+        &quot;status&quot;: &quot;Under Maintenance&quot;
+      },
+      {
+        &quot;id&quot;: 8,
+        &quot;asset_name&quot;: &quot;Postman Workstation&quot;,
+        &quot;asset_type&quot;: &quot;Workstation&quot;,
+        &quot;ip_address&quot;: &quot;192.0.2.10&quot;,
+        &quot;operating_system&quot;: &quot;Linux&quot;,
+        &quot;owner_id&quot;: 1,
+        &quot;department&quot;: &quot;Security&quot;,
+        &quot;location&quot;: &quot;Lab&quot;,
+        &quot;criticality&quot;: &quot;Low&quot;,
+        &quot;status&quot;: &quot;Active&quot;
+      },
+      {
+        &quot;id&quot;: 9,
+        &quot;asset_name&quot;: &quot;Postman Database&quot;,
+        &quot;asset_type&quot;: &quot;Database&quot;,
+        &quot;ip_address&quot;: &quot;192.0.2.10&quot;,
+        &quot;operating_system&quot;: &quot;Linux&quot;,
+        &quot;owner_id&quot;: 1,
+        &quot;department&quot;: &quot;Security&quot;,
+        &quot;location&quot;: &quot;Lab&quot;,
+        &quot;criticality&quot;: &quot;Medium&quot;,
+        &quot;status&quot;: &quot;Inactive&quot;
+      },
+      {
+        &quot;id&quot;: 10,
+        &quot;asset_name&quot;: &quot;Postman Application&quot;,
+        &quot;asset_type&quot;: &quot;Application&quot;,
+        &quot;ip_address&quot;: &quot;192.0.2.10&quot;,
+        &quot;operating_system&quot;: &quot;Linux&quot;,
+        &quot;owner_id&quot;: 1,
+        &quot;department&quot;: &quot;Security&quot;,
+        &quot;location&quot;: &quot;Lab&quot;,
+        &quot;criticality&quot;: &quot;High&quot;,
+        &quot;status&quot;: &quot;Under Maintenance&quot;
+      },
+      {
+        &quot;id&quot;: 11,
+        &quot;asset_name&quot;: &quot;Postman Network Device&quot;,
+        &quot;asset_type&quot;: &quot;Network Device&quot;,
+        &quot;ip_address&quot;: &quot;192.0.2.10&quot;,
+        &quot;operating_system&quot;: &quot;Linux&quot;,
+        &quot;owner_id&quot;: 1,
+        &quot;department&quot;: &quot;Security&quot;,
+        &quot;location&quot;: &quot;Lab&quot;,
+        &quot;criticality&quot;: &quot;High&quot;,
+        &quot;status&quot;: &quot;Active&quot;
+      },
+      {
+        &quot;id&quot;: 12,
+        &quot;asset_name&quot;: &quot;Postman Cloud Resource&quot;,
+        &quot;asset_type&quot;: &quot;Cloud Resource&quot;,
+        &quot;ip_address&quot;: &quot;192.0.2.10&quot;,
+        &quot;operating_system&quot;: &quot;Linux&quot;,
+        &quot;owner_id&quot;: 1,
+        &quot;department&quot;: &quot;Security&quot;,
+        &quot;location&quot;: &quot;Lab&quot;,
+        &quot;criticality&quot;: &quot;Critical&quot;,
+        &quot;status&quot;: &quot;Active&quot;
+      }
+    ]
+  }
+}</pre>
+<p>This screenshot displays stored results from an actual API execution. It is not a simulated API response or a Postman GUI screenshot.</p></article>

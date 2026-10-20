@@ -1,0 +1,1024 @@
+[
+  {
+    "name": "newman-assets-05",
+    "caption": "Marc Bteich \u2013 Create asset \u2013 POST /assets, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-06",
+    "caption": "Marc Bteich \u2013 Create Workstation \u2013 POST /assets, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-07",
+    "caption": "Marc Bteich \u2013 Create Database \u2013 POST /assets, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-08",
+    "caption": "Marc Bteich \u2013 Create Application \u2013 POST /assets, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-09",
+    "caption": "Marc Bteich \u2013 Create Network Device \u2013 POST /assets, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-10",
+    "caption": "Marc Bteich \u2013 Create Cloud Resource \u2013 POST /assets, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-11",
+    "caption": "Marc Bteich \u2013 List assets (auditor) \u2013 GET /assets, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-12",
+    "caption": "Marc Bteich \u2013 Get asset before update (analyst) \u2013 GET /assets/7, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/7"
+  },
+  {
+    "name": "newman-assets-13",
+    "caption": "Marc Bteich \u2013 Update asset (admin) \u2013 PUT /assets/7, HTTP 200",
+    "status": 200,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5002/assets/7"
+  },
+  {
+    "name": "newman-assets-14",
+    "caption": "Marc Bteich \u2013 Get asset after update \u2013 GET /assets/7, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/7"
+  },
+  {
+    "name": "newman-assets-15",
+    "caption": "Marc Bteich \u2013 Search by name \u2013 GET /assets/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/search?name=Postman"
+  },
+  {
+    "name": "newman-assets-16",
+    "caption": "Marc Bteich \u2013 Search by type \u2013 GET /assets/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/search?type=Server"
+  },
+  {
+    "name": "newman-assets-17",
+    "caption": "Marc Bteich \u2013 Search by IP \u2013 GET /assets/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/search?ip=192.0.2.10"
+  },
+  {
+    "name": "newman-assets-18",
+    "caption": "Marc Bteich \u2013 Search by department \u2013 GET /assets/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/search?department=IT"
+  },
+  {
+    "name": "newman-assets-19",
+    "caption": "Marc Bteich \u2013 Search by criticality \u2013 GET /assets/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/search?criticality=High"
+  },
+  {
+    "name": "newman-assets-20",
+    "caption": "Marc Bteich \u2013 Search by combined \u2013 GET /assets/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/search?type=Server&department=IT&criticality=High"
+  },
+  {
+    "name": "newman-assets-21",
+    "caption": "Marc Bteich \u2013 Search by no matches \u2013 GET /assets/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/search?name=NoSuchAsset987"
+  },
+  {
+    "name": "newman-assets-22",
+    "caption": "Marc Bteich \u2013 Internal statistics \u2013 GET /internal/stats, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/internal/stats"
+  },
+  {
+    "name": "newman-assets-23",
+    "caption": "Marc Bteich \u2013 Internal asset lookup \u2013 GET /internal/assets/7, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/internal/assets/7"
+  },
+  {
+    "name": "newman-assets-24",
+    "caption": "Marc Bteich \u2013 Inspect Assets audit records \u2013 GET /logs/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5005/logs/search?service=assets"
+  },
+  {
+    "name": "newman-assets-25",
+    "caption": "Marc Bteich \u2013 Missing token \u2013 GET /assets, HTTP 401",
+    "status": 401,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-26",
+    "caption": "Marc Bteich \u2013 Employee forbidden \u2013 GET /assets/7, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/7"
+  },
+  {
+    "name": "newman-assets-27",
+    "caption": "Marc Bteich \u2013 Analyst cannot list all \u2013 GET /assets, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-28",
+    "caption": "Marc Bteich \u2013 Auditor cannot update \u2013 PUT /assets/7, HTTP 403",
+    "status": 403,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5002/assets/7"
+  },
+  {
+    "name": "newman-assets-29",
+    "caption": "Marc Bteich \u2013 Analyst cannot delete \u2013 DELETE /assets/7, HTTP 403",
+    "status": 403,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5002/assets/7"
+  },
+  {
+    "name": "newman-assets-30",
+    "caption": "Marc Bteich \u2013 Missing asset \u2013 GET /assets/2147483647, HTTP 404",
+    "status": 404,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/2147483647"
+  },
+  {
+    "name": "newman-assets-31",
+    "caption": "Marc Bteich \u2013 Missing asset update \u2013 PUT /assets/2147483647, HTTP 404",
+    "status": 404,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5002/assets/2147483647"
+  },
+  {
+    "name": "newman-assets-32",
+    "caption": "Marc Bteich \u2013 Missing asset deletion \u2013 DELETE /assets/2147483647, HTTP 404",
+    "status": 404,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5002/assets/2147483647"
+  },
+  {
+    "name": "newman-assets-33",
+    "caption": "Marc Bteich \u2013 Empty body \u2013 POST /assets, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-34",
+    "caption": "Marc Bteich \u2013 Invalid JSON \u2013 POST /assets, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-35",
+    "caption": "Marc Bteich \u2013 Internal statistics reject JWT \u2013 GET /internal/stats, HTTP 401",
+    "status": 401,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/internal/stats"
+  },
+  {
+    "name": "newman-assets-36",
+    "caption": "Marc Bteich \u2013 invalid IP \u2013 POST /assets, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-37",
+    "caption": "Marc Bteich \u2013 invalid type \u2013 POST /assets, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-38",
+    "caption": "Marc Bteich \u2013 invalid criticality \u2013 POST /assets, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-39",
+    "caption": "Marc Bteich \u2013 invalid status \u2013 POST /assets, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-40",
+    "caption": "Marc Bteich \u2013 nonexistent owner \u2013 POST /assets, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-41",
+    "caption": "Marc Bteich \u2013 wrong owner type \u2013 POST /assets, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-42",
+    "caption": "Marc Bteich \u2013 unknown field \u2013 POST /assets, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-43",
+    "caption": "Marc Bteich \u2013 missing name \u2013 POST /assets, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-44",
+    "caption": "Marc Bteich \u2013 Reject empty search \u2013 GET /assets/search, HTTP 400",
+    "status": 400,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/search"
+  },
+  {
+    "name": "newman-assets-45",
+    "caption": "Marc Bteich \u2013 Reject invalid search enum \u2013 GET /assets/search, HTTP 400",
+    "status": 400,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/search?criticality=Urgent"
+  },
+  {
+    "name": "newman-assets-46",
+    "caption": "Marc Bteich \u2013 SQL injection text returns no matches \u2013 GET /assets/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/search?name=%27%20OR%201%3D1%20--"
+  },
+  {
+    "name": "newman-assets-47",
+    "caption": "Marc Bteich \u2013 Delete asset (admin) \u2013 DELETE /assets/7, HTTP 200",
+    "status": 200,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5002/assets/7"
+  },
+  {
+    "name": "newman-assets-48",
+    "caption": "Marc Bteich \u2013 Deleted asset returns 404 \u2013 GET /assets/7, HTTP 404",
+    "status": 404,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/7"
+  },
+  {
+    "name": "newman-assets-49",
+    "caption": "Marc Bteich \u2013 Verify deletion audit event \u2013 GET /logs/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5005/logs/search?service=assets&action=ASSET_DELETED"
+  },
+  {
+    "name": "newman-assets-50",
+    "caption": "Marc Bteich \u2013 Create linked asset \u2013 POST /assets, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-assets-51",
+    "caption": "Marc Bteich \u2013 Link vulnerability \u2013 POST /vulnerabilities, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-assets-52",
+    "caption": "Marc Bteich \u2013 Linked vulnerability prevents deletion \u2013 DELETE /assets/13, HTTP 409",
+    "status": 409,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5002/assets/13"
+  },
+  {
+    "name": "newman-assets-53",
+    "caption": "Marc Bteich \u2013 Linked asset preserved \u2013 GET /assets/13, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5002/assets/13"
+  },
+  {
+    "name": "newman-assets-54",
+    "caption": "Marc Bteich \u2013 Remove fixture vulnerability \u2013 DELETE /vulnerabilities/6, HTTP 200",
+    "status": 200,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5007/vulnerabilities/6"
+  },
+  {
+    "name": "newman-assets-55",
+    "caption": "Marc Bteich \u2013 Remove fixture asset \u2013 DELETE /assets/13, HTTP 200",
+    "status": 200,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5002/assets/13"
+  },
+  {
+    "name": "newman-playbooks-05",
+    "caption": "Marc Bteich \u2013 Create playbook \u2013 POST /playbooks, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5009/playbooks"
+  },
+  {
+    "name": "newman-playbooks-06",
+    "caption": "Marc Bteich \u2013 List playbooks \u2013 GET /playbooks, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5009/playbooks"
+  },
+  {
+    "name": "newman-playbooks-07",
+    "caption": "Marc Bteich \u2013 Add second step first \u2013 POST /playbooks/8/actions, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5009/playbooks/8/actions"
+  },
+  {
+    "name": "newman-playbooks-08",
+    "caption": "Marc Bteich \u2013 Add first step \u2013 POST /playbooks/8/actions, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5009/playbooks/8/actions"
+  },
+  {
+    "name": "newman-playbooks-09",
+    "caption": "Marc Bteich \u2013 Verify ordered actions \u2013 GET /playbooks/8, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5009/playbooks/8"
+  },
+  {
+    "name": "newman-playbooks-10",
+    "caption": "Marc Bteich \u2013 Duplicate step rejected \u2013 POST /playbooks/8/actions, HTTP 409",
+    "status": 409,
+    "method": "POST",
+    "url": "http://127.0.0.1:5009/playbooks/8/actions"
+  },
+  {
+    "name": "newman-playbooks-11",
+    "caption": "Marc Bteich \u2013 Cannot skip Pending \u2013 PUT /actions/23/status, HTTP 400",
+    "status": 400,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5009/actions/23/status"
+  },
+  {
+    "name": "newman-playbooks-12",
+    "caption": "Marc Bteich \u2013 Start assigned action \u2013 PUT /actions/23/status, HTTP 200",
+    "status": 200,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5009/actions/23/status"
+  },
+  {
+    "name": "newman-playbooks-13",
+    "caption": "Marc Bteich \u2013 Complete action \u2013 PUT /actions/23/status, HTTP 200",
+    "status": 200,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5009/actions/23/status"
+  },
+  {
+    "name": "newman-playbooks-14",
+    "caption": "Marc Bteich \u2013 No token \u2013 GET /playbooks, HTTP 401",
+    "status": 401,
+    "method": "GET",
+    "url": "http://127.0.0.1:5009/playbooks"
+  },
+  {
+    "name": "newman-playbooks-15",
+    "caption": "Marc Bteich \u2013 User denied \u2013 GET /playbooks, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5009/playbooks"
+  },
+  {
+    "name": "newman-playbooks-16",
+    "caption": "Marc Bteich \u2013 Analyst create denied \u2013 POST /playbooks, HTTP 403",
+    "status": 403,
+    "method": "POST",
+    "url": "http://127.0.0.1:5009/playbooks"
+  },
+  {
+    "name": "newman-playbooks-17",
+    "caption": "Marc Bteich \u2013 Auditor action denied \u2013 POST /playbooks/8/actions, HTTP 403",
+    "status": 403,
+    "method": "POST",
+    "url": "http://127.0.0.1:5009/playbooks/8/actions"
+  },
+  {
+    "name": "newman-playbooks-18",
+    "caption": "Marc Bteich \u2013 Missing playbook \u2013 GET /playbooks/2147483647, HTTP 404",
+    "status": 404,
+    "method": "GET",
+    "url": "http://127.0.0.1:5009/playbooks/2147483647"
+  },
+  {
+    "name": "newman-playbooks-19",
+    "caption": "Marc Bteich \u2013 Missing action \u2013 PUT /actions/2147483647/status, HTTP 404",
+    "status": 404,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5009/actions/2147483647/status"
+  },
+  {
+    "name": "newman-playbooks-20",
+    "caption": "Marc Bteich \u2013 Invalid step \u2013 POST /playbooks/8/actions, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5009/playbooks/8/actions"
+  },
+  {
+    "name": "newman-playbooks-21",
+    "caption": "Marc Bteich \u2013 Missing assigned user \u2013 POST /playbooks/8/actions, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5009/playbooks/8/actions"
+  },
+  {
+    "name": "newman-playbooks-22",
+    "caption": "Marc Bteich \u2013 Completed cannot change \u2013 PUT /actions/23/status, HTTP 400",
+    "status": 400,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5009/actions/23/status"
+  },
+  {
+    "name": "newman-playbooks-23",
+    "caption": "Marc Bteich \u2013 Invalid category \u2013 POST /playbooks, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5009/playbooks"
+  },
+  {
+    "name": "newman-playbooks-24",
+    "caption": "Marc Bteich \u2013 Empty body \u2013 POST /playbooks, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5009/playbooks"
+  },
+  {
+    "name": "newman-playbooks-25",
+    "caption": "Marc Bteich \u2013 Delete playbook \u2013 DELETE /playbooks/8, HTTP 200",
+    "status": 200,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5009/playbooks/8"
+  },
+  {
+    "name": "newman-playbooks-26",
+    "caption": "Marc Bteich \u2013 Deleted playbook \u2013 GET /playbooks/8, HTTP 404",
+    "status": 404,
+    "method": "GET",
+    "url": "http://127.0.0.1:5009/playbooks/8"
+  },
+  {
+    "name": "newman-playbooks-27",
+    "caption": "Marc Bteich \u2013 Cascaded action missing \u2013 PUT /actions/23/status, HTTP 404",
+    "status": 404,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5009/actions/23/status"
+  },
+  {
+    "name": "newman-reports_b-05",
+    "caption": "Marc Bteich \u2013 Generate assets report (admin) \u2013 GET /reports/assets, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/assets"
+  },
+  {
+    "name": "newman-reports_b-06",
+    "caption": "Marc Bteich \u2013 Generate assets report (auditor) \u2013 GET /reports/assets, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/assets"
+  },
+  {
+    "name": "newman-reports_b-07",
+    "caption": "Marc Bteich \u2013 No token assets \u2013 GET /reports/assets, HTTP 401",
+    "status": 401,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/assets"
+  },
+  {
+    "name": "newman-reports_b-08",
+    "caption": "Marc Bteich \u2013 Analyst denied assets \u2013 GET /reports/assets, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/assets"
+  },
+  {
+    "name": "newman-reports_b-09",
+    "caption": "Marc Bteich \u2013 User denied assets \u2013 GET /reports/assets, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/assets"
+  },
+  {
+    "name": "newman-reports_b-10",
+    "caption": "Marc Bteich \u2013 Generate threats report (admin) \u2013 GET /reports/threats, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/threats"
+  },
+  {
+    "name": "newman-reports_b-11",
+    "caption": "Marc Bteich \u2013 Generate threats report (auditor) \u2013 GET /reports/threats, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/threats"
+  },
+  {
+    "name": "newman-reports_b-12",
+    "caption": "Marc Bteich \u2013 No token threats \u2013 GET /reports/threats, HTTP 401",
+    "status": 401,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/threats"
+  },
+  {
+    "name": "newman-reports_b-13",
+    "caption": "Marc Bteich \u2013 Analyst denied threats \u2013 GET /reports/threats, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/threats"
+  },
+  {
+    "name": "newman-reports_b-14",
+    "caption": "Marc Bteich \u2013 User denied threats \u2013 GET /reports/threats, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/threats"
+  },
+  {
+    "name": "newman-reports_b-15",
+    "caption": "Marc Bteich \u2013 Generate vulnerabilities report (admin) \u2013 GET /reports/vulnerabilities, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/vulnerabilities"
+  },
+  {
+    "name": "newman-reports_b-16",
+    "caption": "Marc Bteich \u2013 Generate vulnerabilities report (auditor) \u2013 GET /reports/vulnerabilities, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/vulnerabilities"
+  },
+  {
+    "name": "newman-reports_b-17",
+    "caption": "Marc Bteich \u2013 No token vulnerabilities \u2013 GET /reports/vulnerabilities, HTTP 401",
+    "status": 401,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/vulnerabilities"
+  },
+  {
+    "name": "newman-reports_b-18",
+    "caption": "Marc Bteich \u2013 Analyst denied vulnerabilities \u2013 GET /reports/vulnerabilities, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/vulnerabilities"
+  },
+  {
+    "name": "newman-reports_b-19",
+    "caption": "Marc Bteich \u2013 User denied vulnerabilities \u2013 GET /reports/vulnerabilities, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5006/reports/vulnerabilities"
+  },
+  {
+    "name": "newman-threats-05",
+    "caption": "Marc Bteich \u2013 Create Critical threat \u2013 POST /threats, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5004/threats"
+  },
+  {
+    "name": "newman-threats-06",
+    "caption": "Marc Bteich \u2013 Duplicate normalized threat \u2013 POST /threats, HTTP 409",
+    "status": 409,
+    "method": "POST",
+    "url": "http://127.0.0.1:5004/threats"
+  },
+  {
+    "name": "newman-threats-07",
+    "caption": "Marc Bteich \u2013 List threats \u2013 GET /threats, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats"
+  },
+  {
+    "name": "newman-threats-08",
+    "caption": "Marc Bteich \u2013 Get threat \u2013 GET /threats/9, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats/9"
+  },
+  {
+    "name": "newman-threats-09",
+    "caption": "Marc Bteich \u2013 Search type=Domain \u2013 GET /threats/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats/search?type=Domain"
+  },
+  {
+    "name": "newman-threats-10",
+    "caption": "Marc Bteich \u2013 Search value=postman \u2013 GET /threats/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats/search?value=postman"
+  },
+  {
+    "name": "newman-threats-11",
+    "caption": "Marc Bteich \u2013 Search severity=Critical \u2013 GET /threats/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats/search?severity=Critical"
+  },
+  {
+    "name": "newman-threats-12",
+    "caption": "Marc Bteich \u2013 Search source=Postman \u2013 GET /threats/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats/search?source=Postman"
+  },
+  {
+    "name": "newman-threats-13",
+    "caption": "Marc Bteich \u2013 Search type=Domain&severity=Critical \u2013 GET /threats/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats/search?type=Domain&severity=Critical"
+  },
+  {
+    "name": "newman-threats-14",
+    "caption": "Marc Bteich \u2013 Update threat \u2013 PUT /threats/9, HTTP 200",
+    "status": 200,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5004/threats/9"
+  },
+  {
+    "name": "newman-threats-15",
+    "caption": "Marc Bteich \u2013 Internal stats \u2013 GET /internal/stats, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/internal/stats"
+  },
+  {
+    "name": "newman-threats-16",
+    "caption": "Marc Bteich \u2013 Critical threat notification \u2013 GET /notifications/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5008/notifications/search?type=Threat%20Alert"
+  },
+  {
+    "name": "newman-threats-17",
+    "caption": "Marc Bteich \u2013 Threat audit records \u2013 GET /logs/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5005/logs/search?service=threats"
+  },
+  {
+    "name": "newman-threats-18",
+    "caption": "Marc Bteich \u2013 No token \u2013 GET /threats, HTTP 401",
+    "status": 401,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats"
+  },
+  {
+    "name": "newman-threats-19",
+    "caption": "Marc Bteich \u2013 User denied \u2013 GET /threats, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats"
+  },
+  {
+    "name": "newman-threats-20",
+    "caption": "Marc Bteich \u2013 Auditor search denied \u2013 GET /threats/search, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats/search?source=Lab"
+  },
+  {
+    "name": "newman-threats-21",
+    "caption": "Marc Bteich \u2013 Analyst update denied \u2013 PUT /threats/9, HTTP 403",
+    "status": 403,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5004/threats/9"
+  },
+  {
+    "name": "newman-threats-22",
+    "caption": "Marc Bteich \u2013 Missing threat \u2013 GET /threats/2147483647, HTTP 404",
+    "status": 404,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats/2147483647"
+  },
+  {
+    "name": "newman-threats-23",
+    "caption": "Marc Bteich \u2013 Empty body \u2013 POST /threats, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5004/threats"
+  },
+  {
+    "name": "newman-threats-24",
+    "caption": "Marc Bteich \u2013 Invalid enum \u2013 POST /threats, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5004/threats"
+  },
+  {
+    "name": "newman-threats-25",
+    "caption": "Marc Bteich \u2013 Invalid IP \u2013 POST /threats, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5004/threats"
+  },
+  {
+    "name": "newman-threats-26",
+    "caption": "Marc Bteich \u2013 Invalid domain \u2013 POST /threats, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5004/threats"
+  },
+  {
+    "name": "newman-threats-27",
+    "caption": "Marc Bteich \u2013 Invalid hash \u2013 POST /threats, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5004/threats"
+  },
+  {
+    "name": "newman-threats-28",
+    "caption": "Marc Bteich \u2013 Invalid search \u2013 GET /threats/search, HTTP 400",
+    "status": 400,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats/search?severity=bad"
+  },
+  {
+    "name": "newman-threats-29",
+    "caption": "Marc Bteich \u2013 JWT denied internal stats \u2013 GET /internal/stats, HTTP 401",
+    "status": 401,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/internal/stats"
+  },
+  {
+    "name": "newman-threats-30",
+    "caption": "Marc Bteich \u2013 Delete threat \u2013 DELETE /threats/9, HTTP 200",
+    "status": 200,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5004/threats/9"
+  },
+  {
+    "name": "newman-threats-31",
+    "caption": "Marc Bteich \u2013 Deleted threat \u2013 GET /threats/9, HTTP 404",
+    "status": 404,
+    "method": "GET",
+    "url": "http://127.0.0.1:5004/threats/9"
+  },
+  {
+    "name": "newman-vulnerabilities-05",
+    "caption": "Marc Bteich \u2013 Create affected asset \u2013 POST /assets, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5002/assets"
+  },
+  {
+    "name": "newman-vulnerabilities-06",
+    "caption": "Marc Bteich \u2013 Create Critical vulnerability \u2013 POST /vulnerabilities, HTTP 201",
+    "status": 201,
+    "method": "POST",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-07",
+    "caption": "Marc Bteich \u2013 List vulnerabilities \u2013 GET /vulnerabilities, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-08",
+    "caption": "Marc Bteich \u2013 Get vulnerability \u2013 GET /vulnerabilities/6, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5007/vulnerabilities/6"
+  },
+  {
+    "name": "newman-vulnerabilities-09",
+    "caption": "Marc Bteich \u2013 Search cve=CVE-2026-12345 \u2013 GET /vulnerabilities/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5007/vulnerabilities/search?cve=CVE-2026-12345"
+  },
+  {
+    "name": "newman-vulnerabilities-10",
+    "caption": "Marc Bteich \u2013 Search severity=Critical \u2013 GET /vulnerabilities/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5007/vulnerabilities/search?severity=Critical"
+  },
+  {
+    "name": "newman-vulnerabilities-11",
+    "caption": "Marc Bteich \u2013 Search asset=13 \u2013 GET /vulnerabilities/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5007/vulnerabilities/search?asset=13"
+  },
+  {
+    "name": "newman-vulnerabilities-12",
+    "caption": "Marc Bteich \u2013 Search status=Open \u2013 GET /vulnerabilities/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5007/vulnerabilities/search?status=Open"
+  },
+  {
+    "name": "newman-vulnerabilities-13",
+    "caption": "Marc Bteich \u2013 Cannot skip lifecycle \u2013 PUT /vulnerabilities/6, HTTP 400",
+    "status": 400,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5007/vulnerabilities/6"
+  },
+  {
+    "name": "newman-vulnerabilities-14",
+    "caption": "Marc Bteich \u2013 Transition Under Investigation \u2013 PUT /vulnerabilities/6, HTTP 200",
+    "status": 200,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5007/vulnerabilities/6"
+  },
+  {
+    "name": "newman-vulnerabilities-15",
+    "caption": "Marc Bteich \u2013 Transition In Progress \u2013 PUT /vulnerabilities/6, HTTP 200",
+    "status": 200,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5007/vulnerabilities/6"
+  },
+  {
+    "name": "newman-vulnerabilities-16",
+    "caption": "Marc Bteich \u2013 Transition Resolved \u2013 PUT /vulnerabilities/6, HTTP 200",
+    "status": 200,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5007/vulnerabilities/6"
+  },
+  {
+    "name": "newman-vulnerabilities-17",
+    "caption": "Marc Bteich \u2013 Transition Closed \u2013 PUT /vulnerabilities/6, HTTP 200",
+    "status": 200,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5007/vulnerabilities/6"
+  },
+  {
+    "name": "newman-vulnerabilities-18",
+    "caption": "Marc Bteich \u2013 Internal stats \u2013 GET /internal/stats, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5007/internal/stats"
+  },
+  {
+    "name": "newman-vulnerabilities-19",
+    "caption": "Marc Bteich \u2013 Critical vulnerability notification \u2013 GET /notifications/search, HTTP 200",
+    "status": 200,
+    "method": "GET",
+    "url": "http://127.0.0.1:5008/notifications/search?type=Vulnerability%20Alert"
+  },
+  {
+    "name": "newman-vulnerabilities-20",
+    "caption": "Marc Bteich \u2013 Linked asset cannot be deleted \u2013 DELETE /assets/13, HTTP 409",
+    "status": 409,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5002/assets/13"
+  },
+  {
+    "name": "newman-vulnerabilities-21",
+    "caption": "Marc Bteich \u2013 No token \u2013 GET /vulnerabilities, HTTP 401",
+    "status": 401,
+    "method": "GET",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-22",
+    "caption": "Marc Bteich \u2013 User denied \u2013 GET /vulnerabilities, HTTP 403",
+    "status": 403,
+    "method": "GET",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-23",
+    "caption": "Marc Bteich \u2013 Analyst create denied \u2013 POST /vulnerabilities, HTTP 403",
+    "status": 403,
+    "method": "POST",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-24",
+    "caption": "Marc Bteich \u2013 Auditor update denied \u2013 PUT /vulnerabilities/6, HTTP 403",
+    "status": 403,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5007/vulnerabilities/6"
+  },
+  {
+    "name": "newman-vulnerabilities-25",
+    "caption": "Marc Bteich \u2013 Missing vulnerability \u2013 GET /vulnerabilities/2147483647, HTTP 404",
+    "status": 404,
+    "method": "GET",
+    "url": "http://127.0.0.1:5007/vulnerabilities/2147483647"
+  },
+  {
+    "name": "newman-vulnerabilities-26",
+    "caption": "Marc Bteich \u2013 Empty body \u2013 POST /vulnerabilities, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-27",
+    "caption": "Marc Bteich \u2013 Invalid CVE \u2013 POST /vulnerabilities, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-28",
+    "caption": "Marc Bteich \u2013 Invalid CVSS \u2013 POST /vulnerabilities, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-29",
+    "caption": "Marc Bteich \u2013 Wrong type \u2013 POST /vulnerabilities, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-30",
+    "caption": "Marc Bteich \u2013 Missing asset \u2013 POST /vulnerabilities, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-31",
+    "caption": "Marc Bteich \u2013 Invalid severity \u2013 POST /vulnerabilities, HTTP 400",
+    "status": 400,
+    "method": "POST",
+    "url": "http://127.0.0.1:5007/vulnerabilities"
+  },
+  {
+    "name": "newman-vulnerabilities-32",
+    "caption": "Marc Bteich \u2013 Closed cannot reopen \u2013 PUT /vulnerabilities/6, HTTP 400",
+    "status": 400,
+    "method": "PUT",
+    "url": "http://127.0.0.1:5007/vulnerabilities/6"
+  },
+  {
+    "name": "newman-vulnerabilities-33",
+    "caption": "Marc Bteich \u2013 Delete vulnerability \u2013 DELETE /vulnerabilities/6, HTTP 200",
+    "status": 200,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5007/vulnerabilities/6"
+  },
+  {
+    "name": "newman-vulnerabilities-34",
+    "caption": "Marc Bteich \u2013 Delete affected asset \u2013 DELETE /assets/13, HTTP 200",
+    "status": 200,
+    "method": "DELETE",
+    "url": "http://127.0.0.1:5002/assets/13"
+  }
+]

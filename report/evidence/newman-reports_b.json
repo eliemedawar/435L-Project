@@ -1,0 +1,520 @@
+{
+  "source": "Actual Newman/Postman Runtime execution; secrets redacted",
+  "collection": "reports_b.postman_collection.json",
+  "executed_at": "2026-10-20T12:07:57.225Z",
+  "requests": {
+    "total": 19,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 38,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "records": [
+    {
+      "name": "Login admin",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 1,
+            "full_name": "Lab Admin",
+            "username": "admin",
+            "email": "admin@example.test",
+            "department": "Security Lab",
+            "role": "admin",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:29Z",
+            "last_login": "2026-10-20T12:07:55Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "lara",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 3,
+            "full_name": "Lab Lara",
+            "username": "lara",
+            "email": "lara@example.test",
+            "department": "Security Lab",
+            "role": "analyst",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:55Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login auditor",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "nadia",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 4,
+            "full_name": "Lab Nadia",
+            "username": "nadia",
+            "email": "nadia@example.test",
+            "department": "Security Lab",
+            "role": "auditor",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:55Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "rami",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 5,
+            "full_name": "Lab Rami",
+            "username": "rami",
+            "email": "rami@example.test",
+            "department": "Security Lab",
+            "role": "user",
+            "account_status": "Active",
+            "created_at": "2026-10-20T12:07:30Z",
+            "last_login": "2026-10-20T12:07:56Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Generate assets report (admin)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/assets",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset report generated",
+        "data": {
+          "report_type": "asset",
+          "generated_at": "2026-10-20T12:07:56Z",
+          "generated_by": "admin",
+          "total_assets": 11,
+          "critical_assets": 2,
+          "assets_by_type": {
+            "Server": 1,
+            "Workstation": 2,
+            "Database": 2,
+            "Application": 2,
+            "Network Device": 2,
+            "Cloud Resource": 2
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Generate assets report (auditor)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/assets",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Asset report generated",
+        "data": {
+          "report_type": "asset",
+          "generated_at": "2026-10-20T12:07:56Z",
+          "generated_by": "nadia",
+          "total_assets": 11,
+          "critical_assets": 2,
+          "assets_by_type": {
+            "Server": 1,
+            "Workstation": 2,
+            "Database": 2,
+            "Application": 2,
+            "Network Device": 2,
+            "Cloud Resource": 2
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "No token assets",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/assets",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "Analyst denied assets",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/assets",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "User denied assets",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/assets",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Generate threats report (admin)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/threats",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Threat report generated",
+        "data": {
+          "report_type": "threat",
+          "generated_at": "2026-10-20T12:07:56Z",
+          "generated_by": "admin",
+          "total_threats": 8,
+          "threats_by_severity": {
+            "Low": 2,
+            "Medium": 2,
+            "High": 2,
+            "Critical": 2
+          },
+          "threats_by_type": {
+            "IP Address": 2,
+            "Domain": 1,
+            "File Hash": 3,
+            "Malware Signature": 1,
+            "Other": 1
+          },
+          "recently_added": [
+            {
+              "id": 8,
+              "threat_type": "Other",
+              "threat_value": "LAB-INDICATOR-EXAMPLE",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Critical",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 7,
+              "threat_type": "Malware Signature",
+              "threat_value": "LAB-SIGNATURE-EXAMPLE",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "High",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 6,
+              "threat_type": "File Hash",
+              "threat_value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Medium",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 5,
+              "threat_type": "File Hash",
+              "threat_value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Low",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 4,
+              "threat_type": "File Hash",
+              "threat_value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Critical",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Generate threats report (auditor)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/threats",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Threat report generated",
+        "data": {
+          "report_type": "threat",
+          "generated_at": "2026-10-20T12:07:56Z",
+          "generated_by": "nadia",
+          "total_threats": 8,
+          "threats_by_severity": {
+            "Low": 2,
+            "Medium": 2,
+            "High": 2,
+            "Critical": 2
+          },
+          "threats_by_type": {
+            "IP Address": 2,
+            "Domain": 1,
+            "File Hash": 3,
+            "Malware Signature": 1,
+            "Other": 1
+          },
+          "recently_added": [
+            {
+              "id": 8,
+              "threat_type": "Other",
+              "threat_value": "LAB-INDICATOR-EXAMPLE",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Critical",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 7,
+              "threat_type": "Malware Signature",
+              "threat_value": "LAB-SIGNATURE-EXAMPLE",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "High",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 6,
+              "threat_type": "File Hash",
+              "threat_value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Medium",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 5,
+              "threat_type": "File Hash",
+              "threat_value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Low",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            },
+            {
+              "id": 4,
+              "threat_type": "File Hash",
+              "threat_value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "description": "Synthetic lab indicator for demonstrations",
+              "severity": "Critical",
+              "source": "University lab dataset",
+              "date_added": "2026-10-20T12:07:31Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "No token threats",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/threats",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "Analyst denied threats",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/threats",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "User denied threats",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/threats",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Generate vulnerabilities report (admin)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/vulnerabilities",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Vulnerability report generated",
+        "data": {
+          "report_type": "vulnerability",
+          "generated_at": "2026-10-20T12:07:56Z",
+          "generated_by": "admin",
+          "total_vulnerabilities": 5,
+          "critical_vulnerabilities": 1,
+          "vulnerabilities_by_severity": {
+            "Low": 2,
+            "Medium": 1,
+            "High": 1,
+            "Critical": 1
+          },
+          "vulnerabilities_by_status": {
+            "Open": 1,
+            "Under Investigation": 1,
+            "In Progress": 1,
+            "Resolved": 1,
+            "Closed": 1
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Generate vulnerabilities report (auditor)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/vulnerabilities",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Vulnerability report generated",
+        "data": {
+          "report_type": "vulnerability",
+          "generated_at": "2026-10-20T12:07:56Z",
+          "generated_by": "nadia",
+          "total_vulnerabilities": 5,
+          "critical_vulnerabilities": 1,
+          "vulnerabilities_by_severity": {
+            "Low": 2,
+            "Medium": 1,
+            "High": 1,
+            "Critical": 1
+          },
+          "vulnerabilities_by_status": {
+            "Open": 1,
+            "Under Investigation": 1,
+            "In Progress": 1,
+            "Resolved": 1,
+            "Closed": 1
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "No token vulnerabilities",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/vulnerabilities",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "Analyst denied vulnerabilities",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/vulnerabilities",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "User denied vulnerabilities",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/vulnerabilities",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    }
+  ]
+}

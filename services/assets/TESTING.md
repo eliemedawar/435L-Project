@@ -1,4 +1,8 @@
-# Assets verification (Marc Bteich)
+# Phase 1 Assets verification — historical record (Marc Bteich)
+
+This records the original Assets-only phase. The completed project now has later
+services, an automated 55-request Assets collection fixture and actual Newman
+execution evidence. See `report/TEST_RESULTS.md` for final integrated results.
 
 Executed locally on **20 October 2026**, using Python 3.13.3 on Windows and the
 repository's unchanged pinned requirements in `.venv`.

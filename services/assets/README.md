@@ -115,9 +115,9 @@ queue. Keep Logs running when gathering audit evidence.
 Run tests in a fresh Python process. They create separate temporary SQLite files
 under locally excluded `.local`, start real Users/Logs/Assets HTTP servers on free
 loopback ports, create test-only users, log in through HTTP, and check actual stored
-assets and logs. They do not modify the development database. Tables/rows for
-future services in these tests are explicitly database fixtures, not implemented
-services or submission evidence. Test databases are removed after a successful run.
+assets and logs. They do not modify the development database. Directly inserted
+relationship records in these tests are explicitly labelled database fixtures.
+Test databases are removed after a successful run.
 
 ## Postman and screenshots
 

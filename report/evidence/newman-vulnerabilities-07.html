@@ -1,0 +1,95 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}table{border-collapse:collapse;background:white}td,th{border:1px solid #cbd5e1;padding:8px;text-align:left}th{background:#dbeafe}</style>
+<article>
+<h1>Marc Bteich – List vulnerabilities – GET /vulnerabilities, HTTP 200</h1>
+<small>Genuine Newman execution report • 2026-10-20T12:07:49.364Z • source: newman-vulnerabilities.json</small>
+<p>GET http://127.0.0.1:5007/vulnerabilities</p>
+<h2>Actual request body (credentials redacted)</h2><pre>null</pre>
+<h2>Actual response — HTTP 200</h2><pre>{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;message&quot;: &quot;OK&quot;,
+  &quot;data&quot;: {
+    &quot;count&quot;: 6,
+    &quot;vulnerabilities&quot;: [
+      {
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;Seed remediation scenario 1&quot;,
+        &quot;description&quot;: &quot;Synthetic CVE-format lab example; no real CVE claim&quot;,
+        &quot;cve_id&quot;: &quot;CVE-2026-9000&quot;,
+        &quot;cvss_score&quot;: 2.1,
+        &quot;severity&quot;: &quot;Low&quot;,
+        &quot;asset_id&quot;: 1,
+        &quot;discovery_source&quot;: &quot;Lab scanner simulation dataset&quot;,
+        &quot;status&quot;: &quot;Open&quot;,
+        &quot;created_at&quot;: &quot;2026-10-13T12:07:31Z&quot;,
+        &quot;resolution_date&quot;: null
+      },
+      {
+        &quot;id&quot;: 2,
+        &quot;title&quot;: &quot;Seed remediation scenario 2&quot;,
+        &quot;description&quot;: &quot;Synthetic CVE-format lab example; no real CVE claim&quot;,
+        &quot;cve_id&quot;: &quot;CVE-2026-9001&quot;,
+        &quot;cvss_score&quot;: 5.5,
+        &quot;severity&quot;: &quot;Medium&quot;,
+        &quot;asset_id&quot;: 2,
+        &quot;discovery_source&quot;: &quot;Lab scanner simulation dataset&quot;,
+        &quot;status&quot;: &quot;Under Investigation&quot;,
+        &quot;created_at&quot;: &quot;2026-10-13T12:07:31Z&quot;,
+        &quot;resolution_date&quot;: null
+      },
+      {
+        &quot;id&quot;: 3,
+        &quot;title&quot;: &quot;Seed remediation scenario 3&quot;,
+        &quot;description&quot;: &quot;Synthetic CVE-format lab example; no real CVE claim&quot;,
+        &quot;cve_id&quot;: &quot;CVE-2026-9002&quot;,
+        &quot;cvss_score&quot;: 8.1,
+        &quot;severity&quot;: &quot;High&quot;,
+        &quot;asset_id&quot;: 3,
+        &quot;discovery_source&quot;: &quot;Lab scanner simulation dataset&quot;,
+        &quot;status&quot;: &quot;In Progress&quot;,
+        &quot;created_at&quot;: &quot;2026-10-13T12:07:31Z&quot;,
+        &quot;resolution_date&quot;: null
+      },
+      {
+        &quot;id&quot;: 4,
+        &quot;title&quot;: &quot;Seed remediation scenario 4&quot;,
+        &quot;description&quot;: &quot;Synthetic CVE-format lab example; no real CVE claim&quot;,
+        &quot;cve_id&quot;: &quot;CVE-2026-9003&quot;,
+        &quot;cvss_score&quot;: 9.8,
+        &quot;severity&quot;: &quot;Critical&quot;,
+        &quot;asset_id&quot;: 4,
+        &quot;discovery_source&quot;: &quot;Lab scanner simulation dataset&quot;,
+        &quot;status&quot;: &quot;Resolved&quot;,
+        &quot;created_at&quot;: &quot;2026-10-13T12:07:31Z&quot;,
+        &quot;resolution_date&quot;: &quot;2026-10-20T12:07:31Z&quot;
+      },
+      {
+        &quot;id&quot;: 5,
+        &quot;title&quot;: &quot;Seed remediation scenario 5&quot;,
+        &quot;description&quot;: &quot;Synthetic CVE-format lab example; no real CVE claim&quot;,
+        &quot;cve_id&quot;: &quot;CVE-2026-9004&quot;,
+        &quot;cvss_score&quot;: 7.5,
+        &quot;severity&quot;: &quot;Low&quot;,
+        &quot;asset_id&quot;: 5,
+        &quot;discovery_source&quot;: &quot;Lab scanner simulation dataset&quot;,
+        &quot;status&quot;: &quot;Closed&quot;,
+        &quot;created_at&quot;: &quot;2026-10-13T12:07:31Z&quot;,
+        &quot;resolution_date&quot;: &quot;2026-10-20T12:07:31Z&quot;
+      },
+      {
+        &quot;id&quot;: 6,
+        &quot;title&quot;: &quot;Synthetic Postman vulnerability&quot;,
+        &quot;description&quot;: &quot;Lab scenario only&quot;,
+        &quot;cve_id&quot;: &quot;CVE-2026-12345&quot;,
+        &quot;cvss_score&quot;: 9.8,
+        &quot;severity&quot;: &quot;Critical&quot;,
+        &quot;asset_id&quot;: 13,
+        &quot;discovery_source&quot;: &quot;Postman lab&quot;,
+        &quot;status&quot;: &quot;Open&quot;,
+        &quot;created_at&quot;: &quot;2026-10-20T12:07:47Z&quot;,
+        &quot;resolution_date&quot;: null
+      }
+    ]
+  }
+}</pre>
+<p>This screenshot displays stored results from an actual API execution. It is not a simulated API response or a Postman GUI screenshot.</p></article>

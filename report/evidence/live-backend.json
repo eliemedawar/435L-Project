@@ -1,0 +1,238 @@
+{
+  "checked_at": "2026-10-20T12:10:45.013048+00:00",
+  "services": [
+    {
+      "port": 5001,
+      "path": "/users",
+      "status": 200
+    },
+    {
+      "port": 5002,
+      "path": "/assets",
+      "status": 200
+    },
+    {
+      "port": 5003,
+      "path": "/incidents",
+      "status": 200
+    },
+    {
+      "port": 5004,
+      "path": "/threats",
+      "status": 200
+    },
+    {
+      "port": 5005,
+      "path": "/logs",
+      "status": 200
+    },
+    {
+      "port": 5006,
+      "path": "/reports/summary",
+      "status": 200
+    },
+    {
+      "port": 5007,
+      "path": "/vulnerabilities",
+      "status": 200
+    },
+    {
+      "port": 5008,
+      "path": "/notifications/user/1",
+      "status": 200
+    },
+    {
+      "port": 5009,
+      "path": "/playbooks",
+      "status": 200
+    }
+  ],
+  "reports": {
+    "summary": {
+      "report_type": "security summary",
+      "generated_at": "2026-10-20T12:10:44Z",
+      "generated_by": "admin",
+      "users": 7,
+      "assets": 6,
+      "incidents": 7,
+      "open_incidents": 5,
+      "critical_incidents": 1,
+      "threats": 8,
+      "critical_threats": 2
+    },
+    "incidents": {
+      "report_type": "incident",
+      "generated_at": "2026-10-20T12:10:44Z",
+      "generated_by": "admin",
+      "total_incidents": 7,
+      "open_incidents": 5,
+      "unassigned_open_incidents": 0,
+      "incidents_by_severity": {
+        "Low": 2,
+        "Medium": 2,
+        "High": 2,
+        "Critical": 1
+      },
+      "incidents_by_status": {
+        "Open": 2,
+        "Under Investigation": 2,
+        "Mitigated": 1,
+        "Resolved": 1,
+        "Closed": 1
+      },
+      "incidents_by_category": {
+        "Malware": 1,
+        "Unauthorized Access": 1,
+        "Phishing": 1,
+        "Data Leakage": 1,
+        "Account Compromise": 1,
+        "Denial of Service": 1,
+        "Other": 1
+      }
+    },
+    "activity": {
+      "report_type": "activity",
+      "generated_at": "2026-10-20T12:10:44Z",
+      "generated_by": "admin",
+      "total_user_activities": 5,
+      "login_attempts": 1,
+      "successful_logins": 1,
+      "failed_login_attempts": 0,
+      "failed_login_rate_percent": 0.0,
+      "unauthorized_access_attempts": 0,
+      "activities_by_severity": {
+        "Information": 2,
+        "Warning": 1,
+        "Error": 1,
+        "Critical": 1
+      },
+      "activities_by_service": {
+        "users": 5
+      },
+      "most_performed_actions": [
+        {
+          "action": "SEED_SAMPLE",
+          "count": 4
+        },
+        {
+          "action": "LOGIN_SUCCESS",
+          "count": 1
+        }
+      ]
+    },
+    "assets": {
+      "report_type": "asset",
+      "generated_at": "2026-10-20T12:10:44Z",
+      "generated_by": "admin",
+      "total_assets": 6,
+      "critical_assets": 1,
+      "assets_by_type": {
+        "Server": 1,
+        "Workstation": 1,
+        "Database": 1,
+        "Application": 1,
+        "Network Device": 1,
+        "Cloud Resource": 1
+      }
+    },
+    "threats": {
+      "report_type": "threat",
+      "generated_at": "2026-10-20T12:10:44Z",
+      "generated_by": "admin",
+      "total_threats": 8,
+      "threats_by_severity": {
+        "Low": 2,
+        "Medium": 2,
+        "High": 2,
+        "Critical": 2
+      },
+      "threats_by_type": {
+        "IP Address": 2,
+        "Domain": 1,
+        "File Hash": 3,
+        "Malware Signature": 1,
+        "Other": 1
+      },
+      "recently_added": [
+        {
+          "id": 8,
+          "threat_type": "Other",
+          "threat_value": "LAB-INDICATOR-EXAMPLE",
+          "description": "Synthetic lab indicator for demonstrations",
+          "severity": "Critical",
+          "source": "University lab dataset",
+          "date_added": "2026-10-20T11:56:37Z"
+        },
+        {
+          "id": 7,
+          "threat_type": "Malware Signature",
+          "threat_value": "LAB-SIGNATURE-EXAMPLE",
+          "description": "Synthetic lab indicator for demonstrations",
+          "severity": "High",
+          "source": "University lab dataset",
+          "date_added": "2026-10-20T11:56:37Z"
+        },
+        {
+          "id": 6,
+          "threat_type": "File Hash",
+          "threat_value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "description": "Synthetic lab indicator for demonstrations",
+          "severity": "Medium",
+          "source": "University lab dataset",
+          "date_added": "2026-10-20T11:56:37Z"
+        },
+        {
+          "id": 5,
+          "threat_type": "File Hash",
+          "threat_value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "description": "Synthetic lab indicator for demonstrations",
+          "severity": "Low",
+          "source": "University lab dataset",
+          "date_added": "2026-10-20T11:56:37Z"
+        },
+        {
+          "id": 4,
+          "threat_type": "File Hash",
+          "threat_value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "description": "Synthetic lab indicator for demonstrations",
+          "severity": "Critical",
+          "source": "University lab dataset",
+          "date_added": "2026-10-20T11:56:37Z"
+        }
+      ]
+    },
+    "vulnerabilities": {
+      "report_type": "vulnerability",
+      "generated_at": "2026-10-20T12:10:45Z",
+      "generated_by": "admin",
+      "total_vulnerabilities": 5,
+      "critical_vulnerabilities": 1,
+      "vulnerabilities_by_severity": {
+        "Low": 2,
+        "Medium": 1,
+        "High": 1,
+        "Critical": 1
+      },
+      "vulnerabilities_by_status": {
+        "Open": 1,
+        "Under Investigation": 1,
+        "In Progress": 1,
+        "Resolved": 1,
+        "Closed": 1
+      }
+    }
+  },
+  "database_counts": {
+    "users": 7,
+    "assets": 6,
+    "incidents": 7,
+    "threats": 8,
+    "logs": 5,
+    "vulnerabilities": 5,
+    "notifications": 5,
+    "playbooks": 7,
+    "response_actions": 21
+  },
+  "integrity": "ok",
+  "foreign_key_violations": 0
+}

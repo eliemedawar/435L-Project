@@ -1,0 +1,156 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}table{border-collapse:collapse;background:white}td,th{border:1px solid #cbd5e1;padding:8px;text-align:left}th{background:#dbeafe}</style>
+<h1>Actual execution evidence — Marc Bteich</h1>
+<p>Real Newman/Postman Runtime request/response records, captured locally. This is an execution report, not the Postman desktop interface. Secrets are redacted. Laboratory data is synthetic and was actually stored/executed.</p>
+<h2>newman-assets</h2><p>55 requests; 112 assertions; 0 failures; 2026-10-20T12:07:40.066Z</p>
+<p><a href="newman-assets-05.html">Marc Bteich – Create asset – POST /assets, HTTP 201</a></p>
+<p><a href="newman-assets-06.html">Marc Bteich – Create Workstation – POST /assets, HTTP 201</a></p>
+<p><a href="newman-assets-07.html">Marc Bteich – Create Database – POST /assets, HTTP 201</a></p>
+<p><a href="newman-assets-08.html">Marc Bteich – Create Application – POST /assets, HTTP 201</a></p>
+<p><a href="newman-assets-09.html">Marc Bteich – Create Network Device – POST /assets, HTTP 201</a></p>
+<p><a href="newman-assets-10.html">Marc Bteich – Create Cloud Resource – POST /assets, HTTP 201</a></p>
+<p><a href="newman-assets-11.html">Marc Bteich – List assets (auditor) – GET /assets, HTTP 200</a></p>
+<p><a href="newman-assets-12.html">Marc Bteich – Get asset before update (analyst) – GET /assets/7, HTTP 200</a></p>
+<p><a href="newman-assets-13.html">Marc Bteich – Update asset (admin) – PUT /assets/7, HTTP 200</a></p>
+<p><a href="newman-assets-14.html">Marc Bteich – Get asset after update – GET /assets/7, HTTP 200</a></p>
+<p><a href="newman-assets-15.html">Marc Bteich – Search by name – GET /assets/search, HTTP 200</a></p>
+<p><a href="newman-assets-16.html">Marc Bteich – Search by type – GET /assets/search, HTTP 200</a></p>
+<p><a href="newman-assets-17.html">Marc Bteich – Search by IP – GET /assets/search, HTTP 200</a></p>
+<p><a href="newman-assets-18.html">Marc Bteich – Search by department – GET /assets/search, HTTP 200</a></p>
+<p><a href="newman-assets-19.html">Marc Bteich – Search by criticality – GET /assets/search, HTTP 200</a></p>
+<p><a href="newman-assets-20.html">Marc Bteich – Search by combined – GET /assets/search, HTTP 200</a></p>
+<p><a href="newman-assets-21.html">Marc Bteich – Search by no matches – GET /assets/search, HTTP 200</a></p>
+<p><a href="newman-assets-22.html">Marc Bteich – Internal statistics – GET /internal/stats, HTTP 200</a></p>
+<p><a href="newman-assets-23.html">Marc Bteich – Internal asset lookup – GET /internal/assets/7, HTTP 200</a></p>
+<p><a href="newman-assets-24.html">Marc Bteich – Inspect Assets audit records – GET /logs/search, HTTP 200</a></p>
+<p><a href="newman-assets-25.html">Marc Bteich – Missing token – GET /assets, HTTP 401</a></p>
+<p><a href="newman-assets-26.html">Marc Bteich – Employee forbidden – GET /assets/7, HTTP 403</a></p>
+<p><a href="newman-assets-27.html">Marc Bteich – Analyst cannot list all – GET /assets, HTTP 403</a></p>
+<p><a href="newman-assets-28.html">Marc Bteich – Auditor cannot update – PUT /assets/7, HTTP 403</a></p>
+<p><a href="newman-assets-29.html">Marc Bteich – Analyst cannot delete – DELETE /assets/7, HTTP 403</a></p>
+<p><a href="newman-assets-30.html">Marc Bteich – Missing asset – GET /assets/2147483647, HTTP 404</a></p>
+<p><a href="newman-assets-31.html">Marc Bteich – Missing asset update – PUT /assets/2147483647, HTTP 404</a></p>
+<p><a href="newman-assets-32.html">Marc Bteich – Missing asset deletion – DELETE /assets/2147483647, HTTP 404</a></p>
+<p><a href="newman-assets-33.html">Marc Bteich – Empty body – POST /assets, HTTP 400</a></p>
+<p><a href="newman-assets-34.html">Marc Bteich – Invalid JSON – POST /assets, HTTP 400</a></p>
+<p><a href="newman-assets-35.html">Marc Bteich – Internal statistics reject JWT – GET /internal/stats, HTTP 401</a></p>
+<p><a href="newman-assets-36.html">Marc Bteich – invalid IP – POST /assets, HTTP 400</a></p>
+<p><a href="newman-assets-37.html">Marc Bteich – invalid type – POST /assets, HTTP 400</a></p>
+<p><a href="newman-assets-38.html">Marc Bteich – invalid criticality – POST /assets, HTTP 400</a></p>
+<p><a href="newman-assets-39.html">Marc Bteich – invalid status – POST /assets, HTTP 400</a></p>
+<p><a href="newman-assets-40.html">Marc Bteich – nonexistent owner – POST /assets, HTTP 400</a></p>
+<p><a href="newman-assets-41.html">Marc Bteich – wrong owner type – POST /assets, HTTP 400</a></p>
+<p><a href="newman-assets-42.html">Marc Bteich – unknown field – POST /assets, HTTP 400</a></p>
+<p><a href="newman-assets-43.html">Marc Bteich – missing name – POST /assets, HTTP 400</a></p>
+<p><a href="newman-assets-44.html">Marc Bteich – Reject empty search – GET /assets/search, HTTP 400</a></p>
+<p><a href="newman-assets-45.html">Marc Bteich – Reject invalid search enum – GET /assets/search, HTTP 400</a></p>
+<p><a href="newman-assets-46.html">Marc Bteich – SQL injection text returns no matches – GET /assets/search, HTTP 200</a></p>
+<p><a href="newman-assets-47.html">Marc Bteich – Delete asset (admin) – DELETE /assets/7, HTTP 200</a></p>
+<p><a href="newman-assets-48.html">Marc Bteich – Deleted asset returns 404 – GET /assets/7, HTTP 404</a></p>
+<p><a href="newman-assets-49.html">Marc Bteich – Verify deletion audit event – GET /logs/search, HTTP 200</a></p>
+<p><a href="newman-assets-50.html">Marc Bteich – Create linked asset – POST /assets, HTTP 201</a></p>
+<p><a href="newman-assets-51.html">Marc Bteich – Link vulnerability – POST /vulnerabilities, HTTP 201</a></p>
+<p><a href="newman-assets-52.html">Marc Bteich – Linked vulnerability prevents deletion – DELETE /assets/13, HTTP 409</a></p>
+<p><a href="newman-assets-53.html">Marc Bteich – Linked asset preserved – GET /assets/13, HTTP 200</a></p>
+<p><a href="newman-assets-54.html">Marc Bteich – Remove fixture vulnerability – DELETE /vulnerabilities/6, HTTP 200</a></p>
+<p><a href="newman-assets-55.html">Marc Bteich – Remove fixture asset – DELETE /assets/13, HTTP 200</a></p>
+<h2>newman-combined</h2><p>336 requests; 679 assertions; 0 failures; 2026-10-20T12:09:25.595Z</p>
+<h2>newman-playbooks</h2><p>27 requests; 57 assertions; 0 failures; 2026-10-20T12:07:53.709Z</p>
+<p><a href="newman-playbooks-05.html">Marc Bteich – Create playbook – POST /playbooks, HTTP 201</a></p>
+<p><a href="newman-playbooks-06.html">Marc Bteich – List playbooks – GET /playbooks, HTTP 200</a></p>
+<p><a href="newman-playbooks-07.html">Marc Bteich – Add second step first – POST /playbooks/8/actions, HTTP 201</a></p>
+<p><a href="newman-playbooks-08.html">Marc Bteich – Add first step – POST /playbooks/8/actions, HTTP 201</a></p>
+<p><a href="newman-playbooks-09.html">Marc Bteich – Verify ordered actions – GET /playbooks/8, HTTP 200</a></p>
+<p><a href="newman-playbooks-10.html">Marc Bteich – Duplicate step rejected – POST /playbooks/8/actions, HTTP 409</a></p>
+<p><a href="newman-playbooks-11.html">Marc Bteich – Cannot skip Pending – PUT /actions/23/status, HTTP 400</a></p>
+<p><a href="newman-playbooks-12.html">Marc Bteich – Start assigned action – PUT /actions/23/status, HTTP 200</a></p>
+<p><a href="newman-playbooks-13.html">Marc Bteich – Complete action – PUT /actions/23/status, HTTP 200</a></p>
+<p><a href="newman-playbooks-14.html">Marc Bteich – No token – GET /playbooks, HTTP 401</a></p>
+<p><a href="newman-playbooks-15.html">Marc Bteich – User denied – GET /playbooks, HTTP 403</a></p>
+<p><a href="newman-playbooks-16.html">Marc Bteich – Analyst create denied – POST /playbooks, HTTP 403</a></p>
+<p><a href="newman-playbooks-17.html">Marc Bteich – Auditor action denied – POST /playbooks/8/actions, HTTP 403</a></p>
+<p><a href="newman-playbooks-18.html">Marc Bteich – Missing playbook – GET /playbooks/2147483647, HTTP 404</a></p>
+<p><a href="newman-playbooks-19.html">Marc Bteich – Missing action – PUT /actions/2147483647/status, HTTP 404</a></p>
+<p><a href="newman-playbooks-20.html">Marc Bteich – Invalid step – POST /playbooks/8/actions, HTTP 400</a></p>
+<p><a href="newman-playbooks-21.html">Marc Bteich – Missing assigned user – POST /playbooks/8/actions, HTTP 400</a></p>
+<p><a href="newman-playbooks-22.html">Marc Bteich – Completed cannot change – PUT /actions/23/status, HTTP 400</a></p>
+<p><a href="newman-playbooks-23.html">Marc Bteich – Invalid category – POST /playbooks, HTTP 400</a></p>
+<p><a href="newman-playbooks-24.html">Marc Bteich – Empty body – POST /playbooks, HTTP 400</a></p>
+<p><a href="newman-playbooks-25.html">Marc Bteich – Delete playbook – DELETE /playbooks/8, HTTP 200</a></p>
+<p><a href="newman-playbooks-26.html">Marc Bteich – Deleted playbook – GET /playbooks/8, HTTP 404</a></p>
+<p><a href="newman-playbooks-27.html">Marc Bteich – Cascaded action missing – PUT /actions/23/status, HTTP 404</a></p>
+<h2>newman-reports_b</h2><p>19 requests; 38 assertions; 0 failures; 2026-10-20T12:07:57.225Z</p>
+<p><a href="newman-reports_b-05.html">Marc Bteich – Generate assets report (admin) – GET /reports/assets, HTTP 200</a></p>
+<p><a href="newman-reports_b-06.html">Marc Bteich – Generate assets report (auditor) – GET /reports/assets, HTTP 200</a></p>
+<p><a href="newman-reports_b-07.html">Marc Bteich – No token assets – GET /reports/assets, HTTP 401</a></p>
+<p><a href="newman-reports_b-08.html">Marc Bteich – Analyst denied assets – GET /reports/assets, HTTP 403</a></p>
+<p><a href="newman-reports_b-09.html">Marc Bteich – User denied assets – GET /reports/assets, HTTP 403</a></p>
+<p><a href="newman-reports_b-10.html">Marc Bteich – Generate threats report (admin) – GET /reports/threats, HTTP 200</a></p>
+<p><a href="newman-reports_b-11.html">Marc Bteich – Generate threats report (auditor) – GET /reports/threats, HTTP 200</a></p>
+<p><a href="newman-reports_b-12.html">Marc Bteich – No token threats – GET /reports/threats, HTTP 401</a></p>
+<p><a href="newman-reports_b-13.html">Marc Bteich – Analyst denied threats – GET /reports/threats, HTTP 403</a></p>
+<p><a href="newman-reports_b-14.html">Marc Bteich – User denied threats – GET /reports/threats, HTTP 403</a></p>
+<p><a href="newman-reports_b-15.html">Marc Bteich – Generate vulnerabilities report (admin) – GET /reports/vulnerabilities, HTTP 200</a></p>
+<p><a href="newman-reports_b-16.html">Marc Bteich – Generate vulnerabilities report (auditor) – GET /reports/vulnerabilities, HTTP 200</a></p>
+<p><a href="newman-reports_b-17.html">Marc Bteich – No token vulnerabilities – GET /reports/vulnerabilities, HTTP 401</a></p>
+<p><a href="newman-reports_b-18.html">Marc Bteich – Analyst denied vulnerabilities – GET /reports/vulnerabilities, HTTP 403</a></p>
+<p><a href="newman-reports_b-19.html">Marc Bteich – User denied vulnerabilities – GET /reports/vulnerabilities, HTTP 403</a></p>
+<h2>newman-threats</h2><p>31 requests; 62 assertions; 0 failures; 2026-10-20T12:07:44.605Z</p>
+<p><a href="newman-threats-05.html">Marc Bteich – Create Critical threat – POST /threats, HTTP 201</a></p>
+<p><a href="newman-threats-06.html">Marc Bteich – Duplicate normalized threat – POST /threats, HTTP 409</a></p>
+<p><a href="newman-threats-07.html">Marc Bteich – List threats – GET /threats, HTTP 200</a></p>
+<p><a href="newman-threats-08.html">Marc Bteich – Get threat – GET /threats/9, HTTP 200</a></p>
+<p><a href="newman-threats-09.html">Marc Bteich – Search type=Domain – GET /threats/search, HTTP 200</a></p>
+<p><a href="newman-threats-10.html">Marc Bteich – Search value=postman – GET /threats/search, HTTP 200</a></p>
+<p><a href="newman-threats-11.html">Marc Bteich – Search severity=Critical – GET /threats/search, HTTP 200</a></p>
+<p><a href="newman-threats-12.html">Marc Bteich – Search source=Postman – GET /threats/search, HTTP 200</a></p>
+<p><a href="newman-threats-13.html">Marc Bteich – Search type=Domain&amp;severity=Critical – GET /threats/search, HTTP 200</a></p>
+<p><a href="newman-threats-14.html">Marc Bteich – Update threat – PUT /threats/9, HTTP 200</a></p>
+<p><a href="newman-threats-15.html">Marc Bteich – Internal stats – GET /internal/stats, HTTP 200</a></p>
+<p><a href="newman-threats-16.html">Marc Bteich – Critical threat notification – GET /notifications/search, HTTP 200</a></p>
+<p><a href="newman-threats-17.html">Marc Bteich – Threat audit records – GET /logs/search, HTTP 200</a></p>
+<p><a href="newman-threats-18.html">Marc Bteich – No token – GET /threats, HTTP 401</a></p>
+<p><a href="newman-threats-19.html">Marc Bteich – User denied – GET /threats, HTTP 403</a></p>
+<p><a href="newman-threats-20.html">Marc Bteich – Auditor search denied – GET /threats/search, HTTP 403</a></p>
+<p><a href="newman-threats-21.html">Marc Bteich – Analyst update denied – PUT /threats/9, HTTP 403</a></p>
+<p><a href="newman-threats-22.html">Marc Bteich – Missing threat – GET /threats/2147483647, HTTP 404</a></p>
+<p><a href="newman-threats-23.html">Marc Bteich – Empty body – POST /threats, HTTP 400</a></p>
+<p><a href="newman-threats-24.html">Marc Bteich – Invalid enum – POST /threats, HTTP 400</a></p>
+<p><a href="newman-threats-25.html">Marc Bteich – Invalid IP – POST /threats, HTTP 400</a></p>
+<p><a href="newman-threats-26.html">Marc Bteich – Invalid domain – POST /threats, HTTP 400</a></p>
+<p><a href="newman-threats-27.html">Marc Bteich – Invalid hash – POST /threats, HTTP 400</a></p>
+<p><a href="newman-threats-28.html">Marc Bteich – Invalid search – GET /threats/search, HTTP 400</a></p>
+<p><a href="newman-threats-29.html">Marc Bteich – JWT denied internal stats – GET /internal/stats, HTTP 401</a></p>
+<p><a href="newman-threats-30.html">Marc Bteich – Delete threat – DELETE /threats/9, HTTP 200</a></p>
+<p><a href="newman-threats-31.html">Marc Bteich – Deleted threat – GET /threats/9, HTTP 404</a></p>
+<h2>newman-vulnerabilities</h2><p>34 requests; 70 assertions; 0 failures; 2026-10-20T12:07:49.364Z</p>
+<p><a href="newman-vulnerabilities-05.html">Marc Bteich – Create affected asset – POST /assets, HTTP 201</a></p>
+<p><a href="newman-vulnerabilities-06.html">Marc Bteich – Create Critical vulnerability – POST /vulnerabilities, HTTP 201</a></p>
+<p><a href="newman-vulnerabilities-07.html">Marc Bteich – List vulnerabilities – GET /vulnerabilities, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-08.html">Marc Bteich – Get vulnerability – GET /vulnerabilities/6, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-09.html">Marc Bteich – Search cve=CVE-2026-12345 – GET /vulnerabilities/search, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-10.html">Marc Bteich – Search severity=Critical – GET /vulnerabilities/search, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-11.html">Marc Bteich – Search asset=13 – GET /vulnerabilities/search, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-12.html">Marc Bteich – Search status=Open – GET /vulnerabilities/search, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-13.html">Marc Bteich – Cannot skip lifecycle – PUT /vulnerabilities/6, HTTP 400</a></p>
+<p><a href="newman-vulnerabilities-14.html">Marc Bteich – Transition Under Investigation – PUT /vulnerabilities/6, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-15.html">Marc Bteich – Transition In Progress – PUT /vulnerabilities/6, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-16.html">Marc Bteich – Transition Resolved – PUT /vulnerabilities/6, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-17.html">Marc Bteich – Transition Closed – PUT /vulnerabilities/6, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-18.html">Marc Bteich – Internal stats – GET /internal/stats, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-19.html">Marc Bteich – Critical vulnerability notification – GET /notifications/search, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-20.html">Marc Bteich – Linked asset cannot be deleted – DELETE /assets/13, HTTP 409</a></p>
+<p><a href="newman-vulnerabilities-21.html">Marc Bteich – No token – GET /vulnerabilities, HTTP 401</a></p>
+<p><a href="newman-vulnerabilities-22.html">Marc Bteich – User denied – GET /vulnerabilities, HTTP 403</a></p>
+<p><a href="newman-vulnerabilities-23.html">Marc Bteich – Analyst create denied – POST /vulnerabilities, HTTP 403</a></p>
+<p><a href="newman-vulnerabilities-24.html">Marc Bteich – Auditor update denied – PUT /vulnerabilities/6, HTTP 403</a></p>
+<p><a href="newman-vulnerabilities-25.html">Marc Bteich – Missing vulnerability – GET /vulnerabilities/2147483647, HTTP 404</a></p>
+<p><a href="newman-vulnerabilities-26.html">Marc Bteich – Empty body – POST /vulnerabilities, HTTP 400</a></p>
+<p><a href="newman-vulnerabilities-27.html">Marc Bteich – Invalid CVE – POST /vulnerabilities, HTTP 400</a></p>
+<p><a href="newman-vulnerabilities-28.html">Marc Bteich – Invalid CVSS – POST /vulnerabilities, HTTP 400</a></p>
+<p><a href="newman-vulnerabilities-29.html">Marc Bteich – Wrong type – POST /vulnerabilities, HTTP 400</a></p>
+<p><a href="newman-vulnerabilities-30.html">Marc Bteich – Missing asset – POST /vulnerabilities, HTTP 400</a></p>
+<p><a href="newman-vulnerabilities-31.html">Marc Bteich – Invalid severity – POST /vulnerabilities, HTTP 400</a></p>
+<p><a href="newman-vulnerabilities-32.html">Marc Bteich – Closed cannot reopen – PUT /vulnerabilities/6, HTTP 400</a></p>
+<p><a href="newman-vulnerabilities-33.html">Marc Bteich – Delete vulnerability – DELETE /vulnerabilities/6, HTTP 200</a></p>
+<p><a href="newman-vulnerabilities-34.html">Marc Bteich – Delete affected asset – DELETE /assets/13, HTTP 200</a></p>

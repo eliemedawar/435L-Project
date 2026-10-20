@@ -1,0 +1,1553 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}table{border-collapse:collapse;background:white}td,th{border:1px solid #cbd5e1;padding:8px;text-align:left}th{background:#dbeafe}</style>
+<h1>Marc Bteich – Database structure and stored records – actual local SQLite inspection</h1>
+<h2>assets</h2>
+<pre>[
+  [
+    0,
+    &quot;id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    1
+  ],
+  [
+    1,
+    &quot;asset_name&quot;,
+    &quot;VARCHAR(150)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    2,
+    &quot;asset_type&quot;,
+    &quot;VARCHAR(30)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    3,
+    &quot;ip_address&quot;,
+    &quot;VARCHAR(45)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    4,
+    &quot;operating_system&quot;,
+    &quot;VARCHAR(100)&quot;,
+    0,
+    null,
+    0
+  ],
+  [
+    5,
+    &quot;owner_id&quot;,
+    &quot;INTEGER&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    6,
+    &quot;department&quot;,
+    &quot;VARCHAR(100)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    7,
+    &quot;location&quot;,
+    &quot;VARCHAR(150)&quot;,
+    0,
+    null,
+    0
+  ],
+  [
+    8,
+    &quot;criticality&quot;,
+    &quot;VARCHAR(10)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    9,
+    &quot;status&quot;,
+    &quot;VARCHAR(25)&quot;,
+    1,
+    null,
+    0
+  ]
+]</pre>
+<pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;asset_name&quot;: &quot;Seed Server&quot;,
+    &quot;asset_type&quot;: &quot;Server&quot;,
+    &quot;ip_address&quot;: &quot;192.0.2.100&quot;,
+    &quot;operating_system&quot;: &quot;Lab Linux&quot;,
+    &quot;owner_id&quot;: 1,
+    &quot;department&quot;: &quot;Security Lab&quot;,
+    &quot;location&quot;: &quot;University lab&quot;,
+    &quot;criticality&quot;: &quot;Low&quot;,
+    &quot;status&quot;: &quot;Active&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;asset_name&quot;: &quot;Seed Workstation&quot;,
+    &quot;asset_type&quot;: &quot;Workstation&quot;,
+    &quot;ip_address&quot;: &quot;192.0.2.101&quot;,
+    &quot;operating_system&quot;: &quot;Lab Linux&quot;,
+    &quot;owner_id&quot;: 1,
+    &quot;department&quot;: &quot;Research Lab&quot;,
+    &quot;location&quot;: &quot;University lab&quot;,
+    &quot;criticality&quot;: &quot;Medium&quot;,
+    &quot;status&quot;: &quot;Inactive&quot;
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;asset_name&quot;: &quot;Seed Database&quot;,
+    &quot;asset_type&quot;: &quot;Database&quot;,
+    &quot;ip_address&quot;: &quot;192.0.2.102&quot;,
+    &quot;operating_system&quot;: null,
+    &quot;owner_id&quot;: 1,
+    &quot;department&quot;: &quot;Security Lab&quot;,
+    &quot;location&quot;: &quot;University lab&quot;,
+    &quot;criticality&quot;: &quot;High&quot;,
+    &quot;status&quot;: &quot;Under Maintenance&quot;
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;asset_name&quot;: &quot;Seed Application&quot;,
+    &quot;asset_type&quot;: &quot;Application&quot;,
+    &quot;ip_address&quot;: &quot;192.0.2.103&quot;,
+    &quot;operating_system&quot;: null,
+    &quot;owner_id&quot;: 1,
+    &quot;department&quot;: &quot;Research Lab&quot;,
+    &quot;location&quot;: &quot;University lab&quot;,
+    &quot;criticality&quot;: &quot;Critical&quot;,
+    &quot;status&quot;: &quot;Active&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;asset_name&quot;: &quot;Seed Network Device&quot;,
+    &quot;asset_type&quot;: &quot;Network Device&quot;,
+    &quot;ip_address&quot;: &quot;192.0.2.104&quot;,
+    &quot;operating_system&quot;: null,
+    &quot;owner_id&quot;: 1,
+    &quot;department&quot;: &quot;Security Lab&quot;,
+    &quot;location&quot;: &quot;University lab&quot;,
+    &quot;criticality&quot;: &quot;Low&quot;,
+    &quot;status&quot;: &quot;Inactive&quot;
+  },
+  {
+    &quot;id&quot;: 6,
+    &quot;asset_name&quot;: &quot;Seed Cloud Resource&quot;,
+    &quot;asset_type&quot;: &quot;Cloud Resource&quot;,
+    &quot;ip_address&quot;: &quot;192.0.2.105&quot;,
+    &quot;operating_system&quot;: null,
+    &quot;owner_id&quot;: 1,
+    &quot;department&quot;: &quot;Research Lab&quot;,
+    &quot;location&quot;: &quot;University lab&quot;,
+    &quot;criticality&quot;: &quot;Medium&quot;,
+    &quot;status&quot;: &quot;Under Maintenance&quot;
+  }
+]</pre>
+<p>Foreign keys:</p><pre>[
+  [
+    0,
+    0,
+    &quot;users&quot;,
+    &quot;owner_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;NONE&quot;
+  ]
+]</pre>
+<h2>incidents</h2>
+<pre>[
+  [
+    0,
+    &quot;id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    1
+  ],
+  [
+    1,
+    &quot;title&quot;,
+    &quot;VARCHAR(150)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    2,
+    &quot;description&quot;,
+    &quot;VARCHAR(2000)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    3,
+    &quot;category&quot;,
+    &quot;VARCHAR(30)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    4,
+    &quot;severity&quot;,
+    &quot;VARCHAR(10)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    5,
+    &quot;reporter_id&quot;,
+    &quot;INTEGER&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    6,
+    &quot;asset_id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    0
+  ],
+  [
+    7,
+    &quot;assigned_analyst_id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    0
+  ],
+  [
+    8,
+    &quot;status&quot;,
+    &quot;VARCHAR(25)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    9,
+    &quot;created_at&quot;,
+    &quot;DATETIME&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    10,
+    &quot;resolved_at&quot;,
+    &quot;DATETIME&quot;,
+    0,
+    null,
+    0
+  ]
+]</pre>
+<pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Seed Malware incident&quot;,
+    &quot;description&quot;: &quot;Synthetic lab incident snapshot&quot;,
+    &quot;category&quot;: &quot;Malware&quot;,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;reporter_id&quot;: 5,
+    &quot;asset_id&quot;: 1,
+    &quot;assigned_analyst_id&quot;: 3,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;created_at&quot;: &quot;2026-10-15 11:56:37.182868&quot;,
+    &quot;resolved_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;title&quot;: &quot;Seed Unauthorized Access incident&quot;,
+    &quot;description&quot;: &quot;Synthetic lab incident snapshot&quot;,
+    &quot;category&quot;: &quot;Unauthorized Access&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;reporter_id&quot;: 5,
+    &quot;asset_id&quot;: 2,
+    &quot;assigned_analyst_id&quot;: 3,
+    &quot;status&quot;: &quot;Under Investigation&quot;,
+    &quot;created_at&quot;: &quot;2026-10-15 11:56:37.182868&quot;,
+    &quot;resolved_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;title&quot;: &quot;Seed Phishing incident&quot;,
+    &quot;description&quot;: &quot;Synthetic lab incident snapshot&quot;,
+    &quot;category&quot;: &quot;Phishing&quot;,
+    &quot;severity&quot;: &quot;High&quot;,
+    &quot;reporter_id&quot;: 5,
+    &quot;asset_id&quot;: 3,
+    &quot;assigned_analyst_id&quot;: 3,
+    &quot;status&quot;: &quot;Mitigated&quot;,
+    &quot;created_at&quot;: &quot;2026-10-15 11:56:37.182868&quot;,
+    &quot;resolved_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;title&quot;: &quot;Seed Data Leakage incident&quot;,
+    &quot;description&quot;: &quot;Synthetic lab incident snapshot&quot;,
+    &quot;category&quot;: &quot;Data Leakage&quot;,
+    &quot;severity&quot;: &quot;Critical&quot;,
+    &quot;reporter_id&quot;: 5,
+    &quot;asset_id&quot;: 4,
+    &quot;assigned_analyst_id&quot;: 3,
+    &quot;status&quot;: &quot;Resolved&quot;,
+    &quot;created_at&quot;: &quot;2026-10-15 11:56:37.182868&quot;,
+    &quot;resolved_at&quot;: &quot;2026-10-20 11:56:37.182868&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;title&quot;: &quot;Seed Account Compromise incident&quot;,
+    &quot;description&quot;: &quot;Synthetic lab incident snapshot&quot;,
+    &quot;category&quot;: &quot;Account Compromise&quot;,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;reporter_id&quot;: 5,
+    &quot;asset_id&quot;: 5,
+    &quot;assigned_analyst_id&quot;: 3,
+    &quot;status&quot;: &quot;Closed&quot;,
+    &quot;created_at&quot;: &quot;2026-10-15 11:56:37.182868&quot;,
+    &quot;resolved_at&quot;: &quot;2026-10-20 11:56:37.182868&quot;
+  },
+  {
+    &quot;id&quot;: 6,
+    &quot;title&quot;: &quot;Seed Denial of Service incident&quot;,
+    &quot;description&quot;: &quot;Synthetic lab incident snapshot&quot;,
+    &quot;category&quot;: &quot;Denial of Service&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;reporter_id&quot;: 5,
+    &quot;asset_id&quot;: 6,
+    &quot;assigned_analyst_id&quot;: 3,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;created_at&quot;: &quot;2026-10-15 11:56:37.182868&quot;,
+    &quot;resolved_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 7,
+    &quot;title&quot;: &quot;Seed Other incident&quot;,
+    &quot;description&quot;: &quot;Synthetic lab incident snapshot&quot;,
+    &quot;category&quot;: &quot;Other&quot;,
+    &quot;severity&quot;: &quot;High&quot;,
+    &quot;reporter_id&quot;: 5,
+    &quot;asset_id&quot;: 1,
+    &quot;assigned_analyst_id&quot;: 3,
+    &quot;status&quot;: &quot;Under Investigation&quot;,
+    &quot;created_at&quot;: &quot;2026-10-15 11:56:37.182868&quot;,
+    &quot;resolved_at&quot;: null
+  }
+]</pre>
+<p>Foreign keys:</p><pre>[
+  [
+    0,
+    0,
+    &quot;users&quot;,
+    &quot;assigned_analyst_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;SET NULL&quot;,
+    &quot;NONE&quot;
+  ],
+  [
+    1,
+    0,
+    &quot;assets&quot;,
+    &quot;asset_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;SET NULL&quot;,
+    &quot;NONE&quot;
+  ],
+  [
+    2,
+    0,
+    &quot;users&quot;,
+    &quot;reporter_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;NONE&quot;
+  ]
+]</pre>
+<h2>investigation_notes</h2>
+<pre>[
+  [
+    0,
+    &quot;id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    1
+  ],
+  [
+    1,
+    &quot;incident_id&quot;,
+    &quot;INTEGER&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    2,
+    &quot;analyst_id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    0
+  ],
+  [
+    3,
+    &quot;content&quot;,
+    &quot;VARCHAR(2000)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    4,
+    &quot;created_at&quot;,
+    &quot;DATETIME&quot;,
+    1,
+    null,
+    0
+  ]
+]</pre>
+<pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;incident_id&quot;: 1,
+    &quot;analyst_id&quot;: 3,
+    &quot;content&quot;: &quot;Seed note: review lab telemetry; scenario data only&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.190149&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;incident_id&quot;: 2,
+    &quot;analyst_id&quot;: 3,
+    &quot;content&quot;: &quot;Seed note: review lab telemetry; scenario data only&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.195392&quot;
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;incident_id&quot;: 3,
+    &quot;analyst_id&quot;: 3,
+    &quot;content&quot;: &quot;Seed note: review lab telemetry; scenario data only&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.197271&quot;
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;incident_id&quot;: 4,
+    &quot;analyst_id&quot;: 3,
+    &quot;content&quot;: &quot;Seed note: review lab telemetry; scenario data only&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.199179&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;incident_id&quot;: 5,
+    &quot;analyst_id&quot;: 3,
+    &quot;content&quot;: &quot;Seed note: review lab telemetry; scenario data only&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.201179&quot;
+  },
+  {
+    &quot;id&quot;: 6,
+    &quot;incident_id&quot;: 6,
+    &quot;analyst_id&quot;: 3,
+    &quot;content&quot;: &quot;Seed note: review lab telemetry; scenario data only&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.202976&quot;
+  },
+  {
+    &quot;id&quot;: 7,
+    &quot;incident_id&quot;: 7,
+    &quot;analyst_id&quot;: 3,
+    &quot;content&quot;: &quot;Seed note: review lab telemetry; scenario data only&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.204630&quot;
+  }
+]</pre>
+<p>Foreign keys:</p><pre>[
+  [
+    0,
+    0,
+    &quot;users&quot;,
+    &quot;analyst_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;SET NULL&quot;,
+    &quot;NONE&quot;
+  ],
+  [
+    1,
+    0,
+    &quot;incidents&quot;,
+    &quot;incident_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;CASCADE&quot;,
+    &quot;NONE&quot;
+  ]
+]</pre>
+<h2>logs</h2>
+<pre>[
+  [
+    0,
+    &quot;id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    1
+  ],
+  [
+    1,
+    &quot;user_id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    0
+  ],
+  [
+    2,
+    &quot;username&quot;,
+    &quot;VARCHAR(30)&quot;,
+    0,
+    null,
+    0
+  ],
+  [
+    3,
+    &quot;action&quot;,
+    &quot;VARCHAR(50)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    4,
+    &quot;description&quot;,
+    &quot;VARCHAR(500)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    5,
+    &quot;severity&quot;,
+    &quot;VARCHAR(20)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    6,
+    &quot;related_service&quot;,
+    &quot;VARCHAR(30)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    7,
+    &quot;timestamp&quot;,
+    &quot;DATETIME&quot;,
+    1,
+    null,
+    0
+  ]
+]</pre>
+<pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;SEED_SAMPLE&quot;,
+    &quot;description&quot;: &quot;Seed audit example Information&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 11:56:37.211171&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;SEED_SAMPLE&quot;,
+    &quot;description&quot;: &quot;Seed audit example Warning&quot;,
+    &quot;severity&quot;: &quot;Warning&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 11:56:37.211839&quot;
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;SEED_SAMPLE&quot;,
+    &quot;description&quot;: &quot;Seed audit example Error&quot;,
+    &quot;severity&quot;: &quot;Error&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 11:56:37.212302&quot;
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;SEED_SAMPLE&quot;,
+    &quot;description&quot;: &quot;Seed audit example Critical&quot;,
+    &quot;severity&quot;: &quot;Critical&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 11:56:37.212673&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;LOGIN_SUCCESS&quot;,
+    &quot;description&quot;: &quot;User &#x27;admin&#x27; logged in&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 12:10:44.627246&quot;
+  }
+]</pre>
+<p>Foreign keys:</p><pre>[
+  [
+    0,
+    0,
+    &quot;users&quot;,
+    &quot;user_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;SET NULL&quot;,
+    &quot;NONE&quot;
+  ]
+]</pre>
+<h2>notifications</h2>
+<pre>[
+  [
+    0,
+    &quot;id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    1
+  ],
+  [
+    1,
+    &quot;user_id&quot;,
+    &quot;INTEGER&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    2,
+    &quot;title&quot;,
+    &quot;VARCHAR(150)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    3,
+    &quot;message&quot;,
+    &quot;VARCHAR(1000)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    4,
+    &quot;notification_type&quot;,
+    &quot;VARCHAR(30)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    5,
+    &quot;severity&quot;,
+    &quot;VARCHAR(10)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    6,
+    &quot;status&quot;,
+    &quot;VARCHAR(10)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    7,
+    &quot;created_at&quot;,
+    &quot;DATETIME&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    8,
+    &quot;read_at&quot;,
+    &quot;DATETIME&quot;,
+    0,
+    null,
+    0
+  ]
+]</pre>
+<pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;user_id&quot;: 1,
+    &quot;title&quot;: &quot;Seed Incident Assignment&quot;,
+    &quot;message&quot;: &quot;Synthetic sample notification&quot;,
+    &quot;notification_type&quot;: &quot;Incident Assignment&quot;,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.207288&quot;,
+    &quot;read_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;user_id&quot;: 1,
+    &quot;title&quot;: &quot;Seed Security Alert&quot;,
+    &quot;message&quot;: &quot;Synthetic sample notification&quot;,
+    &quot;notification_type&quot;: &quot;Security Alert&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;status&quot;: &quot;Read&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.207949&quot;,
+    &quot;read_at&quot;: &quot;2026-10-20 11:56:37.182868&quot;
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;user_id&quot;: 1,
+    &quot;title&quot;: &quot;Seed System Notification&quot;,
+    &quot;message&quot;: &quot;Synthetic sample notification&quot;,
+    &quot;notification_type&quot;: &quot;System Notification&quot;,
+    &quot;severity&quot;: &quot;High&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.208408&quot;,
+    &quot;read_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;user_id&quot;: 1,
+    &quot;title&quot;: &quot;Seed Threat Alert&quot;,
+    &quot;message&quot;: &quot;Synthetic sample notification&quot;,
+    &quot;notification_type&quot;: &quot;Threat Alert&quot;,
+    &quot;severity&quot;: &quot;Critical&quot;,
+    &quot;status&quot;: &quot;Read&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.208961&quot;,
+    &quot;read_at&quot;: &quot;2026-10-20 11:56:37.182868&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;user_id&quot;: 1,
+    &quot;title&quot;: &quot;Seed Vulnerability Alert&quot;,
+    &quot;message&quot;: &quot;Synthetic sample notification&quot;,
+    &quot;notification_type&quot;: &quot;Vulnerability Alert&quot;,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.209458&quot;,
+    &quot;read_at&quot;: null
+  }
+]</pre>
+<p>Foreign keys:</p><pre>[
+  [
+    0,
+    0,
+    &quot;users&quot;,
+    &quot;user_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;CASCADE&quot;,
+    &quot;NONE&quot;
+  ]
+]</pre>
+<h2>playbooks</h2>
+<pre>[
+  [
+    0,
+    &quot;id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    1
+  ],
+  [
+    1,
+    &quot;name&quot;,
+    &quot;VARCHAR(150)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    2,
+    &quot;description&quot;,
+    &quot;VARCHAR(2000)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    3,
+    &quot;incident_category&quot;,
+    &quot;VARCHAR(30)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    4,
+    &quot;severity&quot;,
+    &quot;VARCHAR(10)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    5,
+    &quot;created_by&quot;,
+    &quot;INTEGER&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    6,
+    &quot;created_at&quot;,
+    &quot;DATETIME&quot;,
+    1,
+    null,
+    0
+  ]
+]</pre>
+<pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Seed Malware response&quot;,
+    &quot;description&quot;: &quot;Ordered laboratory response procedure&quot;,
+    &quot;incident_category&quot;: &quot;Malware&quot;,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;created_by&quot;: 1,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.191780&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;name&quot;: &quot;Seed Unauthorized Access response&quot;,
+    &quot;description&quot;: &quot;Ordered laboratory response procedure&quot;,
+    &quot;incident_category&quot;: &quot;Unauthorized Access&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;created_by&quot;: 1,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.195830&quot;
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;name&quot;: &quot;Seed Phishing response&quot;,
+    &quot;description&quot;: &quot;Ordered laboratory response procedure&quot;,
+    &quot;incident_category&quot;: &quot;Phishing&quot;,
+    &quot;severity&quot;: &quot;High&quot;,
+    &quot;created_by&quot;: 1,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.197683&quot;
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;name&quot;: &quot;Seed Data Leakage response&quot;,
+    &quot;description&quot;: &quot;Ordered laboratory response procedure&quot;,
+    &quot;incident_category&quot;: &quot;Data Leakage&quot;,
+    &quot;severity&quot;: &quot;Critical&quot;,
+    &quot;created_by&quot;: 1,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.199672&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;name&quot;: &quot;Seed Account Compromise response&quot;,
+    &quot;description&quot;: &quot;Ordered laboratory response procedure&quot;,
+    &quot;incident_category&quot;: &quot;Account Compromise&quot;,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;created_by&quot;: 1,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.201588&quot;
+  },
+  {
+    &quot;id&quot;: 6,
+    &quot;name&quot;: &quot;Seed Denial of Service response&quot;,
+    &quot;description&quot;: &quot;Ordered laboratory response procedure&quot;,
+    &quot;incident_category&quot;: &quot;Denial of Service&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;created_by&quot;: 1,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.203369&quot;
+  },
+  {
+    &quot;id&quot;: 7,
+    &quot;name&quot;: &quot;Seed Other response&quot;,
+    &quot;description&quot;: &quot;Ordered laboratory response procedure&quot;,
+    &quot;incident_category&quot;: &quot;Other&quot;,
+    &quot;severity&quot;: &quot;High&quot;,
+    &quot;created_by&quot;: 1,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.204997&quot;
+  }
+]</pre>
+<p>Foreign keys:</p><pre>[
+  [
+    0,
+    0,
+    &quot;users&quot;,
+    &quot;created_by&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;NONE&quot;
+  ]
+]</pre>
+<h2>response_actions</h2>
+<pre>[
+  [
+    0,
+    &quot;id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    1
+  ],
+  [
+    1,
+    &quot;playbook_id&quot;,
+    &quot;INTEGER&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    2,
+    &quot;description&quot;,
+    &quot;VARCHAR(2000)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    3,
+    &quot;step_number&quot;,
+    &quot;INTEGER&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    4,
+    &quot;status&quot;,
+    &quot;VARCHAR(20)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    5,
+    &quot;assigned_user_id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    0
+  ],
+  [
+    6,
+    &quot;completion_date&quot;,
+    &quot;DATETIME&quot;,
+    0,
+    null,
+    0
+  ],
+  [
+    7,
+    &quot;execution_history&quot;,
+    &quot;JSON&quot;,
+    1,
+    &quot;&#x27;[]&#x27;&quot;,
+    0
+  ]
+]</pre>
+<pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;playbook_id&quot;: 1,
+    &quot;description&quot;: &quot;Collect lab evidence&quot;,
+    &quot;step_number&quot;: 1,
+    &quot;status&quot;: &quot;Pending&quot;,
+    &quot;assigned_user_id&quot;: 3,
+    &quot;completion_date&quot;: null,
+    &quot;execution_history&quot;: &quot;[{\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: null, \&quot;to_status\&quot;: \&quot;Pending\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}]&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;playbook_id&quot;: 1,
+    &quot;description&quot;: &quot;Contain lab host&quot;,
+    &quot;step_number&quot;: 2,
+    &quot;status&quot;: &quot;In Progress&quot;,
+    &quot;assigned_user_id&quot;: 3,
+    &quot;completion_date&quot;: null,
+    &quot;execution_history&quot;: &quot;[{\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: null, \&quot;to_status\&quot;: \&quot;Pending\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}, {\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: \&quot;Pending\&quot;, \&quot;to_status\&quot;: \&quot;In Progress\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}]&quot;
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;playbook_id&quot;: 1,
+    &quot;description&quot;: &quot;Verify recovery&quot;,
+    &quot;step_number&quot;: 3,
+    &quot;status&quot;: &quot;Completed&quot;,
+    &quot;assigned_user_id&quot;: 3,
+    &quot;completion_date&quot;: &quot;2026-10-20 11:56:37.182868&quot;,
+    &quot;execution_history&quot;: &quot;[{\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: null, \&quot;to_status\&quot;: \&quot;Pending\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}, {\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: \&quot;Pending\&quot;, \&quot;to_status\&quot;: \&quot;In Progress\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}, {\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: \&quot;In Progress\&quot;, \&quot;to_status\&quot;: \&quot;Completed\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}]&quot;
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;playbook_id&quot;: 2,
+    &quot;description&quot;: &quot;Collect lab evidence&quot;,
+    &quot;step_number&quot;: 1,
+    &quot;status&quot;: &quot;Pending&quot;,
+    &quot;assigned_user_id&quot;: 3,
+    &quot;completion_date&quot;: null,
+    &quot;execution_history&quot;: &quot;[{\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: null, \&quot;to_status\&quot;: \&quot;Pending\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}]&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;playbook_id&quot;: 2,
+    &quot;description&quot;: &quot;Contain lab host&quot;,
+    &quot;step_number&quot;: 2,
+    &quot;status&quot;: &quot;In Progress&quot;,
+    &quot;assigned_user_id&quot;: 3,
+    &quot;completion_date&quot;: null,
+    &quot;execution_history&quot;: &quot;[{\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: null, \&quot;to_status\&quot;: \&quot;Pending\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}, {\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: \&quot;Pending\&quot;, \&quot;to_status\&quot;: \&quot;In Progress\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}]&quot;
+  },
+  {
+    &quot;id&quot;: 6,
+    &quot;playbook_id&quot;: 2,
+    &quot;description&quot;: &quot;Verify recovery&quot;,
+    &quot;step_number&quot;: 3,
+    &quot;status&quot;: &quot;Completed&quot;,
+    &quot;assigned_user_id&quot;: 3,
+    &quot;completion_date&quot;: &quot;2026-10-20 11:56:37.182868&quot;,
+    &quot;execution_history&quot;: &quot;[{\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: null, \&quot;to_status\&quot;: \&quot;Pending\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}, {\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: \&quot;Pending\&quot;, \&quot;to_status\&quot;: \&quot;In Progress\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}, {\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: \&quot;In Progress\&quot;, \&quot;to_status\&quot;: \&quot;Completed\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}]&quot;
+  },
+  {
+    &quot;id&quot;: 7,
+    &quot;playbook_id&quot;: 3,
+    &quot;description&quot;: &quot;Collect lab evidence&quot;,
+    &quot;step_number&quot;: 1,
+    &quot;status&quot;: &quot;Pending&quot;,
+    &quot;assigned_user_id&quot;: 3,
+    &quot;completion_date&quot;: null,
+    &quot;execution_history&quot;: &quot;[{\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: null, \&quot;to_status\&quot;: \&quot;Pending\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}]&quot;
+  },
+  {
+    &quot;id&quot;: 8,
+    &quot;playbook_id&quot;: 3,
+    &quot;description&quot;: &quot;Contain lab host&quot;,
+    &quot;step_number&quot;: 2,
+    &quot;status&quot;: &quot;In Progress&quot;,
+    &quot;assigned_user_id&quot;: 3,
+    &quot;completion_date&quot;: null,
+    &quot;execution_history&quot;: &quot;[{\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: null, \&quot;to_status\&quot;: \&quot;Pending\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}, {\&quot;actor_id\&quot;: 3, \&quot;at\&quot;: \&quot;2026-10-20T11:56:37Z\&quot;, \&quot;from_status\&quot;: \&quot;Pending\&quot;, \&quot;to_status\&quot;: \&quot;In Progress\&quot;, \&quot;assigned_user_id\&quot;: 3, \&quot;completion_date\&quot;: null, \&quot;source\&quot;: \&quot;seed snapshot\&quot;}]&quot;
+  }
+]</pre>
+<p>Foreign keys:</p><pre>[
+  [
+    0,
+    0,
+    &quot;users&quot;,
+    &quot;assigned_user_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;SET NULL&quot;,
+    &quot;NONE&quot;
+  ],
+  [
+    1,
+    0,
+    &quot;playbooks&quot;,
+    &quot;playbook_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;CASCADE&quot;,
+    &quot;NONE&quot;
+  ]
+]</pre>
+<h2>threats</h2>
+<pre>[
+  [
+    0,
+    &quot;id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    1
+  ],
+  [
+    1,
+    &quot;threat_type&quot;,
+    &quot;VARCHAR(30)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    2,
+    &quot;threat_value&quot;,
+    &quot;VARCHAR(255)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    3,
+    &quot;description&quot;,
+    &quot;VARCHAR(2000)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    4,
+    &quot;severity&quot;,
+    &quot;VARCHAR(10)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    5,
+    &quot;source&quot;,
+    &quot;VARCHAR(150)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    6,
+    &quot;date_added&quot;,
+    &quot;DATETIME&quot;,
+    1,
+    null,
+    0
+  ]
+]</pre>
+<pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;threat_type&quot;: &quot;IP Address&quot;,
+    &quot;threat_value&quot;: &quot;192.0.2.200&quot;,
+    &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;source&quot;: &quot;University lab dataset&quot;,
+    &quot;date_added&quot;: &quot;2026-10-20 11:56:37.179287&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;threat_type&quot;: &quot;IP Address&quot;,
+    &quot;threat_value&quot;: &quot;2001:db8::200&quot;,
+    &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;source&quot;: &quot;University lab dataset&quot;,
+    &quot;date_added&quot;: &quot;2026-10-20 11:56:37.180152&quot;
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;threat_type&quot;: &quot;Domain&quot;,
+    &quot;threat_value&quot;: &quot;indicator.example.test&quot;,
+    &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+    &quot;severity&quot;: &quot;High&quot;,
+    &quot;source&quot;: &quot;University lab dataset&quot;,
+    &quot;date_added&quot;: &quot;2026-10-20 11:56:37.180641&quot;
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;threat_type&quot;: &quot;File Hash&quot;,
+    &quot;threat_value&quot;: &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;,
+    &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+    &quot;severity&quot;: &quot;Critical&quot;,
+    &quot;source&quot;: &quot;University lab dataset&quot;,
+    &quot;date_added&quot;: &quot;2026-10-20 11:56:37.181163&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;threat_type&quot;: &quot;File Hash&quot;,
+    &quot;threat_value&quot;: &quot;bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&quot;,
+    &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;source&quot;: &quot;University lab dataset&quot;,
+    &quot;date_added&quot;: &quot;2026-10-20 11:56:37.181633&quot;
+  },
+  {
+    &quot;id&quot;: 6,
+    &quot;threat_type&quot;: &quot;File Hash&quot;,
+    &quot;threat_value&quot;: &quot;cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc&quot;,
+    &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;source&quot;: &quot;University lab dataset&quot;,
+    &quot;date_added&quot;: &quot;2026-10-20 11:56:37.182120&quot;
+  },
+  {
+    &quot;id&quot;: 7,
+    &quot;threat_type&quot;: &quot;Malware Signature&quot;,
+    &quot;threat_value&quot;: &quot;LAB-SIGNATURE-EXAMPLE&quot;,
+    &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+    &quot;severity&quot;: &quot;High&quot;,
+    &quot;source&quot;: &quot;University lab dataset&quot;,
+    &quot;date_added&quot;: &quot;2026-10-20 11:56:37.182587&quot;
+  },
+  {
+    &quot;id&quot;: 8,
+    &quot;threat_type&quot;: &quot;Other&quot;,
+    &quot;threat_value&quot;: &quot;LAB-INDICATOR-EXAMPLE&quot;,
+    &quot;description&quot;: &quot;Synthetic lab indicator for demonstrations&quot;,
+    &quot;severity&quot;: &quot;Critical&quot;,
+    &quot;source&quot;: &quot;University lab dataset&quot;,
+    &quot;date_added&quot;: &quot;2026-10-20 11:56:37.183061&quot;
+  }
+]</pre>
+<p>Foreign keys:</p><pre>[]</pre>
+<h2>users</h2>
+<pre>[
+  [
+    0,
+    &quot;id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    1
+  ],
+  [
+    1,
+    &quot;full_name&quot;,
+    &quot;VARCHAR(100)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    2,
+    &quot;username&quot;,
+    &quot;VARCHAR(30)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    3,
+    &quot;email&quot;,
+    &quot;VARCHAR(120)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    4,
+    &quot;password_hash&quot;,
+    &quot;VARCHAR(60)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    5,
+    &quot;department&quot;,
+    &quot;VARCHAR(100)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    6,
+    &quot;role&quot;,
+    &quot;VARCHAR(20)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    7,
+    &quot;account_status&quot;,
+    &quot;VARCHAR(20)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    8,
+    &quot;created_at&quot;,
+    &quot;DATETIME&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    9,
+    &quot;last_login&quot;,
+    &quot;DATETIME&quot;,
+    0,
+    null,
+    0
+  ]
+]</pre>
+<pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;full_name&quot;: &quot;Lab Admin&quot;,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;email&quot;: &quot;admin@example.test&quot;,
+    &quot;department&quot;: &quot;Security Lab&quot;,
+    &quot;role&quot;: &quot;admin&quot;,
+    &quot;account_status&quot;: &quot;Active&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:35.850727&quot;,
+    &quot;last_login&quot;: &quot;2026-10-20 12:10:44.594456&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;full_name&quot;: &quot;Lab Admin2&quot;,
+    &quot;username&quot;: &quot;admin2&quot;,
+    &quot;email&quot;: &quot;admin2@example.test&quot;,
+    &quot;department&quot;: &quot;Security Lab&quot;,
+    &quot;role&quot;: &quot;admin&quot;,
+    &quot;account_status&quot;: &quot;Active&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:36.099639&quot;,
+    &quot;last_login&quot;: null
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;full_name&quot;: &quot;Lab Lara&quot;,
+    &quot;username&quot;: &quot;lara&quot;,
+    &quot;email&quot;: &quot;lara@example.test&quot;,
+    &quot;department&quot;: &quot;Security Lab&quot;,
+    &quot;role&quot;: &quot;analyst&quot;,
+    &quot;account_status&quot;: &quot;Active&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:36.314481&quot;,
+    &quot;last_login&quot;: null
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;full_name&quot;: &quot;Lab Nadia&quot;,
+    &quot;username&quot;: &quot;nadia&quot;,
+    &quot;email&quot;: &quot;nadia@example.test&quot;,
+    &quot;department&quot;: &quot;Security Lab&quot;,
+    &quot;role&quot;: &quot;auditor&quot;,
+    &quot;account_status&quot;: &quot;Active&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:36.528331&quot;,
+    &quot;last_login&quot;: null
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;full_name&quot;: &quot;Lab Rami&quot;,
+    &quot;username&quot;: &quot;rami&quot;,
+    &quot;email&quot;: &quot;rami@example.test&quot;,
+    &quot;department&quot;: &quot;Security Lab&quot;,
+    &quot;role&quot;: &quot;user&quot;,
+    &quot;account_status&quot;: &quot;Active&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:36.743005&quot;,
+    &quot;last_login&quot;: null
+  },
+  {
+    &quot;id&quot;: 6,
+    &quot;full_name&quot;: &quot;Lab Inactive_Lab&quot;,
+    &quot;username&quot;: &quot;inactive_lab&quot;,
+    &quot;email&quot;: &quot;inactive_lab@example.test&quot;,
+    &quot;department&quot;: &quot;Security Lab&quot;,
+    &quot;role&quot;: &quot;user&quot;,
+    &quot;account_status&quot;: &quot;Inactive&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:36.956600&quot;,
+    &quot;last_login&quot;: null
+  },
+  {
+    &quot;id&quot;: 7,
+    &quot;full_name&quot;: &quot;Lab Suspended_Lab&quot;,
+    &quot;username&quot;: &quot;suspended_lab&quot;,
+    &quot;email&quot;: &quot;suspended_lab@example.test&quot;,
+    &quot;department&quot;: &quot;Security Lab&quot;,
+    &quot;role&quot;: &quot;user&quot;,
+    &quot;account_status&quot;: &quot;Suspended&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 11:56:37.170199&quot;,
+    &quot;last_login&quot;: null
+  }
+]</pre>
+<p>Foreign keys:</p><pre>[]</pre>
+<h2>vulnerabilities</h2>
+<pre>[
+  [
+    0,
+    &quot;id&quot;,
+    &quot;INTEGER&quot;,
+    0,
+    null,
+    1
+  ],
+  [
+    1,
+    &quot;title&quot;,
+    &quot;VARCHAR(150)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    2,
+    &quot;description&quot;,
+    &quot;VARCHAR(2000)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    3,
+    &quot;cve_id&quot;,
+    &quot;VARCHAR(40)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    4,
+    &quot;cvss_score&quot;,
+    &quot;NUMERIC(3,1)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    5,
+    &quot;severity&quot;,
+    &quot;VARCHAR(10)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    6,
+    &quot;asset_id&quot;,
+    &quot;INTEGER&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    7,
+    &quot;discovery_source&quot;,
+    &quot;VARCHAR(150)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    8,
+    &quot;status&quot;,
+    &quot;VARCHAR(25)&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    9,
+    &quot;created_at&quot;,
+    &quot;DATETIME&quot;,
+    1,
+    null,
+    0
+  ],
+  [
+    10,
+    &quot;resolution_date&quot;,
+    &quot;DATETIME&quot;,
+    0,
+    null,
+    0
+  ]
+]</pre>
+<pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Seed remediation scenario 1&quot;,
+    &quot;description&quot;: &quot;Synthetic CVE-format lab example; no real CVE claim&quot;,
+    &quot;cve_id&quot;: &quot;CVE-2026-9000&quot;,
+    &quot;cvss_score&quot;: 2.1,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;asset_id&quot;: 1,
+    &quot;discovery_source&quot;: &quot;Lab scanner simulation dataset&quot;,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;created_at&quot;: &quot;2026-10-13 11:56:37.182868&quot;,
+    &quot;resolution_date&quot;: null
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;title&quot;: &quot;Seed remediation scenario 2&quot;,
+    &quot;description&quot;: &quot;Synthetic CVE-format lab example; no real CVE claim&quot;,
+    &quot;cve_id&quot;: &quot;CVE-2026-9001&quot;,
+    &quot;cvss_score&quot;: 5.5,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;asset_id&quot;: 2,
+    &quot;discovery_source&quot;: &quot;Lab scanner simulation dataset&quot;,
+    &quot;status&quot;: &quot;Under Investigation&quot;,
+    &quot;created_at&quot;: &quot;2026-10-13 11:56:37.182868&quot;,
+    &quot;resolution_date&quot;: null
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;title&quot;: &quot;Seed remediation scenario 3&quot;,
+    &quot;description&quot;: &quot;Synthetic CVE-format lab example; no real CVE claim&quot;,
+    &quot;cve_id&quot;: &quot;CVE-2026-9002&quot;,
+    &quot;cvss_score&quot;: 8.1,
+    &quot;severity&quot;: &quot;High&quot;,
+    &quot;asset_id&quot;: 3,
+    &quot;discovery_source&quot;: &quot;Lab scanner simulation dataset&quot;,
+    &quot;status&quot;: &quot;In Progress&quot;,
+    &quot;created_at&quot;: &quot;2026-10-13 11:56:37.182868&quot;,
+    &quot;resolution_date&quot;: null
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;title&quot;: &quot;Seed remediation scenario 4&quot;,
+    &quot;description&quot;: &quot;Synthetic CVE-format lab example; no real CVE claim&quot;,
+    &quot;cve_id&quot;: &quot;CVE-2026-9003&quot;,
+    &quot;cvss_score&quot;: 9.8,
+    &quot;severity&quot;: &quot;Critical&quot;,
+    &quot;asset_id&quot;: 4,
+    &quot;discovery_source&quot;: &quot;Lab scanner simulation dataset&quot;,
+    &quot;status&quot;: &quot;Resolved&quot;,
+    &quot;created_at&quot;: &quot;2026-10-13 11:56:37.182868&quot;,
+    &quot;resolution_date&quot;: &quot;2026-10-20 11:56:37.182868&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;title&quot;: &quot;Seed remediation scenario 5&quot;,
+    &quot;description&quot;: &quot;Synthetic CVE-format lab example; no real CVE claim&quot;,
+    &quot;cve_id&quot;: &quot;CVE-2026-9004&quot;,
+    &quot;cvss_score&quot;: 7.5,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;asset_id&quot;: 5,
+    &quot;discovery_source&quot;: &quot;Lab scanner simulation dataset&quot;,
+    &quot;status&quot;: &quot;Closed&quot;,
+    &quot;created_at&quot;: &quot;2026-10-13 11:56:37.182868&quot;,
+    &quot;resolution_date&quot;: &quot;2026-10-20 11:56:37.182868&quot;
+  }
+]</pre>
+<p>Foreign keys:</p><pre>[
+  [
+    0,
+    0,
+    &quot;assets&quot;,
+    &quot;asset_id&quot;,
+    &quot;id&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;NO ACTION&quot;,
+    &quot;NONE&quot;
+  ]
+]</pre>
