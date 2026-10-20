@@ -1,0 +1,2998 @@
+{
+  "source": "Actual Newman/Postman Runtime execution; secrets redacted",
+  "collection": "logs.postman_collection.json",
+  "executed_at": "2026-10-20T20:01:05.401Z",
+  "requests": {
+    "total": 43,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 86,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "records": [
+    {
+      "name": "Login - admin",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 1,
+            "full_name": "Elie Medawar",
+            "username": "admin",
+            "email": "admin@corp.com",
+            "department": "Security",
+            "role": "admin",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:51Z",
+            "last_login": "2026-10-20T20:01:00Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - regular user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "rami",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 2,
+            "full_name": "Rami Haddad",
+            "username": "rami",
+            "email": "rami@corp.com",
+            "department": "Accounting",
+            "role": "user",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:55Z",
+            "last_login": "2026-10-20T20:01:01Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "lara",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 3,
+            "full_name": "Lara Khoury",
+            "username": "lara",
+            "email": "lara@corp.com",
+            "department": "Security Operations Center",
+            "role": "analyst",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:55Z",
+            "last_login": "2026-10-20T20:01:01Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - auditor",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "nadia",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 4,
+            "full_name": "Nadia Saab",
+            "username": "nadia",
+            "email": "nadia@corp.com",
+            "department": "Compliance",
+            "role": "auditor",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:56Z",
+            "last_login": "2026-10-20T20:01:01Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - wrong password (creates LOGIN_FAILED log)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "rami",
+        "password": "[REDACTED]"
+      },
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Invalid username/email or password"
+      },
+      "error": null
+    },
+    {
+      "name": "Create log - admin (Information)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": {
+        "user_id": 2,
+        "action": "ACCOUNT_REVIEW",
+        "description": "Quarterly review of account activity",
+        "severity": "Information",
+        "related_service": "users"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Log record created successfully",
+        "data": {
+          "id": 29,
+          "user_id": 2,
+          "username": "rami",
+          "action": "ACCOUNT_REVIEW",
+          "description": "Quarterly review of account activity",
+          "severity": "Information",
+          "related_service": "users",
+          "timestamp": "2026-10-20T20:01:02Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create log - admin (Warning, other user)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": {
+        "user_id": 3,
+        "action": "POLICY_EXCEPTION",
+        "description": "Analyst accessed a restricted share",
+        "severity": "Warning",
+        "related_service": "assets"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Log record created successfully",
+        "data": {
+          "id": 30,
+          "user_id": 3,
+          "username": "lara",
+          "action": "POLICY_EXCEPTION",
+          "description": "Analyst accessed a restricted share",
+          "severity": "Warning",
+          "related_service": "assets",
+          "timestamp": "2026-10-20T20:01:02Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create log - admin (Critical)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": {
+        "user_id": 3,
+        "action": "DATA_EXFILTRATION_SUSPECTED",
+        "description": "Large outbound transfer flagged on file server",
+        "severity": "Critical",
+        "related_service": "incidents"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Log record created successfully",
+        "data": {
+          "id": 31,
+          "user_id": 3,
+          "username": "lara",
+          "action": "DATA_EXFILTRATION_SUSPECTED",
+          "description": "Large outbound transfer flagged on file server",
+          "severity": "Critical",
+          "related_service": "incidents",
+          "timestamp": "2026-10-20T20:01:02Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create log - missing user_id",
+      "method": "POST",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": {
+        "action": "TEST_EVENT",
+        "description": "No user",
+        "severity": "Information",
+        "related_service": "users"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Missing required field(s): user_id"
+      },
+      "error": null
+    },
+    {
+      "name": "Create log - invalid severity",
+      "method": "POST",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": {
+        "user_id": 2,
+        "action": "TEST_EVENT",
+        "description": "Bad severity",
+        "severity": "Huge",
+        "related_service": "users"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid severity 'Huge'. Allowed values: Information, Warning, Error, Critical"
+      },
+      "error": null
+    },
+    {
+      "name": "Create log - invalid related service",
+      "method": "POST",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": {
+        "user_id": 2,
+        "action": "TEST_EVENT",
+        "description": "Bad service",
+        "severity": "Error",
+        "related_service": "pizza"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid related_service 'pizza'. Allowed values: users, assets, incidents, threats, logs, reports, vulnerabilities, notifications, playbooks"
+      },
+      "error": null
+    },
+    {
+      "name": "Create log - non-existing user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": {
+        "user_id": 9999,
+        "action": "TEST_EVENT",
+        "description": "Ghost",
+        "severity": "Error",
+        "related_service": "users"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "User with id 9999 does not exist"
+      },
+      "error": null
+    },
+    {
+      "name": "Create log - analyst (forbidden)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": {
+        "user_id": 2,
+        "action": "TEST_EVENT",
+        "description": "Not allowed",
+        "severity": "Error",
+        "related_service": "users"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Get all logs - admin",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Logs retrieved successfully",
+        "data": {
+          "count": 32,
+          "logs": [
+            {
+              "id": 32,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied POST /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 31,
+              "user_id": 3,
+              "username": "lara",
+              "action": "DATA_EXFILTRATION_SUSPECTED",
+              "description": "Large outbound transfer flagged on file server",
+              "severity": "Critical",
+              "related_service": "incidents",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 30,
+              "user_id": 3,
+              "username": "lara",
+              "action": "POLICY_EXCEPTION",
+              "description": "Analyst accessed a restricted share",
+              "severity": "Warning",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 29,
+              "user_id": 2,
+              "username": "rami",
+              "action": "ACCOUNT_REVIEW",
+              "description": "Quarterly review of account activity",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 28,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'rami'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 27,
+              "user_id": 4,
+              "username": "nadia",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'nadia' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 26,
+              "user_id": 3,
+              "username": "lara",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'lara' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 25,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 24,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:00Z"
+            },
+            {
+              "id": 23,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_DELETED",
+              "description": "User 'temp.employee' (id 5) deleted",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 22,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied DELETE /users/5",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 21,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_UPDATED",
+              "description": "User 'lara' (id 3) updated fields: department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 20,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to change role of user id 2",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 19,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to update user id 3",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 18,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_UPDATED",
+              "description": "User 'rami' (id 2) updated fields: full_name, department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 17,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to view user 'lara'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 16,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 15,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 14,
+              "user_id": 4,
+              "username": "nadia",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'nadia' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 13,
+              "user_id": 3,
+              "username": "lara",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'lara' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 12,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 11,
+              "user_id": null,
+              "username": null,
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "Attempt to self-register username 'sneaky' with role 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 10,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'temp.employee' (id 5, role user) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 9,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'nadia' (id 4, role auditor) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 8,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'lara' (id 3, role analyst) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_CREATED",
+              "description": "User 'rami' (id 2, role user) created by self-registration",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 6,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 5,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:54Z"
+            },
+            {
+              "id": 4,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 3",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 3,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 2",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 2,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 1",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 1,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:53Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get all logs - auditor",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Logs retrieved successfully",
+        "data": {
+          "count": 32,
+          "logs": [
+            {
+              "id": 32,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied POST /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 31,
+              "user_id": 3,
+              "username": "lara",
+              "action": "DATA_EXFILTRATION_SUSPECTED",
+              "description": "Large outbound transfer flagged on file server",
+              "severity": "Critical",
+              "related_service": "incidents",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 30,
+              "user_id": 3,
+              "username": "lara",
+              "action": "POLICY_EXCEPTION",
+              "description": "Analyst accessed a restricted share",
+              "severity": "Warning",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 29,
+              "user_id": 2,
+              "username": "rami",
+              "action": "ACCOUNT_REVIEW",
+              "description": "Quarterly review of account activity",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 28,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'rami'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 27,
+              "user_id": 4,
+              "username": "nadia",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'nadia' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 26,
+              "user_id": 3,
+              "username": "lara",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'lara' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 25,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 24,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:00Z"
+            },
+            {
+              "id": 23,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_DELETED",
+              "description": "User 'temp.employee' (id 5) deleted",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 22,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied DELETE /users/5",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 21,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_UPDATED",
+              "description": "User 'lara' (id 3) updated fields: department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 20,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to change role of user id 2",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 19,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to update user id 3",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 18,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_UPDATED",
+              "description": "User 'rami' (id 2) updated fields: full_name, department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 17,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to view user 'lara'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 16,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 15,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 14,
+              "user_id": 4,
+              "username": "nadia",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'nadia' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 13,
+              "user_id": 3,
+              "username": "lara",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'lara' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 12,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 11,
+              "user_id": null,
+              "username": null,
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "Attempt to self-register username 'sneaky' with role 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 10,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'temp.employee' (id 5, role user) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 9,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'nadia' (id 4, role auditor) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 8,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'lara' (id 3, role analyst) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_CREATED",
+              "description": "User 'rami' (id 2, role user) created by self-registration",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 6,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 5,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:54Z"
+            },
+            {
+              "id": 4,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 3",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 3,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 2",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 2,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 1",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 1,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:53Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get all logs - analyst (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Get all logs - regular user (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Get all logs - no token",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "Get log by id - admin",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/29",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Log retrieved successfully",
+        "data": {
+          "id": 29,
+          "user_id": 2,
+          "username": "rami",
+          "action": "ACCOUNT_REVIEW",
+          "description": "Quarterly review of account activity",
+          "severity": "Information",
+          "related_service": "users",
+          "timestamp": "2026-10-20T20:01:02Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get log by id - analyst",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/29",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Log retrieved successfully",
+        "data": {
+          "id": 29,
+          "user_id": 2,
+          "username": "rami",
+          "action": "ACCOUNT_REVIEW",
+          "description": "Quarterly review of account activity",
+          "severity": "Information",
+          "related_service": "users",
+          "timestamp": "2026-10-20T20:01:02Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get log by id - invalid id",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/99999",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Log with id 99999 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Get log by id - regular user (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/29",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Search by user id",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?user=2",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "13 log(s) match the search criteria",
+        "data": {
+          "count": 13,
+          "logs": [
+            {
+              "id": 35,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs/29",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 34,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 29,
+              "user_id": 2,
+              "username": "rami",
+              "action": "ACCOUNT_REVIEW",
+              "description": "Quarterly review of account activity",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 28,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'rami'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 25,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 22,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied DELETE /users/5",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 20,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to change role of user id 2",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 19,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to update user id 3",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 18,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_UPDATED",
+              "description": "User 'rami' (id 2) updated fields: full_name, department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 17,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to view user 'lara'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 15,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 12,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_CREATED",
+              "description": "User 'rami' (id 2, role user) created by self-registration",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by username",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?user=rami",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "13 log(s) match the search criteria",
+        "data": {
+          "count": 13,
+          "logs": [
+            {
+              "id": 35,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs/29",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 34,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 29,
+              "user_id": 2,
+              "username": "rami",
+              "action": "ACCOUNT_REVIEW",
+              "description": "Quarterly review of account activity",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 28,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'rami'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 25,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 22,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied DELETE /users/5",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 20,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to change role of user id 2",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 19,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to update user id 3",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 18,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_UPDATED",
+              "description": "User 'rami' (id 2) updated fields: full_name, department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 17,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to view user 'lara'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 15,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 12,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_CREATED",
+              "description": "User 'rami' (id 2, role user) created by self-registration",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by action (failed logins)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?action=LOGIN_FAILED",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "2 log(s) match the search criteria",
+        "data": {
+          "count": 2,
+          "logs": [
+            {
+              "id": 28,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'rami'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 6,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by severity",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?severity=Warning",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "15 log(s) match the search criteria",
+        "data": {
+          "count": 15,
+          "logs": [
+            {
+              "id": 35,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs/29",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 34,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 33,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied GET /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 32,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied POST /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 30,
+              "user_id": 3,
+              "username": "lara",
+              "action": "POLICY_EXCEPTION",
+              "description": "Analyst accessed a restricted share",
+              "severity": "Warning",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 28,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'rami'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 23,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_DELETED",
+              "description": "User 'temp.employee' (id 5) deleted",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 22,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied DELETE /users/5",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 20,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to change role of user id 2",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 19,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to update user id 3",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 17,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to view user 'lara'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 16,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 15,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 11,
+              "user_id": null,
+              "username": null,
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "Attempt to self-register username 'sneaky' with role 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 6,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by related service",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?service=users",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "26 log(s) match the search criteria",
+        "data": {
+          "count": 26,
+          "logs": [
+            {
+              "id": 29,
+              "user_id": 2,
+              "username": "rami",
+              "action": "ACCOUNT_REVIEW",
+              "description": "Quarterly review of account activity",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 28,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'rami'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 27,
+              "user_id": 4,
+              "username": "nadia",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'nadia' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 26,
+              "user_id": 3,
+              "username": "lara",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'lara' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 25,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 24,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:00Z"
+            },
+            {
+              "id": 23,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_DELETED",
+              "description": "User 'temp.employee' (id 5) deleted",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 22,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied DELETE /users/5",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 21,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_UPDATED",
+              "description": "User 'lara' (id 3) updated fields: department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 20,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to change role of user id 2",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 19,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to update user id 3",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 18,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_UPDATED",
+              "description": "User 'rami' (id 2) updated fields: full_name, department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 17,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to view user 'lara'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 16,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 15,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 14,
+              "user_id": 4,
+              "username": "nadia",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'nadia' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 13,
+              "user_id": 3,
+              "username": "lara",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'lara' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 12,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 11,
+              "user_id": null,
+              "username": null,
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "Attempt to self-register username 'sneaky' with role 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 10,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'temp.employee' (id 5, role user) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 9,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'nadia' (id 4, role auditor) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 8,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'lara' (id 3, role analyst) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_CREATED",
+              "description": "User 'rami' (id 2, role user) created by self-registration",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 6,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 5,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:54Z"
+            },
+            {
+              "id": 1,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:53Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by date (today)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?date=2026-10-20",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "35 log(s) match the search criteria",
+        "data": {
+          "count": 35,
+          "logs": [
+            {
+              "id": 35,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs/29",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 34,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 33,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied GET /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 32,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied POST /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 31,
+              "user_id": 3,
+              "username": "lara",
+              "action": "DATA_EXFILTRATION_SUSPECTED",
+              "description": "Large outbound transfer flagged on file server",
+              "severity": "Critical",
+              "related_service": "incidents",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 30,
+              "user_id": 3,
+              "username": "lara",
+              "action": "POLICY_EXCEPTION",
+              "description": "Analyst accessed a restricted share",
+              "severity": "Warning",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 29,
+              "user_id": 2,
+              "username": "rami",
+              "action": "ACCOUNT_REVIEW",
+              "description": "Quarterly review of account activity",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 28,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'rami'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 27,
+              "user_id": 4,
+              "username": "nadia",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'nadia' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 26,
+              "user_id": 3,
+              "username": "lara",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'lara' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 25,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 24,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:00Z"
+            },
+            {
+              "id": 23,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_DELETED",
+              "description": "User 'temp.employee' (id 5) deleted",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 22,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied DELETE /users/5",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 21,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_UPDATED",
+              "description": "User 'lara' (id 3) updated fields: department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 20,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to change role of user id 2",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 19,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to update user id 3",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 18,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_UPDATED",
+              "description": "User 'rami' (id 2) updated fields: full_name, department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 17,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to view user 'lara'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 16,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 15,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 14,
+              "user_id": 4,
+              "username": "nadia",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'nadia' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 13,
+              "user_id": 3,
+              "username": "lara",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'lara' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 12,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 11,
+              "user_id": null,
+              "username": null,
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "Attempt to self-register username 'sneaky' with role 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 10,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'temp.employee' (id 5, role user) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 9,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'nadia' (id 4, role auditor) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 8,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'lara' (id 3, role analyst) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_CREATED",
+              "description": "User 'rami' (id 2, role user) created by self-registration",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 6,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 5,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:54Z"
+            },
+            {
+              "id": 4,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 3",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 3,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 2",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 2,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 1",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 1,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:53Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by date range",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?date_from=2026-01-01&date_to=2026-10-20",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "35 log(s) match the search criteria",
+        "data": {
+          "count": 35,
+          "logs": [
+            {
+              "id": 35,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs/29",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 34,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 33,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied GET /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 32,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied POST /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 31,
+              "user_id": 3,
+              "username": "lara",
+              "action": "DATA_EXFILTRATION_SUSPECTED",
+              "description": "Large outbound transfer flagged on file server",
+              "severity": "Critical",
+              "related_service": "incidents",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 30,
+              "user_id": 3,
+              "username": "lara",
+              "action": "POLICY_EXCEPTION",
+              "description": "Analyst accessed a restricted share",
+              "severity": "Warning",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 29,
+              "user_id": 2,
+              "username": "rami",
+              "action": "ACCOUNT_REVIEW",
+              "description": "Quarterly review of account activity",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 28,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'rami'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 27,
+              "user_id": 4,
+              "username": "nadia",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'nadia' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 26,
+              "user_id": 3,
+              "username": "lara",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'lara' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 25,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 24,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:00Z"
+            },
+            {
+              "id": 23,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_DELETED",
+              "description": "User 'temp.employee' (id 5) deleted",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 22,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied DELETE /users/5",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 21,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_UPDATED",
+              "description": "User 'lara' (id 3) updated fields: department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 20,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to change role of user id 2",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 19,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to update user id 3",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 18,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_UPDATED",
+              "description": "User 'rami' (id 2) updated fields: full_name, department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 17,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to view user 'lara'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 16,
+              "user_id": 3,
+              "username": "lara",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "analyst 'lara' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 15,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 14,
+              "user_id": 4,
+              "username": "nadia",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'nadia' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 13,
+              "user_id": 3,
+              "username": "lara",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'lara' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 12,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 11,
+              "user_id": null,
+              "username": null,
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "Attempt to self-register username 'sneaky' with role 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 10,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'temp.employee' (id 5, role user) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 9,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'nadia' (id 4, role auditor) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:56Z"
+            },
+            {
+              "id": 8,
+              "user_id": 1,
+              "username": "admin",
+              "action": "USER_CREATED",
+              "description": "User 'lara' (id 3, role analyst) created by admin 'admin'",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_CREATED",
+              "description": "User 'rami' (id 2, role user) created by self-registration",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 6,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'admin'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            },
+            {
+              "id": 5,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:54Z"
+            },
+            {
+              "id": 4,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 3",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 3,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 2",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 2,
+              "user_id": 1,
+              "username": "admin",
+              "action": "ASSET_CREATED",
+              "description": "Created asset 1",
+              "severity": "Information",
+              "related_service": "assets",
+              "timestamp": "2026-10-20T20:00:53Z"
+            },
+            {
+              "id": 1,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:53Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search combined criteria",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?user=admin&action=LOGIN_SUCCESS",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "3 log(s) match the search criteria",
+        "data": {
+          "count": 3,
+          "logs": [
+            {
+              "id": 24,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:00Z"
+            },
+            {
+              "id": 5,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:54Z"
+            },
+            {
+              "id": 1,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'admin' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:53Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search - analyst allowed",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?severity=Critical",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "1 log(s) match the search criteria",
+        "data": {
+          "count": 1,
+          "logs": [
+            {
+              "id": 31,
+              "user_id": 3,
+              "username": "lara",
+              "action": "DATA_EXFILTRATION_SUSPECTED",
+              "description": "Large outbound transfer flagged on file server",
+              "severity": "Critical",
+              "related_service": "incidents",
+              "timestamp": "2026-10-20T20:01:02Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search - invalid date format",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?date=17-10-2026",
+      "request": null,
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "'date' must be a date in YYYY-MM-DD format"
+      },
+      "error": null
+    },
+    {
+      "name": "Search - no criteria",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search",
+      "request": null,
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Provide at least one search criterion: user, action, severity, service, date, date_from, date_to"
+      },
+      "error": null
+    },
+    {
+      "name": "Search - regular user (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?severity=Warning",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Logs by user - user with logs",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/user/2",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "14 log(s) found for user 2",
+        "data": {
+          "count": 14,
+          "logs": [
+            {
+              "id": 36,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs/search",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:04Z"
+            },
+            {
+              "id": 35,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs/29",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 34,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /logs",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:03Z"
+            },
+            {
+              "id": 29,
+              "user_id": 2,
+              "username": "rami",
+              "action": "ACCOUNT_REVIEW",
+              "description": "Quarterly review of account activity",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:02Z"
+            },
+            {
+              "id": 28,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_FAILED",
+              "description": "Failed login attempt for 'rami'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 25,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:01:01Z"
+            },
+            {
+              "id": 22,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied DELETE /users/5",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 20,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to change role of user id 2",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:59Z"
+            },
+            {
+              "id": 19,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to update user id 3",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 18,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_UPDATED",
+              "description": "User 'rami' (id 2) updated fields: full_name, department",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 17,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "'rami' tried to view user 'lara'",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 15,
+              "user_id": 2,
+              "username": "rami",
+              "action": "UNAUTHORIZED_ACCESS",
+              "description": "user 'rami' was denied GET /users",
+              "severity": "Warning",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:58Z"
+            },
+            {
+              "id": 12,
+              "user_id": 2,
+              "username": "rami",
+              "action": "LOGIN_SUCCESS",
+              "description": "User 'rami' logged in",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "username": "rami",
+              "action": "USER_CREATED",
+              "description": "User 'rami' (id 2, role user) created by self-registration",
+              "severity": "Information",
+              "related_service": "users",
+              "timestamp": "2026-10-20T20:00:55Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Logs by user - user with no logs",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/user/9999",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "No logs found for user 9999",
+        "data": {
+          "count": 0,
+          "logs": []
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Logs by user - analyst (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/user/2",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Delete log - analyst (forbidden)",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5005/logs/29",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Delete log - auditor (forbidden)",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5005/logs/29",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Delete log - admin (success)",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5005/logs/29",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Log 29 deleted successfully",
+        "data": null
+      },
+      "error": null
+    },
+    {
+      "name": "Delete log - already deleted",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5005/logs/29",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Log with id 29 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Update log - not allowed (immutable)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5005/logs/1",
+      "request": {
+        "description": "tampered"
+      },
+      "status": 405,
+      "response": {
+        "status": "error",
+        "message": "HTTP method not allowed on this endpoint"
+      },
+      "error": null
+    },
+    {
+      "name": "Search the LOG_DELETED record",
+      "method": "GET",
+      "url": "http://127.0.0.1:5005/logs/search?action=LOG_DELETED",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "1 log(s) match the search criteria",
+        "data": {
+          "count": 1,
+          "logs": [
+            {
+              "id": 40,
+              "user_id": 1,
+              "username": "admin",
+              "action": "LOG_DELETED",
+              "description": "Admin 'admin' deleted log 29 (ACCOUNT_REVIEW by rami at 2026-10-20 20:01)",
+              "severity": "Warning",
+              "related_service": "logs",
+              "timestamp": "2026-10-20T20:01:05Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    }
+  ]
+}

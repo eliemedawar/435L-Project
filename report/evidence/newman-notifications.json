@@ -1,0 +1,905 @@
+{
+  "source": "Actual Newman/Postman Runtime execution; secrets redacted",
+  "collection": "notifications.postman_collection.json",
+  "executed_at": "2026-10-20T20:01:16.182Z",
+  "requests": {
+    "total": 33,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 66,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "records": [
+    {
+      "name": "Login - admin",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 1,
+            "full_name": "Elie Medawar",
+            "username": "admin",
+            "email": "admin@corp.com",
+            "department": "Security",
+            "role": "admin",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:51Z",
+            "last_login": "2026-10-20T20:01:12Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - regular user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "rami",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 2,
+            "full_name": "Rami Haddad",
+            "username": "rami",
+            "email": "rami@corp.com",
+            "department": "Accounting",
+            "role": "user",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:55Z",
+            "last_login": "2026-10-20T20:01:12Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "lara",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 3,
+            "full_name": "Lara Khoury",
+            "username": "lara",
+            "email": "lara@corp.com",
+            "department": "Security Operations Center",
+            "role": "analyst",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:55Z",
+            "last_login": "2026-10-20T20:01:13Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - auditor",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "nadia",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 4,
+            "full_name": "Nadia Saab",
+            "username": "nadia",
+            "email": "nadia@corp.com",
+            "department": "Compliance",
+            "role": "auditor",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:56Z",
+            "last_login": "2026-10-20T20:01:13Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create - system notification",
+      "method": "POST",
+      "url": "http://127.0.0.1:5008/notifications",
+      "request": {
+        "user_id": 2,
+        "title": "Security awareness training",
+        "message": "Mandatory training on Friday",
+        "notification_type": "System Notification",
+        "severity": "Low"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Notification created successfully",
+        "data": {
+          "id": 7,
+          "user_id": 2,
+          "title": "Security awareness training",
+          "message": "Mandatory training on Friday",
+          "notification_type": "System Notification",
+          "severity": "Low",
+          "status": "Unread",
+          "created_at": "2026-10-20T20:01:13Z",
+          "read_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create - threat alert",
+      "method": "POST",
+      "url": "http://127.0.0.1:5008/notifications",
+      "request": {
+        "user_id": 2,
+        "title": "Malicious IP blocked",
+        "message": "185.220.101.4 tried to reach your laptop",
+        "notification_type": "Threat Alert",
+        "severity": "High"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Notification created successfully",
+        "data": {
+          "id": 8,
+          "user_id": 2,
+          "title": "Malicious IP blocked",
+          "message": "185.220.101.4 tried to reach your laptop",
+          "notification_type": "Threat Alert",
+          "severity": "High",
+          "status": "Unread",
+          "created_at": "2026-10-20T20:01:13Z",
+          "read_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create - vulnerability alert to analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5008/notifications",
+      "request": {
+        "user_id": 3,
+        "title": "Critical CVE",
+        "message": "CVE-2024-3400 affects the firewall",
+        "notification_type": "Vulnerability Alert",
+        "severity": "Critical"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Notification created successfully",
+        "data": {
+          "id": 9,
+          "user_id": 3,
+          "title": "Critical CVE",
+          "message": "CVE-2024-3400 affects the firewall",
+          "notification_type": "Vulnerability Alert",
+          "severity": "Critical",
+          "status": "Unread",
+          "created_at": "2026-10-20T20:01:13Z",
+          "read_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create - invalid type",
+      "method": "POST",
+      "url": "http://127.0.0.1:5008/notifications",
+      "request": {
+        "user_id": 2,
+        "title": "Security awareness training",
+        "message": "Mandatory training on Friday",
+        "notification_type": "Spam",
+        "severity": "Low"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid notification_type 'Spam'. Allowed values: Incident Assignment, Security Alert, System Notification, Threat Alert, Vulnerability Alert"
+      },
+      "error": null
+    },
+    {
+      "name": "Create - non-existing user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5008/notifications",
+      "request": {
+        "user_id": 99999,
+        "title": "Security awareness training",
+        "message": "Mandatory training on Friday",
+        "notification_type": "System Notification",
+        "severity": "Low"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "User with id 99999 does not exist"
+      },
+      "error": null
+    },
+    {
+      "name": "Create - missing fields",
+      "method": "POST",
+      "url": "http://127.0.0.1:5008/notifications",
+      "request": {
+        "title": "Incomplete"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Missing required field(s): user_id, message, notification_type, severity"
+      },
+      "error": null
+    },
+    {
+      "name": "Create - analyst (forbidden)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5008/notifications",
+      "request": {
+        "user_id": 2,
+        "title": "Security awareness training",
+        "message": "Mandatory training on Friday",
+        "notification_type": "System Notification",
+        "severity": "Low"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "User's own notifications",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/user/2",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "6 notification(s) found for user 2",
+        "data": {
+          "count": 6,
+          "notifications": [
+            {
+              "id": 8,
+              "user_id": 2,
+              "title": "Malicious IP blocked",
+              "message": "185.220.101.4 tried to reach your laptop",
+              "notification_type": "Threat Alert",
+              "severity": "High",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:13Z",
+              "read_at": null
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "title": "Security awareness training",
+              "message": "Mandatory training on Friday",
+              "notification_type": "System Notification",
+              "severity": "Low",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:13Z",
+              "read_at": null
+            },
+            {
+              "id": 6,
+              "user_id": 2,
+              "title": "Incident #1 is now Closed",
+              "message": "The status of your reported incident 'Phishing email received' changed from Resolved to Closed.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            },
+            {
+              "id": 5,
+              "user_id": 2,
+              "title": "Incident #1 is now Resolved",
+              "message": "The status of your reported incident 'Phishing email received' changed from Mitigated to Resolved.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            },
+            {
+              "id": 4,
+              "user_id": 2,
+              "title": "Incident #1 is now Mitigated",
+              "message": "The status of your reported incident 'Phishing email received' changed from Under Investigation to Mitigated.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            },
+            {
+              "id": 3,
+              "user_id": 2,
+              "title": "Incident #1 is now Under Investigation",
+              "message": "The status of your reported incident 'Phishing email received' changed from Open to Under Investigation.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "User's unread notifications",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/user/2?status=Unread",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "6 notification(s) found for user 2",
+        "data": {
+          "count": 6,
+          "notifications": [
+            {
+              "id": 8,
+              "user_id": 2,
+              "title": "Malicious IP blocked",
+              "message": "185.220.101.4 tried to reach your laptop",
+              "notification_type": "Threat Alert",
+              "severity": "High",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:13Z",
+              "read_at": null
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "title": "Security awareness training",
+              "message": "Mandatory training on Friday",
+              "notification_type": "System Notification",
+              "severity": "Low",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:13Z",
+              "read_at": null
+            },
+            {
+              "id": 6,
+              "user_id": 2,
+              "title": "Incident #1 is now Closed",
+              "message": "The status of your reported incident 'Phishing email received' changed from Resolved to Closed.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            },
+            {
+              "id": 5,
+              "user_id": 2,
+              "title": "Incident #1 is now Resolved",
+              "message": "The status of your reported incident 'Phishing email received' changed from Mitigated to Resolved.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            },
+            {
+              "id": 4,
+              "user_id": 2,
+              "title": "Incident #1 is now Mitigated",
+              "message": "The status of your reported incident 'Phishing email received' changed from Under Investigation to Mitigated.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            },
+            {
+              "id": 3,
+              "user_id": 2,
+              "title": "Incident #1 is now Under Investigation",
+              "message": "The status of your reported incident 'Phishing email received' changed from Open to Under Investigation.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Auditor views a user's notifications",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/user/2",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "6 notification(s) found for user 2",
+        "data": {
+          "count": 6,
+          "notifications": [
+            {
+              "id": 8,
+              "user_id": 2,
+              "title": "Malicious IP blocked",
+              "message": "185.220.101.4 tried to reach your laptop",
+              "notification_type": "Threat Alert",
+              "severity": "High",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:13Z",
+              "read_at": null
+            },
+            {
+              "id": 7,
+              "user_id": 2,
+              "title": "Security awareness training",
+              "message": "Mandatory training on Friday",
+              "notification_type": "System Notification",
+              "severity": "Low",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:13Z",
+              "read_at": null
+            },
+            {
+              "id": 6,
+              "user_id": 2,
+              "title": "Incident #1 is now Closed",
+              "message": "The status of your reported incident 'Phishing email received' changed from Resolved to Closed.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            },
+            {
+              "id": 5,
+              "user_id": 2,
+              "title": "Incident #1 is now Resolved",
+              "message": "The status of your reported incident 'Phishing email received' changed from Mitigated to Resolved.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            },
+            {
+              "id": 4,
+              "user_id": 2,
+              "title": "Incident #1 is now Mitigated",
+              "message": "The status of your reported incident 'Phishing email received' changed from Under Investigation to Mitigated.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            },
+            {
+              "id": 3,
+              "user_id": 2,
+              "title": "Incident #1 is now Under Investigation",
+              "message": "The status of your reported incident 'Phishing email received' changed from Open to Under Investigation.",
+              "notification_type": "System Notification",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:10Z",
+              "read_at": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Empty result (user with no notifications)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/user/4",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "No notifications found for user 4",
+        "data": {
+          "count": 0,
+          "notifications": []
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Other user's notifications (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/user/3",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "You can only view your own notifications"
+      },
+      "error": null
+    },
+    {
+      "name": "Get - owner",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/7",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Notification retrieved successfully",
+        "data": {
+          "id": 7,
+          "user_id": 2,
+          "title": "Security awareness training",
+          "message": "Mandatory training on Friday",
+          "notification_type": "System Notification",
+          "severity": "Low",
+          "status": "Unread",
+          "created_at": "2026-10-20T20:01:13Z",
+          "read_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get - invalid id",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/99999",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Notification with id 99999 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Get - another user (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/7",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "You can only access your own notifications"
+      },
+      "error": null
+    },
+    {
+      "name": "Mark read - another user (forbidden)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5008/notifications/7/read",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "You can only mark your own notifications as read"
+      },
+      "error": null
+    },
+    {
+      "name": "Mark read - owner",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5008/notifications/7/read",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Notification marked as read",
+        "data": {
+          "id": 7,
+          "user_id": 2,
+          "title": "Security awareness training",
+          "message": "Mandatory training on Friday",
+          "notification_type": "System Notification",
+          "severity": "Low",
+          "status": "Read",
+          "created_at": "2026-10-20T20:01:13Z",
+          "read_at": "2026-10-20T20:01:15Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Mark read - again",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5008/notifications/7/read",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Notification was already marked as read",
+        "data": {
+          "id": 7,
+          "user_id": 2,
+          "title": "Security awareness training",
+          "message": "Mandatory training on Friday",
+          "notification_type": "System Notification",
+          "severity": "Low",
+          "status": "Read",
+          "created_at": "2026-10-20T20:01:13Z",
+          "read_at": "2026-10-20T20:01:15Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Mark read - auditor (forbidden)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5008/notifications/7/read",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Search by type",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/search?type=Threat%20Alert",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "1 notification(s) match the search criteria",
+        "data": {
+          "count": 1,
+          "notifications": [
+            {
+              "id": 8,
+              "user_id": 2,
+              "title": "Malicious IP blocked",
+              "message": "185.220.101.4 tried to reach your laptop",
+              "notification_type": "Threat Alert",
+              "severity": "High",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:13Z",
+              "read_at": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by user and status",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/search?user=2&status=Read",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "1 notification(s) match the search criteria",
+        "data": {
+          "count": 1,
+          "notifications": [
+            {
+              "id": 7,
+              "user_id": 2,
+              "title": "Security awareness training",
+              "message": "Mandatory training on Friday",
+              "notification_type": "System Notification",
+              "severity": "Low",
+              "status": "Read",
+              "created_at": "2026-10-20T20:01:13Z",
+              "read_at": "2026-10-20T20:01:15Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search by severity - auditor",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/search?severity=Critical",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "2 notification(s) match the search criteria",
+        "data": {
+          "count": 2,
+          "notifications": [
+            {
+              "id": 9,
+              "user_id": 3,
+              "title": "Critical CVE",
+              "message": "CVE-2024-3400 affects the firewall",
+              "notification_type": "Vulnerability Alert",
+              "severity": "Critical",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:13Z",
+              "read_at": null
+            },
+            {
+              "id": 2,
+              "user_id": 3,
+              "title": "New incident assigned: #2",
+              "message": "You have been assigned incident #2 'Ransomware on web server' (Critical).",
+              "notification_type": "Incident Assignment",
+              "severity": "Critical",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:09Z",
+              "read_at": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search - analyst (own only)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/search?status=Unread",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "3 notification(s) match the search criteria",
+        "data": {
+          "count": 3,
+          "notifications": [
+            {
+              "id": 9,
+              "user_id": 3,
+              "title": "Critical CVE",
+              "message": "CVE-2024-3400 affects the firewall",
+              "notification_type": "Vulnerability Alert",
+              "severity": "Critical",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:13Z",
+              "read_at": null
+            },
+            {
+              "id": 2,
+              "user_id": 3,
+              "title": "New incident assigned: #2",
+              "message": "You have been assigned incident #2 'Ransomware on web server' (Critical).",
+              "notification_type": "Incident Assignment",
+              "severity": "Critical",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:09Z",
+              "read_at": null
+            },
+            {
+              "id": 1,
+              "user_id": 3,
+              "title": "New incident assigned: #1",
+              "message": "You have been assigned incident #1 'Phishing email received' (Medium).",
+              "notification_type": "Incident Assignment",
+              "severity": "Medium",
+              "status": "Unread",
+              "created_at": "2026-10-20T20:01:09Z",
+              "read_at": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Search - no criteria",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/search",
+      "request": null,
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Provide at least one search criterion: user, type, severity, status"
+      },
+      "error": null
+    },
+    {
+      "name": "Search - invalid type",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/search?type=Spam",
+      "request": null,
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid type 'Spam'. Allowed values: Incident Assignment, Security Alert, System Notification, Threat Alert, Vulnerability Alert"
+      },
+      "error": null
+    },
+    {
+      "name": "Search - regular user (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5008/notifications/search?status=Read",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Delete - analyst (forbidden)",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5008/notifications/7",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Delete - admin",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5008/notifications/7",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Notification 7 deleted successfully",
+        "data": null
+      },
+      "error": null
+    },
+    {
+      "name": "Delete - already deleted",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5008/notifications/7",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Notification with id 7 not found"
+      },
+      "error": null
+    }
+  ]
+}

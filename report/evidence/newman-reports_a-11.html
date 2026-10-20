@@ -1,0 +1,42 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}</style>
+<article>
+<h1>Elie Medawar – Generate Incident Report – Incident report - auditor (HTTP 200)</h1>
+<small>Genuine Newman execution report • 2026-10-20T20:01:19.454Z • source: newman-reports_a.json</small>
+<p>GET http://127.0.0.1:5006/reports/incidents</p>
+<h2>Actual request body (credentials redacted)</h2><pre>null</pre>
+<h2>Actual response — HTTP 200</h2><pre>{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;message&quot;: &quot;Incident report generated&quot;,
+  &quot;data&quot;: {
+    &quot;report_type&quot;: &quot;incident&quot;,
+    &quot;generated_at&quot;: &quot;2026-10-20T20:01:19Z&quot;,
+    &quot;generated_by&quot;: &quot;nadia&quot;,
+    &quot;total_incidents&quot;: 4,
+    &quot;open_incidents&quot;: 3,
+    &quot;unassigned_open_incidents&quot;: 2,
+    &quot;incidents_by_severity&quot;: {
+      &quot;Low&quot;: 1,
+      &quot;Medium&quot;: 1,
+      &quot;High&quot;: 1,
+      &quot;Critical&quot;: 1
+    },
+    &quot;incidents_by_status&quot;: {
+      &quot;Open&quot;: 3,
+      &quot;Under Investigation&quot;: 0,
+      &quot;Mitigated&quot;: 0,
+      &quot;Resolved&quot;: 0,
+      &quot;Closed&quot;: 1
+    },
+    &quot;incidents_by_category&quot;: {
+      &quot;Malware&quot;: 1,
+      &quot;Unauthorized Access&quot;: 1,
+      &quot;Phishing&quot;: 1,
+      &quot;Data Leakage&quot;: 0,
+      &quot;Account Compromise&quot;: 0,
+      &quot;Denial of Service&quot;: 0,
+      &quot;Other&quot;: 1
+    }
+  }
+}</pre>
+<p>This screenshot displays stored results from an actual API execution. It is not a simulated API response or a Postman GUI screenshot.</p></article>

@@ -1,0 +1,448 @@
+{
+  "source": "Actual Newman/Postman Runtime execution; secrets redacted",
+  "collection": "reports_a.postman_collection.json",
+  "executed_at": "2026-10-20T20:01:19.454Z",
+  "requests": {
+    "total": 15,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 30,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "records": [
+    {
+      "name": "Login - admin",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 1,
+            "full_name": "Elie Medawar",
+            "username": "admin",
+            "email": "admin@corp.com",
+            "department": "Security",
+            "role": "admin",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:51Z",
+            "last_login": "2026-10-20T20:01:17Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - regular user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "rami",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 2,
+            "full_name": "Rami Haddad",
+            "username": "rami",
+            "email": "rami@corp.com",
+            "department": "Accounting",
+            "role": "user",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:55Z",
+            "last_login": "2026-10-20T20:01:17Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "lara",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 3,
+            "full_name": "Lara Khoury",
+            "username": "lara",
+            "email": "lara@corp.com",
+            "department": "Security Operations Center",
+            "role": "analyst",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:55Z",
+            "last_login": "2026-10-20T20:01:17Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - auditor",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "nadia",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 4,
+            "full_name": "Nadia Saab",
+            "username": "nadia",
+            "email": "nadia@corp.com",
+            "department": "Compliance",
+            "role": "auditor",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:56Z",
+            "last_login": "2026-10-20T20:01:18Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Summary - admin",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/summary",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Security summary report generated",
+        "data": {
+          "report_type": "security summary",
+          "generated_at": "2026-10-20T20:01:18Z",
+          "generated_by": "admin",
+          "users": 4,
+          "assets": 3,
+          "incidents": 4,
+          "open_incidents": 3,
+          "critical_incidents": 1,
+          "threats": 0,
+          "critical_threats": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Summary - auditor",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/summary",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Security summary report generated",
+        "data": {
+          "report_type": "security summary",
+          "generated_at": "2026-10-20T20:01:18Z",
+          "generated_by": "nadia",
+          "users": 4,
+          "assets": 3,
+          "incidents": 4,
+          "open_incidents": 3,
+          "critical_incidents": 1,
+          "threats": 0,
+          "critical_threats": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Summary - analyst (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/summary",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Summary - regular user (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/summary",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Summary - no token",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/summary",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "Incident report - admin",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/incidents",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident report generated",
+        "data": {
+          "report_type": "incident",
+          "generated_at": "2026-10-20T20:01:18Z",
+          "generated_by": "admin",
+          "total_incidents": 4,
+          "open_incidents": 3,
+          "unassigned_open_incidents": 2,
+          "incidents_by_severity": {
+            "Low": 1,
+            "Medium": 1,
+            "High": 1,
+            "Critical": 1
+          },
+          "incidents_by_status": {
+            "Open": 3,
+            "Under Investigation": 0,
+            "Mitigated": 0,
+            "Resolved": 0,
+            "Closed": 1
+          },
+          "incidents_by_category": {
+            "Malware": 1,
+            "Unauthorized Access": 1,
+            "Phishing": 1,
+            "Data Leakage": 0,
+            "Account Compromise": 0,
+            "Denial of Service": 0,
+            "Other": 1
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Incident report - auditor",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/incidents",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident report generated",
+        "data": {
+          "report_type": "incident",
+          "generated_at": "2026-10-20T20:01:19Z",
+          "generated_by": "nadia",
+          "total_incidents": 4,
+          "open_incidents": 3,
+          "unassigned_open_incidents": 2,
+          "incidents_by_severity": {
+            "Low": 1,
+            "Medium": 1,
+            "High": 1,
+            "Critical": 1
+          },
+          "incidents_by_status": {
+            "Open": 3,
+            "Under Investigation": 0,
+            "Mitigated": 0,
+            "Resolved": 0,
+            "Closed": 1
+          },
+          "incidents_by_category": {
+            "Malware": 1,
+            "Unauthorized Access": 1,
+            "Phishing": 1,
+            "Data Leakage": 0,
+            "Account Compromise": 0,
+            "Denial of Service": 0,
+            "Other": 1
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Incident report - analyst (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/incidents",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Activity report - admin",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/activity",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Activity report generated",
+        "data": {
+          "report_type": "activity",
+          "generated_at": "2026-10-20T20:01:19Z",
+          "generated_by": "admin",
+          "total_user_activities": 85,
+          "login_attempts": 23,
+          "successful_logins": 21,
+          "failed_login_attempts": 2,
+          "failed_login_rate_percent": 8.7,
+          "unauthorized_access_attempts": 31,
+          "activities_by_severity": {
+            "Information": 46,
+            "Warning": 37,
+            "Error": 0,
+            "Critical": 2
+          },
+          "activities_by_service": {
+            "assets": 4,
+            "incidents": 20,
+            "logs": 9,
+            "notifications": 12,
+            "reports": 3,
+            "users": 37
+          },
+          "most_performed_actions": [
+            {
+              "action": "UNAUTHORIZED_ACCESS",
+              "count": 31
+            },
+            {
+              "action": "LOGIN_SUCCESS",
+              "count": 21
+            },
+            {
+              "action": "INCIDENT_CREATED",
+              "count": 4
+            },
+            {
+              "action": "INCIDENT_STATUS_CHANGED",
+              "count": 4
+            },
+            {
+              "action": "USER_CREATED",
+              "count": 4
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Activity report - auditor",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/activity",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Activity report generated",
+        "data": {
+          "report_type": "activity",
+          "generated_at": "2026-10-20T20:01:19Z",
+          "generated_by": "nadia",
+          "total_user_activities": 85,
+          "login_attempts": 23,
+          "successful_logins": 21,
+          "failed_login_attempts": 2,
+          "failed_login_rate_percent": 8.7,
+          "unauthorized_access_attempts": 31,
+          "activities_by_severity": {
+            "Information": 46,
+            "Warning": 37,
+            "Error": 0,
+            "Critical": 2
+          },
+          "activities_by_service": {
+            "assets": 4,
+            "incidents": 20,
+            "logs": 9,
+            "notifications": 12,
+            "reports": 3,
+            "users": 37
+          },
+          "most_performed_actions": [
+            {
+              "action": "UNAUTHORIZED_ACCESS",
+              "count": 31
+            },
+            {
+              "action": "LOGIN_SUCCESS",
+              "count": 21
+            },
+            {
+              "action": "INCIDENT_CREATED",
+              "count": 4
+            },
+            {
+              "action": "INCIDENT_STATUS_CHANGED",
+              "count": 4
+            },
+            {
+              "action": "USER_CREATED",
+              "count": 4
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Activity report - regular user (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5006/reports/activity",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    }
+  ]
+}

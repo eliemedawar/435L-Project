@@ -1,0 +1,1115 @@
+{
+  "source": "Actual Newman/Postman Runtime execution; secrets redacted",
+  "collection": "incidents.postman_collection.json",
+  "executed_at": "2026-10-20T20:01:11.540Z",
+  "requests": {
+    "total": 43,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 86,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "records": [
+    {
+      "name": "Login - admin",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 1,
+            "full_name": "Elie Medawar",
+            "username": "admin",
+            "email": "admin@corp.com",
+            "department": "Security",
+            "role": "admin",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:51Z",
+            "last_login": "2026-10-20T20:01:06Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - regular user",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "rami",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 2,
+            "full_name": "Rami Haddad",
+            "username": "rami",
+            "email": "rami@corp.com",
+            "department": "Accounting",
+            "role": "user",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:55Z",
+            "last_login": "2026-10-20T20:01:06Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "lara",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 3,
+            "full_name": "Lara Khoury",
+            "username": "lara",
+            "email": "lara@corp.com",
+            "department": "Security Operations Center",
+            "role": "analyst",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:55Z",
+            "last_login": "2026-10-20T20:01:07Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - auditor",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "nadia",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 4,
+            "full_name": "Nadia Saab",
+            "username": "nadia",
+            "email": "nadia@corp.com",
+            "department": "Compliance",
+            "role": "auditor",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:56Z",
+            "last_login": "2026-10-20T20:01:07Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create - regular user (Medium)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": {
+        "title": "Phishing email received",
+        "description": "Employee clicked a link in a fake invoice email",
+        "category": "Phishing",
+        "severity": "Medium",
+        "asset_id": 1
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Incident created successfully",
+        "data": {
+          "id": 1,
+          "title": "Phishing email received",
+          "description": "Employee clicked a link in a fake invoice email",
+          "category": "Phishing",
+          "severity": "Medium",
+          "reporter_id": 2,
+          "asset_id": 1,
+          "assigned_analyst_id": null,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create - admin (Critical)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": {
+        "title": "Ransomware on web server",
+        "description": "Files encrypted, ransom note found",
+        "category": "Malware",
+        "severity": "Critical",
+        "asset_id": 1
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Incident created successfully",
+        "data": {
+          "id": 2,
+          "title": "Ransomware on web server",
+          "description": "Files encrypted, ransom note found",
+          "category": "Malware",
+          "severity": "Critical",
+          "reporter_id": 1,
+          "asset_id": 1,
+          "assigned_analyst_id": null,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create - admin (High)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": {
+        "title": "Brute force on HR database",
+        "description": "Thousands of failed logins from one IP",
+        "category": "Unauthorized Access",
+        "severity": "High",
+        "asset_id": 1
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Incident created successfully",
+        "data": {
+          "id": 3,
+          "title": "Brute force on HR database",
+          "description": "Thousands of failed logins from one IP",
+          "category": "Unauthorized Access",
+          "severity": "High",
+          "reporter_id": 1,
+          "asset_id": 1,
+          "assigned_analyst_id": null,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create - regular user (Low)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": {
+        "title": "Port scan detected",
+        "description": "Firewall blocked a port scan",
+        "category": "Other",
+        "severity": "Low",
+        "asset_id": 1
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Incident created successfully",
+        "data": {
+          "id": 4,
+          "title": "Port scan detected",
+          "description": "Firewall blocked a port scan",
+          "category": "Other",
+          "severity": "Low",
+          "reporter_id": 2,
+          "asset_id": 1,
+          "assigned_analyst_id": null,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Create - invalid severity",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": {
+        "title": "Phishing email received",
+        "description": "Employee clicked a link in a fake invoice email",
+        "category": "Phishing",
+        "severity": "Extreme",
+        "asset_id": 1
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid severity 'Extreme'. Allowed values: Low, Medium, High, Critical"
+      },
+      "error": null
+    },
+    {
+      "name": "Create - invalid category",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": {
+        "title": "Phishing email received",
+        "description": "Employee clicked a link in a fake invoice email",
+        "category": "Aliens",
+        "severity": "Medium",
+        "asset_id": 1
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid category 'Aliens'. Allowed values: Malware, Unauthorized Access, Phishing, Data Leakage, Account Compromise, Denial of Service, Other"
+      },
+      "error": null
+    },
+    {
+      "name": "Create - missing fields",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": {
+        "title": "Incomplete"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Missing required field(s): description, category, severity, asset_id"
+      },
+      "error": null
+    },
+    {
+      "name": "Create - non-existing asset",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": {
+        "title": "Phishing email received",
+        "description": "Employee clicked a link in a fake invoice email",
+        "category": "Phishing",
+        "severity": "Medium",
+        "asset_id": 99999
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Asset with id 99999 does not exist"
+      },
+      "error": null
+    },
+    {
+      "name": "Create - analyst (forbidden)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": {
+        "title": "Phishing email received",
+        "description": "Employee clicked a link in a fake invoice email",
+        "category": "Phishing",
+        "severity": "Medium",
+        "asset_id": 1
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Create - no token",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": {
+        "title": "Phishing email received",
+        "description": "Employee clicked a link in a fake invoice email",
+        "category": "Phishing",
+        "severity": "Medium",
+        "asset_id": 1
+      },
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "Get all - admin",
+      "method": "GET",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incidents retrieved successfully",
+        "data": {
+          "count": 4,
+          "incidents": [
+            {
+              "id": 4,
+              "title": "Port scan detected",
+              "description": "Firewall blocked a port scan",
+              "category": "Other",
+              "severity": "Low",
+              "reporter_id": 2,
+              "asset_id": 1,
+              "assigned_analyst_id": null,
+              "status": "Open",
+              "created_at": "2026-10-20T20:01:07Z",
+              "resolved_at": null
+            },
+            {
+              "id": 3,
+              "title": "Brute force on HR database",
+              "description": "Thousands of failed logins from one IP",
+              "category": "Unauthorized Access",
+              "severity": "High",
+              "reporter_id": 1,
+              "asset_id": 1,
+              "assigned_analyst_id": null,
+              "status": "Open",
+              "created_at": "2026-10-20T20:01:07Z",
+              "resolved_at": null
+            },
+            {
+              "id": 2,
+              "title": "Ransomware on web server",
+              "description": "Files encrypted, ransom note found",
+              "category": "Malware",
+              "severity": "Critical",
+              "reporter_id": 1,
+              "asset_id": 1,
+              "assigned_analyst_id": null,
+              "status": "Open",
+              "created_at": "2026-10-20T20:01:07Z",
+              "resolved_at": null
+            },
+            {
+              "id": 1,
+              "title": "Phishing email received",
+              "description": "Employee clicked a link in a fake invoice email",
+              "category": "Phishing",
+              "severity": "Medium",
+              "reporter_id": 2,
+              "asset_id": 1,
+              "assigned_analyst_id": null,
+              "status": "Open",
+              "created_at": "2026-10-20T20:01:07Z",
+              "resolved_at": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get all - auditor",
+      "method": "GET",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incidents retrieved successfully",
+        "data": {
+          "count": 4,
+          "incidents": [
+            {
+              "id": 4,
+              "title": "Port scan detected",
+              "description": "Firewall blocked a port scan",
+              "category": "Other",
+              "severity": "Low",
+              "reporter_id": 2,
+              "asset_id": 1,
+              "assigned_analyst_id": null,
+              "status": "Open",
+              "created_at": "2026-10-20T20:01:07Z",
+              "resolved_at": null
+            },
+            {
+              "id": 3,
+              "title": "Brute force on HR database",
+              "description": "Thousands of failed logins from one IP",
+              "category": "Unauthorized Access",
+              "severity": "High",
+              "reporter_id": 1,
+              "asset_id": 1,
+              "assigned_analyst_id": null,
+              "status": "Open",
+              "created_at": "2026-10-20T20:01:07Z",
+              "resolved_at": null
+            },
+            {
+              "id": 2,
+              "title": "Ransomware on web server",
+              "description": "Files encrypted, ransom note found",
+              "category": "Malware",
+              "severity": "Critical",
+              "reporter_id": 1,
+              "asset_id": 1,
+              "assigned_analyst_id": null,
+              "status": "Open",
+              "created_at": "2026-10-20T20:01:07Z",
+              "resolved_at": null
+            },
+            {
+              "id": 1,
+              "title": "Phishing email received",
+              "description": "Employee clicked a link in a fake invoice email",
+              "category": "Phishing",
+              "severity": "Medium",
+              "reporter_id": 2,
+              "asset_id": 1,
+              "assigned_analyst_id": null,
+              "status": "Open",
+              "created_at": "2026-10-20T20:01:07Z",
+              "resolved_at": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get all - filter by severity",
+      "method": "GET",
+      "url": "http://127.0.0.1:5003/incidents?severity=Critical",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incidents retrieved successfully",
+        "data": {
+          "count": 1,
+          "incidents": [
+            {
+              "id": 2,
+              "title": "Ransomware on web server",
+              "description": "Files encrypted, ransom note found",
+              "category": "Malware",
+              "severity": "Critical",
+              "reporter_id": 1,
+              "asset_id": 1,
+              "assigned_analyst_id": null,
+              "status": "Open",
+              "created_at": "2026-10-20T20:01:07Z",
+              "resolved_at": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get all - regular user (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5003/incidents",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Get - reporter views own incident",
+      "method": "GET",
+      "url": "http://127.0.0.1:5003/incidents/1",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident retrieved successfully",
+        "data": {
+          "id": 1,
+          "title": "Phishing email received",
+          "description": "Employee clicked a link in a fake invoice email",
+          "category": "Phishing",
+          "severity": "Medium",
+          "reporter_id": 2,
+          "asset_id": 1,
+          "assigned_analyst_id": null,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null,
+          "investigation_notes": []
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get - admin",
+      "method": "GET",
+      "url": "http://127.0.0.1:5003/incidents/2",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident retrieved successfully",
+        "data": {
+          "id": 2,
+          "title": "Ransomware on web server",
+          "description": "Files encrypted, ransom note found",
+          "category": "Malware",
+          "severity": "Critical",
+          "reporter_id": 1,
+          "asset_id": 1,
+          "assigned_analyst_id": null,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null,
+          "investigation_notes": []
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get - invalid id",
+      "method": "GET",
+      "url": "http://127.0.0.1:5003/incidents/99999",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Incident with id 99999 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Get - analyst not assigned (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5003/incidents/1",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "You do not have access to this incident"
+      },
+      "error": null
+    },
+    {
+      "name": "Status before assignment (rejected)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/1/status",
+      "request": {
+        "status": "Under Investigation"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Assign the incident to a Security Analyst before starting the investigation"
+      },
+      "error": null
+    },
+    {
+      "name": "Assign - admin to analyst",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/1/assign",
+      "request": {
+        "analyst_id": 3
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident assigned successfully",
+        "data": {
+          "id": 1,
+          "title": "Phishing email received",
+          "description": "Employee clicked a link in a fake invoice email",
+          "category": "Phishing",
+          "severity": "Medium",
+          "reporter_id": 2,
+          "asset_id": 1,
+          "assigned_analyst_id": 3,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Assign incident 2 to analyst",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/2/assign",
+      "request": {
+        "analyst_id": 3
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident assigned successfully",
+        "data": {
+          "id": 2,
+          "title": "Ransomware on web server",
+          "description": "Files encrypted, ransom note found",
+          "category": "Malware",
+          "severity": "Critical",
+          "reporter_id": 1,
+          "asset_id": 1,
+          "assigned_analyst_id": 3,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Assign - user is not an analyst",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/2/assign",
+      "request": {
+        "analyst_id": 2
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "User 'rami' is not a Security Analyst (role: user)"
+      },
+      "error": null
+    },
+    {
+      "name": "Assign - by analyst (forbidden)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/2/assign",
+      "request": {
+        "analyst_id": 3
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Assign - non-existing incident",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/99999/assign",
+      "request": {
+        "analyst_id": 3
+      },
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "Incident with id 99999 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Open -> Closed (rejected)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/1/status",
+      "request": {
+        "status": "Closed"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid status transition: Open -> Closed. The next allowed status is 'Under Investigation'"
+      },
+      "error": null
+    },
+    {
+      "name": "Open -> Under Investigation",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/1/status",
+      "request": {
+        "status": "Under Investigation"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident status updated to 'Under Investigation'",
+        "data": {
+          "id": 1,
+          "title": "Phishing email received",
+          "description": "Employee clicked a link in a fake invoice email",
+          "category": "Phishing",
+          "severity": "Medium",
+          "reporter_id": 2,
+          "asset_id": 1,
+          "assigned_analyst_id": 3,
+          "status": "Under Investigation",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Under Investigation -> Mitigated",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/1/status",
+      "request": {
+        "status": "Mitigated"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident status updated to 'Mitigated'",
+        "data": {
+          "id": 1,
+          "title": "Phishing email received",
+          "description": "Employee clicked a link in a fake invoice email",
+          "category": "Phishing",
+          "severity": "Medium",
+          "reporter_id": 2,
+          "asset_id": 1,
+          "assigned_analyst_id": 3,
+          "status": "Mitigated",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Mitigated -> Resolved",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/1/status",
+      "request": {
+        "status": "Resolved"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident status updated to 'Resolved'",
+        "data": {
+          "id": 1,
+          "title": "Phishing email received",
+          "description": "Employee clicked a link in a fake invoice email",
+          "category": "Phishing",
+          "severity": "Medium",
+          "reporter_id": 2,
+          "asset_id": 1,
+          "assigned_analyst_id": 3,
+          "status": "Resolved",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": "2026-10-20T20:01:10Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Resolved -> Mitigated (rejected)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/1/status",
+      "request": {
+        "status": "Mitigated"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid status transition: Resolved -> Mitigated. The next allowed status is 'Closed'"
+      },
+      "error": null
+    },
+    {
+      "name": "Resolved -> Closed",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/1/status",
+      "request": {
+        "status": "Closed"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident status updated to 'Closed'",
+        "data": {
+          "id": 1,
+          "title": "Phishing email received",
+          "description": "Employee clicked a link in a fake invoice email",
+          "category": "Phishing",
+          "severity": "Medium",
+          "reporter_id": 2,
+          "asset_id": 1,
+          "assigned_analyst_id": 3,
+          "status": "Closed",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": "2026-10-20T20:01:10Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Closed -> Open (rejected)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/1/status",
+      "request": {
+        "status": "Open"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Incident 1 is Closed; its status can no longer change"
+      },
+      "error": null
+    },
+    {
+      "name": "Status change - regular user (forbidden)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5003/incidents/2/status",
+      "request": {
+        "status": "Under Investigation"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Add note - assigned analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents/2/notes",
+      "request": {
+        "content": "Analysis: ransomware strain identified as LockBit"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Investigation note added successfully",
+        "data": {
+          "id": 2,
+          "title": "Ransomware on web server",
+          "description": "Files encrypted, ransom note found",
+          "category": "Malware",
+          "severity": "Critical",
+          "reporter_id": 1,
+          "asset_id": 1,
+          "assigned_analyst_id": 3,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null,
+          "investigation_notes": [
+            {
+              "id": 1,
+              "incident_id": 2,
+              "analyst_id": 3,
+              "content": "Analysis: ransomware strain identified as LockBit",
+              "created_at": "2026-10-20T20:01:10Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Add note - evidence",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents/2/notes",
+      "request": {
+        "content": "Evidence: memory dump and encrypted samples collected"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Investigation note added successfully",
+        "data": {
+          "id": 2,
+          "title": "Ransomware on web server",
+          "description": "Files encrypted, ransom note found",
+          "category": "Malware",
+          "severity": "Critical",
+          "reporter_id": 1,
+          "asset_id": 1,
+          "assigned_analyst_id": 3,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null,
+          "investigation_notes": [
+            {
+              "id": 1,
+              "incident_id": 2,
+              "analyst_id": 3,
+              "content": "Analysis: ransomware strain identified as LockBit",
+              "created_at": "2026-10-20T20:01:10Z"
+            },
+            {
+              "id": 2,
+              "incident_id": 2,
+              "analyst_id": 3,
+              "content": "Evidence: memory dump and encrypted samples collected",
+              "created_at": "2026-10-20T20:01:10Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Add note - admin",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents/2/notes",
+      "request": {
+        "content": "Action: server isolated and restored from backup"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "Investigation note added successfully",
+        "data": {
+          "id": 2,
+          "title": "Ransomware on web server",
+          "description": "Files encrypted, ransom note found",
+          "category": "Malware",
+          "severity": "Critical",
+          "reporter_id": 1,
+          "asset_id": 1,
+          "assigned_analyst_id": 3,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null,
+          "investigation_notes": [
+            {
+              "id": 1,
+              "incident_id": 2,
+              "analyst_id": 3,
+              "content": "Analysis: ransomware strain identified as LockBit",
+              "created_at": "2026-10-20T20:01:10Z"
+            },
+            {
+              "id": 2,
+              "incident_id": 2,
+              "analyst_id": 3,
+              "content": "Evidence: memory dump and encrypted samples collected",
+              "created_at": "2026-10-20T20:01:10Z"
+            },
+            {
+              "id": 3,
+              "incident_id": 2,
+              "analyst_id": 1,
+              "content": "Action: server isolated and restored from backup",
+              "created_at": "2026-10-20T20:01:11Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Add note - empty content",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents/2/notes",
+      "request": {
+        "content": "   "
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Missing required field(s): content"
+      },
+      "error": null
+    },
+    {
+      "name": "Add note - closed incident",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents/1/notes",
+      "request": {
+        "content": "Too late"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Incident 1 is Closed; notes can no longer be added"
+      },
+      "error": null
+    },
+    {
+      "name": "Add note - regular user (forbidden)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5003/incidents/2/notes",
+      "request": {
+        "content": "x"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Get incident with notes",
+      "method": "GET",
+      "url": "http://127.0.0.1:5003/incidents/2",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Incident retrieved successfully",
+        "data": {
+          "id": 2,
+          "title": "Ransomware on web server",
+          "description": "Files encrypted, ransom note found",
+          "category": "Malware",
+          "severity": "Critical",
+          "reporter_id": 1,
+          "asset_id": 1,
+          "assigned_analyst_id": 3,
+          "status": "Open",
+          "created_at": "2026-10-20T20:01:07Z",
+          "resolved_at": null,
+          "investigation_notes": [
+            {
+              "id": 1,
+              "incident_id": 2,
+              "analyst_id": 3,
+              "content": "Analysis: ransomware strain identified as LockBit",
+              "created_at": "2026-10-20T20:01:10Z"
+            },
+            {
+              "id": 2,
+              "incident_id": 2,
+              "analyst_id": 3,
+              "content": "Evidence: memory dump and encrypted samples collected",
+              "created_at": "2026-10-20T20:01:10Z"
+            },
+            {
+              "id": 3,
+              "incident_id": 2,
+              "analyst_id": 1,
+              "content": "Action: server isolated and restored from backup",
+              "created_at": "2026-10-20T20:01:11Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    }
+  ]
+}

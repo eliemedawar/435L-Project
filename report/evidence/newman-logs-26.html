@@ -1,0 +1,167 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}</style>
+<article>
+<h1>Elie Medawar – Search Logs – Search by severity (HTTP 200)</h1>
+<small>Genuine Newman execution report • 2026-10-20T20:01:05.401Z • source: newman-logs.json</small>
+<p>GET http://127.0.0.1:5005/logs/search?severity=Warning</p>
+<h2>Actual request body (credentials redacted)</h2><pre>null</pre>
+<h2>Actual response — HTTP 200</h2><pre>{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;message&quot;: &quot;15 log(s) match the search criteria&quot;,
+  &quot;data&quot;: {
+    &quot;count&quot;: 15,
+    &quot;logs&quot;: [
+      {
+        &quot;id&quot;: 35,
+        &quot;user_id&quot;: 2,
+        &quot;username&quot;: &quot;rami&quot;,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;user &#x27;rami&#x27; was denied GET /logs/29&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;logs&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:01:03Z&quot;
+      },
+      {
+        &quot;id&quot;: 34,
+        &quot;user_id&quot;: 2,
+        &quot;username&quot;: &quot;rami&quot;,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;user &#x27;rami&#x27; was denied GET /logs&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;logs&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:01:03Z&quot;
+      },
+      {
+        &quot;id&quot;: 33,
+        &quot;user_id&quot;: 3,
+        &quot;username&quot;: &quot;lara&quot;,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;analyst &#x27;lara&#x27; was denied GET /logs&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;logs&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:01:02Z&quot;
+      },
+      {
+        &quot;id&quot;: 32,
+        &quot;user_id&quot;: 3,
+        &quot;username&quot;: &quot;lara&quot;,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;analyst &#x27;lara&#x27; was denied POST /logs&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;logs&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:01:02Z&quot;
+      },
+      {
+        &quot;id&quot;: 30,
+        &quot;user_id&quot;: 3,
+        &quot;username&quot;: &quot;lara&quot;,
+        &quot;action&quot;: &quot;POLICY_EXCEPTION&quot;,
+        &quot;description&quot;: &quot;Analyst accessed a restricted share&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;assets&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:01:02Z&quot;
+      },
+      {
+        &quot;id&quot;: 28,
+        &quot;user_id&quot;: 2,
+        &quot;username&quot;: &quot;rami&quot;,
+        &quot;action&quot;: &quot;LOGIN_FAILED&quot;,
+        &quot;description&quot;: &quot;Failed login attempt for &#x27;rami&#x27;&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;users&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:01:01Z&quot;
+      },
+      {
+        &quot;id&quot;: 23,
+        &quot;user_id&quot;: 1,
+        &quot;username&quot;: &quot;admin&quot;,
+        &quot;action&quot;: &quot;USER_DELETED&quot;,
+        &quot;description&quot;: &quot;User &#x27;temp.employee&#x27; (id 5) deleted&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;users&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:00:59Z&quot;
+      },
+      {
+        &quot;id&quot;: 22,
+        &quot;user_id&quot;: 2,
+        &quot;username&quot;: &quot;rami&quot;,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;user &#x27;rami&#x27; was denied DELETE /users/5&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;users&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:00:59Z&quot;
+      },
+      {
+        &quot;id&quot;: 20,
+        &quot;user_id&quot;: 2,
+        &quot;username&quot;: &quot;rami&quot;,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;&#x27;rami&#x27; tried to change role of user id 2&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;users&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:00:59Z&quot;
+      },
+      {
+        &quot;id&quot;: 19,
+        &quot;user_id&quot;: 2,
+        &quot;username&quot;: &quot;rami&quot;,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;&#x27;rami&#x27; tried to update user id 3&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;users&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:00:58Z&quot;
+      },
+      {
+        &quot;id&quot;: 17,
+        &quot;user_id&quot;: 2,
+        &quot;username&quot;: &quot;rami&quot;,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;&#x27;rami&#x27; tried to view user &#x27;lara&#x27;&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;users&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:00:58Z&quot;
+      },
+      {
+        &quot;id&quot;: 16,
+        &quot;user_id&quot;: 3,
+        &quot;username&quot;: &quot;lara&quot;,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;analyst &#x27;lara&#x27; was denied GET /users&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;users&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:00:58Z&quot;
+      },
+      {
+        &quot;id&quot;: 15,
+        &quot;user_id&quot;: 2,
+        &quot;username&quot;: &quot;rami&quot;,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;user &#x27;rami&#x27; was denied GET /users&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;users&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:00:58Z&quot;
+      },
+      {
+        &quot;id&quot;: 11,
+        &quot;user_id&quot;: null,
+        &quot;username&quot;: null,
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;description&quot;: &quot;Attempt to self-register username &#x27;sneaky&#x27; with role &#x27;admin&#x27;&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;users&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:00:56Z&quot;
+      },
+      {
+        &quot;id&quot;: 6,
+        &quot;user_id&quot;: 1,
+        &quot;username&quot;: &quot;admin&quot;,
+        &quot;action&quot;: &quot;LOGIN_FAILED&quot;,
+        &quot;description&quot;: &quot;Failed login attempt for &#x27;admin&#x27;&quot;,
+        &quot;severity&quot;: &quot;Warning&quot;,
+        &quot;related_service&quot;: &quot;users&quot;,
+        &quot;timestamp&quot;: &quot;2026-10-20T20:00:55Z&quot;
+      }
+    ]
+  }
+}</pre>
+<p>This screenshot displays stored results from an actual API execution. It is not a simulated API response or a Postman GUI screenshot.</p></article>

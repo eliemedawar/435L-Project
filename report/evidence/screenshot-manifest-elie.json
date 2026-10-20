@@ -1,0 +1,1522 @@
+[
+  {
+    "name": "newman-users-01",
+    "collection": "users",
+    "title": "User Login",
+    "request": "Login - admin (success)",
+    "caption": "Elie Medawar \u2013 User Login \u2013 Login - admin (success) (HTTP 200)",
+    "method": "POST",
+    "path": "/users/login",
+    "status": 200
+  },
+  {
+    "name": "newman-users-02",
+    "collection": "users",
+    "title": "User Login",
+    "request": "Login - wrong password (failure)",
+    "caption": "Elie Medawar \u2013 User Login \u2013 Login - wrong password (failure) (HTTP 401)",
+    "method": "POST",
+    "path": "/users/login",
+    "status": 401
+  },
+  {
+    "name": "newman-users-03",
+    "collection": "users",
+    "title": "User Login",
+    "request": "Login - missing password",
+    "caption": "Elie Medawar \u2013 User Login \u2013 Login - missing password (HTTP 400)",
+    "method": "POST",
+    "path": "/users/login",
+    "status": 400
+  },
+  {
+    "name": "newman-users-04",
+    "collection": "users",
+    "title": "User Registration",
+    "request": "Register - regular user (self-registration)",
+    "caption": "Elie Medawar \u2013 User Registration \u2013 Register - regular user (self-registration) (HTTP 201)",
+    "method": "POST",
+    "path": "/users/register",
+    "status": 201
+  },
+  {
+    "name": "newman-users-05",
+    "collection": "users",
+    "title": "User Registration",
+    "request": "Register - analyst (by admin)",
+    "caption": "Elie Medawar \u2013 User Registration \u2013 Register - analyst (by admin) (HTTP 201)",
+    "method": "POST",
+    "path": "/users/register",
+    "status": 201
+  },
+  {
+    "name": "newman-users-06",
+    "collection": "users",
+    "title": "User Registration",
+    "request": "Register - auditor (by admin)",
+    "caption": "Elie Medawar \u2013 User Registration \u2013 Register - auditor (by admin) (HTTP 201)",
+    "method": "POST",
+    "path": "/users/register",
+    "status": 201
+  },
+  {
+    "name": "newman-users-07",
+    "collection": "users",
+    "title": "User Registration",
+    "request": "Register - temporary user (to delete later)",
+    "caption": "Elie Medawar \u2013 User Registration \u2013 Register - temporary user (to delete later) (HTTP 201)",
+    "method": "POST",
+    "path": "/users/register",
+    "status": 201
+  },
+  {
+    "name": "newman-users-08",
+    "collection": "users",
+    "title": "User Registration",
+    "request": "Register - duplicate username",
+    "caption": "Elie Medawar \u2013 User Registration \u2013 Register - duplicate username (HTTP 409)",
+    "method": "POST",
+    "path": "/users/register",
+    "status": 409
+  },
+  {
+    "name": "newman-users-09",
+    "collection": "users",
+    "title": "User Registration",
+    "request": "Register - invalid email",
+    "caption": "Elie Medawar \u2013 User Registration \u2013 Register - invalid email (HTTP 400)",
+    "method": "POST",
+    "path": "/users/register",
+    "status": 400
+  },
+  {
+    "name": "newman-users-10",
+    "collection": "users",
+    "title": "User Registration",
+    "request": "Register - weak password",
+    "caption": "Elie Medawar \u2013 User Registration \u2013 Register - weak password (HTTP 400)",
+    "method": "POST",
+    "path": "/users/register",
+    "status": 400
+  },
+  {
+    "name": "newman-users-11",
+    "collection": "users",
+    "title": "User Registration",
+    "request": "Register - missing required fields",
+    "caption": "Elie Medawar \u2013 User Registration \u2013 Register - missing required fields (HTTP 400)",
+    "method": "POST",
+    "path": "/users/register",
+    "status": 400
+  },
+  {
+    "name": "newman-users-12",
+    "collection": "users",
+    "title": "User Registration",
+    "request": "Register - unexpected field",
+    "caption": "Elie Medawar \u2013 User Registration \u2013 Register - unexpected field (HTTP 400)",
+    "method": "POST",
+    "path": "/users/register",
+    "status": 400
+  },
+  {
+    "name": "newman-users-13",
+    "collection": "users",
+    "title": "User Registration",
+    "request": "Register - self-register as admin (forbidden)",
+    "caption": "Elie Medawar \u2013 User Registration \u2013 Register - self-register as admin (forbidden) (HTTP 403)",
+    "method": "POST",
+    "path": "/users/register",
+    "status": 403
+  },
+  {
+    "name": "newman-users-14",
+    "collection": "users",
+    "title": "User Login",
+    "request": "Login - regular user (by email)",
+    "caption": "Elie Medawar \u2013 User Login \u2013 Login - regular user (by email) (HTTP 200)",
+    "method": "POST",
+    "path": "/users/login",
+    "status": 200
+  },
+  {
+    "name": "newman-users-15",
+    "collection": "users",
+    "title": "User Login",
+    "request": "Login - analyst",
+    "caption": "Elie Medawar \u2013 User Login \u2013 Login - analyst (HTTP 200)",
+    "method": "POST",
+    "path": "/users/login",
+    "status": 200
+  },
+  {
+    "name": "newman-users-16",
+    "collection": "users",
+    "title": "User Login",
+    "request": "Login - auditor",
+    "caption": "Elie Medawar \u2013 User Login \u2013 Login - auditor (HTTP 200)",
+    "method": "POST",
+    "path": "/users/login",
+    "status": 200
+  },
+  {
+    "name": "newman-users-17",
+    "collection": "users",
+    "title": "Retrieve All Users",
+    "request": "Get all users - admin",
+    "caption": "Elie Medawar \u2013 Retrieve All Users \u2013 Get all users - admin (HTTP 200)",
+    "method": "GET",
+    "path": "/users",
+    "status": 200
+  },
+  {
+    "name": "newman-users-18",
+    "collection": "users",
+    "title": "Retrieve All Users",
+    "request": "Get all users - auditor",
+    "caption": "Elie Medawar \u2013 Retrieve All Users \u2013 Get all users - auditor (HTTP 200)",
+    "method": "GET",
+    "path": "/users",
+    "status": 200
+  },
+  {
+    "name": "newman-users-19",
+    "collection": "users",
+    "title": "Retrieve All Users",
+    "request": "Get users filtered by role",
+    "caption": "Elie Medawar \u2013 Retrieve All Users \u2013 Get users filtered by role (HTTP 200)",
+    "method": "GET",
+    "path": "/users",
+    "status": 200
+  },
+  {
+    "name": "newman-users-20",
+    "collection": "users",
+    "title": "Retrieve All Users",
+    "request": "Get all users - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve All Users \u2013 Get all users - regular user (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/users",
+    "status": 403
+  },
+  {
+    "name": "newman-users-21",
+    "collection": "users",
+    "title": "Retrieve All Users",
+    "request": "Get all users - analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve All Users \u2013 Get all users - analyst (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/users",
+    "status": 403
+  },
+  {
+    "name": "newman-users-22",
+    "collection": "users",
+    "title": "Retrieve All Users",
+    "request": "Get all users - no token",
+    "caption": "Elie Medawar \u2013 Retrieve All Users \u2013 Get all users - no token (HTTP 401)",
+    "method": "GET",
+    "path": "/users",
+    "status": 401
+  },
+  {
+    "name": "newman-users-23",
+    "collection": "users",
+    "title": "Retrieve User By Username",
+    "request": "Get user by username - existing",
+    "caption": "Elie Medawar \u2013 Retrieve User By Username \u2013 Get user by username - existing (HTTP 200)",
+    "method": "GET",
+    "path": "/users/lara",
+    "status": 200
+  },
+  {
+    "name": "newman-users-24",
+    "collection": "users",
+    "title": "Retrieve User By Username",
+    "request": "Get user by username - non-existing",
+    "caption": "Elie Medawar \u2013 Retrieve User By Username \u2013 Get user by username - non-existing (HTTP 404)",
+    "method": "GET",
+    "path": "/users/ghost",
+    "status": 404
+  },
+  {
+    "name": "newman-users-25",
+    "collection": "users",
+    "title": "Retrieve User By Username",
+    "request": "Get own info - regular user",
+    "caption": "Elie Medawar \u2013 Retrieve User By Username \u2013 Get own info - regular user (HTTP 200)",
+    "method": "GET",
+    "path": "/users/rami",
+    "status": 200
+  },
+  {
+    "name": "newman-users-26",
+    "collection": "users",
+    "title": "Retrieve User By Username",
+    "request": "Get another user - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve User By Username \u2013 Get another user - regular user (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/users/lara",
+    "status": 403
+  },
+  {
+    "name": "newman-users-27",
+    "collection": "users",
+    "title": "Update User Information",
+    "request": "Update own info - regular user",
+    "caption": "Elie Medawar \u2013 Update User Information \u2013 Update own info - regular user (HTTP 200)",
+    "method": "PUT",
+    "path": "/users/2",
+    "status": 200
+  },
+  {
+    "name": "newman-users-28",
+    "collection": "users",
+    "title": "Update User Information",
+    "request": "Update another user - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Update User Information \u2013 Update another user - regular user (forbidden) (HTTP 403)",
+    "method": "PUT",
+    "path": "/users/3",
+    "status": 403
+  },
+  {
+    "name": "newman-users-29",
+    "collection": "users",
+    "title": "Update User Information",
+    "request": "Update own role - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Update User Information \u2013 Update own role - regular user (forbidden) (HTTP 403)",
+    "method": "PUT",
+    "path": "/users/2",
+    "status": 403
+  },
+  {
+    "name": "newman-users-30",
+    "collection": "users",
+    "title": "Update User Information",
+    "request": "Update role - admin",
+    "caption": "Elie Medawar \u2013 Update User Information \u2013 Update role - admin (HTTP 200)",
+    "method": "PUT",
+    "path": "/users/3",
+    "status": 200
+  },
+  {
+    "name": "newman-users-31",
+    "collection": "users",
+    "title": "Update User Information",
+    "request": "Update - invalid role value",
+    "caption": "Elie Medawar \u2013 Update User Information \u2013 Update - invalid role value (HTTP 400)",
+    "method": "PUT",
+    "path": "/users/2",
+    "status": 400
+  },
+  {
+    "name": "newman-users-32",
+    "collection": "users",
+    "title": "Update User Information",
+    "request": "Update - non-existing user",
+    "caption": "Elie Medawar \u2013 Update User Information \u2013 Update - non-existing user (HTTP 404)",
+    "method": "PUT",
+    "path": "/users/9999",
+    "status": 404
+  },
+  {
+    "name": "newman-users-33",
+    "collection": "users",
+    "title": "Delete User",
+    "request": "Delete user - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Delete User \u2013 Delete user - regular user (forbidden) (HTTP 403)",
+    "method": "DELETE",
+    "path": "/users/5",
+    "status": 403
+  },
+  {
+    "name": "newman-users-34",
+    "collection": "users",
+    "title": "Delete User",
+    "request": "Delete user - admin (success)",
+    "caption": "Elie Medawar \u2013 Delete User \u2013 Delete user - admin (success) (HTTP 200)",
+    "method": "DELETE",
+    "path": "/users/5",
+    "status": 200
+  },
+  {
+    "name": "newman-users-35",
+    "collection": "users",
+    "title": "Delete User",
+    "request": "Delete user - already deleted",
+    "caption": "Elie Medawar \u2013 Delete User \u2013 Delete user - already deleted (HTTP 404)",
+    "method": "DELETE",
+    "path": "/users/5",
+    "status": 404
+  },
+  {
+    "name": "newman-logs-06",
+    "collection": "logs",
+    "title": "Create Log Record",
+    "request": "Create log - admin (Information)",
+    "caption": "Elie Medawar \u2013 Create Log Record \u2013 Create log - admin (Information) (HTTP 201)",
+    "method": "POST",
+    "path": "/logs",
+    "status": 201
+  },
+  {
+    "name": "newman-logs-07",
+    "collection": "logs",
+    "title": "Create Log Record",
+    "request": "Create log - admin (Warning, other user)",
+    "caption": "Elie Medawar \u2013 Create Log Record \u2013 Create log - admin (Warning, other user) (HTTP 201)",
+    "method": "POST",
+    "path": "/logs",
+    "status": 201
+  },
+  {
+    "name": "newman-logs-08",
+    "collection": "logs",
+    "title": "Create Log Record",
+    "request": "Create log - admin (Critical)",
+    "caption": "Elie Medawar \u2013 Create Log Record \u2013 Create log - admin (Critical) (HTTP 201)",
+    "method": "POST",
+    "path": "/logs",
+    "status": 201
+  },
+  {
+    "name": "newman-logs-09",
+    "collection": "logs",
+    "title": "Create Log Record",
+    "request": "Create log - missing user_id",
+    "caption": "Elie Medawar \u2013 Create Log Record \u2013 Create log - missing user_id (HTTP 400)",
+    "method": "POST",
+    "path": "/logs",
+    "status": 400
+  },
+  {
+    "name": "newman-logs-10",
+    "collection": "logs",
+    "title": "Create Log Record",
+    "request": "Create log - invalid severity",
+    "caption": "Elie Medawar \u2013 Create Log Record \u2013 Create log - invalid severity (HTTP 400)",
+    "method": "POST",
+    "path": "/logs",
+    "status": 400
+  },
+  {
+    "name": "newman-logs-11",
+    "collection": "logs",
+    "title": "Create Log Record",
+    "request": "Create log - invalid related service",
+    "caption": "Elie Medawar \u2013 Create Log Record \u2013 Create log - invalid related service (HTTP 400)",
+    "method": "POST",
+    "path": "/logs",
+    "status": 400
+  },
+  {
+    "name": "newman-logs-12",
+    "collection": "logs",
+    "title": "Create Log Record",
+    "request": "Create log - non-existing user",
+    "caption": "Elie Medawar \u2013 Create Log Record \u2013 Create log - non-existing user (HTTP 400)",
+    "method": "POST",
+    "path": "/logs",
+    "status": 400
+  },
+  {
+    "name": "newman-logs-13",
+    "collection": "logs",
+    "title": "Create Log Record",
+    "request": "Create log - analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Create Log Record \u2013 Create log - analyst (forbidden) (HTTP 403)",
+    "method": "POST",
+    "path": "/logs",
+    "status": 403
+  },
+  {
+    "name": "newman-logs-14",
+    "collection": "logs",
+    "title": "Retrieve All Logs",
+    "request": "Get all logs - admin",
+    "caption": "Elie Medawar \u2013 Retrieve All Logs \u2013 Get all logs - admin (HTTP 200)",
+    "method": "GET",
+    "path": "/logs",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-15",
+    "collection": "logs",
+    "title": "Retrieve All Logs",
+    "request": "Get all logs - auditor",
+    "caption": "Elie Medawar \u2013 Retrieve All Logs \u2013 Get all logs - auditor (HTTP 200)",
+    "method": "GET",
+    "path": "/logs",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-16",
+    "collection": "logs",
+    "title": "Retrieve All Logs",
+    "request": "Get all logs - analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve All Logs \u2013 Get all logs - analyst (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/logs",
+    "status": 403
+  },
+  {
+    "name": "newman-logs-17",
+    "collection": "logs",
+    "title": "Retrieve All Logs",
+    "request": "Get all logs - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve All Logs \u2013 Get all logs - regular user (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/logs",
+    "status": 403
+  },
+  {
+    "name": "newman-logs-18",
+    "collection": "logs",
+    "title": "Retrieve All Logs",
+    "request": "Get all logs - no token",
+    "caption": "Elie Medawar \u2013 Retrieve All Logs \u2013 Get all logs - no token (HTTP 401)",
+    "method": "GET",
+    "path": "/logs",
+    "status": 401
+  },
+  {
+    "name": "newman-logs-19",
+    "collection": "logs",
+    "title": "Retrieve Specific Log",
+    "request": "Get log by id - admin",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Log \u2013 Get log by id - admin (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/29",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-20",
+    "collection": "logs",
+    "title": "Retrieve Specific Log",
+    "request": "Get log by id - analyst",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Log \u2013 Get log by id - analyst (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/29",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-21",
+    "collection": "logs",
+    "title": "Retrieve Specific Log",
+    "request": "Get log by id - invalid id",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Log \u2013 Get log by id - invalid id (HTTP 404)",
+    "method": "GET",
+    "path": "/logs/99999",
+    "status": 404
+  },
+  {
+    "name": "newman-logs-22",
+    "collection": "logs",
+    "title": "Retrieve Specific Log",
+    "request": "Get log by id - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Log \u2013 Get log by id - regular user (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/logs/29",
+    "status": 403
+  },
+  {
+    "name": "newman-logs-23",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search by user id",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search by user id (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-24",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search by username",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search by username (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-25",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search by action (failed logins)",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search by action (failed logins) (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-26",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search by severity",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search by severity (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-27",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search by related service",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search by related service (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-28",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search by date (today)",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search by date (today) (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-29",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search by date range",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search by date range (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-30",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search combined criteria",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search combined criteria (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-31",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search - analyst allowed",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search - analyst allowed (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-32",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search - invalid date format",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search - invalid date format (HTTP 400)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 400
+  },
+  {
+    "name": "newman-logs-33",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search - no criteria",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search - no criteria (HTTP 400)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 400
+  },
+  {
+    "name": "newman-logs-34",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search - regular user (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 403
+  },
+  {
+    "name": "newman-logs-35",
+    "collection": "logs",
+    "title": "Retrieve Logs By User",
+    "request": "Logs by user - user with logs",
+    "caption": "Elie Medawar \u2013 Retrieve Logs By User \u2013 Logs by user - user with logs (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/user/2",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-36",
+    "collection": "logs",
+    "title": "Retrieve Logs By User",
+    "request": "Logs by user - user with no logs",
+    "caption": "Elie Medawar \u2013 Retrieve Logs By User \u2013 Logs by user - user with no logs (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/user/9999",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-37",
+    "collection": "logs",
+    "title": "Retrieve Logs By User",
+    "request": "Logs by user - analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve Logs By User \u2013 Logs by user - analyst (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/logs/user/2",
+    "status": 403
+  },
+  {
+    "name": "newman-logs-38",
+    "collection": "logs",
+    "title": "Delete Logs",
+    "request": "Delete log - analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Delete Logs \u2013 Delete log - analyst (forbidden) (HTTP 403)",
+    "method": "DELETE",
+    "path": "/logs/29",
+    "status": 403
+  },
+  {
+    "name": "newman-logs-39",
+    "collection": "logs",
+    "title": "Delete Logs",
+    "request": "Delete log - auditor (forbidden)",
+    "caption": "Elie Medawar \u2013 Delete Logs \u2013 Delete log - auditor (forbidden) (HTTP 403)",
+    "method": "DELETE",
+    "path": "/logs/29",
+    "status": 403
+  },
+  {
+    "name": "newman-logs-40",
+    "collection": "logs",
+    "title": "Delete Logs",
+    "request": "Delete log - admin (success)",
+    "caption": "Elie Medawar \u2013 Delete Logs \u2013 Delete log - admin (success) (HTTP 200)",
+    "method": "DELETE",
+    "path": "/logs/29",
+    "status": 200
+  },
+  {
+    "name": "newman-logs-41",
+    "collection": "logs",
+    "title": "Delete Logs",
+    "request": "Delete log - already deleted",
+    "caption": "Elie Medawar \u2013 Delete Logs \u2013 Delete log - already deleted (HTTP 404)",
+    "method": "DELETE",
+    "path": "/logs/29",
+    "status": 404
+  },
+  {
+    "name": "newman-logs-42",
+    "collection": "logs",
+    "title": "Update Log (immutability check)",
+    "request": "Update log - not allowed (immutable)",
+    "caption": "Elie Medawar \u2013 Update Log (immutability check) \u2013 Update log - not allowed (immutable) (HTTP 405)",
+    "method": "PUT",
+    "path": "/logs/1",
+    "status": 405
+  },
+  {
+    "name": "newman-logs-43",
+    "collection": "logs",
+    "title": "Search Logs",
+    "request": "Search the LOG_DELETED record",
+    "caption": "Elie Medawar \u2013 Search Logs \u2013 Search the LOG_DELETED record (HTTP 200)",
+    "method": "GET",
+    "path": "/logs/search",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-05",
+    "collection": "incidents",
+    "title": "Create Incident",
+    "request": "Create - regular user (Medium)",
+    "caption": "Elie Medawar \u2013 Create Incident \u2013 Create - regular user (Medium) (HTTP 201)",
+    "method": "POST",
+    "path": "/incidents",
+    "status": 201
+  },
+  {
+    "name": "newman-incidents-06",
+    "collection": "incidents",
+    "title": "Create Incident",
+    "request": "Create - admin (Critical)",
+    "caption": "Elie Medawar \u2013 Create Incident \u2013 Create - admin (Critical) (HTTP 201)",
+    "method": "POST",
+    "path": "/incidents",
+    "status": 201
+  },
+  {
+    "name": "newman-incidents-07",
+    "collection": "incidents",
+    "title": "Create Incident",
+    "request": "Create - admin (High)",
+    "caption": "Elie Medawar \u2013 Create Incident \u2013 Create - admin (High) (HTTP 201)",
+    "method": "POST",
+    "path": "/incidents",
+    "status": 201
+  },
+  {
+    "name": "newman-incidents-08",
+    "collection": "incidents",
+    "title": "Create Incident",
+    "request": "Create - regular user (Low)",
+    "caption": "Elie Medawar \u2013 Create Incident \u2013 Create - regular user (Low) (HTTP 201)",
+    "method": "POST",
+    "path": "/incidents",
+    "status": 201
+  },
+  {
+    "name": "newman-incidents-09",
+    "collection": "incidents",
+    "title": "Create Incident",
+    "request": "Create - invalid severity",
+    "caption": "Elie Medawar \u2013 Create Incident \u2013 Create - invalid severity (HTTP 400)",
+    "method": "POST",
+    "path": "/incidents",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-10",
+    "collection": "incidents",
+    "title": "Create Incident",
+    "request": "Create - invalid category",
+    "caption": "Elie Medawar \u2013 Create Incident \u2013 Create - invalid category (HTTP 400)",
+    "method": "POST",
+    "path": "/incidents",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-11",
+    "collection": "incidents",
+    "title": "Create Incident",
+    "request": "Create - missing fields",
+    "caption": "Elie Medawar \u2013 Create Incident \u2013 Create - missing fields (HTTP 400)",
+    "method": "POST",
+    "path": "/incidents",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-12",
+    "collection": "incidents",
+    "title": "Create Incident",
+    "request": "Create - non-existing asset",
+    "caption": "Elie Medawar \u2013 Create Incident \u2013 Create - non-existing asset (HTTP 400)",
+    "method": "POST",
+    "path": "/incidents",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-13",
+    "collection": "incidents",
+    "title": "Create Incident",
+    "request": "Create - analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Create Incident \u2013 Create - analyst (forbidden) (HTTP 403)",
+    "method": "POST",
+    "path": "/incidents",
+    "status": 403
+  },
+  {
+    "name": "newman-incidents-14",
+    "collection": "incidents",
+    "title": "Create Incident",
+    "request": "Create - no token",
+    "caption": "Elie Medawar \u2013 Create Incident \u2013 Create - no token (HTTP 401)",
+    "method": "POST",
+    "path": "/incidents",
+    "status": 401
+  },
+  {
+    "name": "newman-incidents-15",
+    "collection": "incidents",
+    "title": "Retrieve All Incidents",
+    "request": "Get all - admin",
+    "caption": "Elie Medawar \u2013 Retrieve All Incidents \u2013 Get all - admin (HTTP 200)",
+    "method": "GET",
+    "path": "/incidents",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-16",
+    "collection": "incidents",
+    "title": "Retrieve All Incidents",
+    "request": "Get all - auditor",
+    "caption": "Elie Medawar \u2013 Retrieve All Incidents \u2013 Get all - auditor (HTTP 200)",
+    "method": "GET",
+    "path": "/incidents",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-17",
+    "collection": "incidents",
+    "title": "Retrieve All Incidents",
+    "request": "Get all - filter by severity",
+    "caption": "Elie Medawar \u2013 Retrieve All Incidents \u2013 Get all - filter by severity (HTTP 200)",
+    "method": "GET",
+    "path": "/incidents",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-18",
+    "collection": "incidents",
+    "title": "Retrieve All Incidents",
+    "request": "Get all - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve All Incidents \u2013 Get all - regular user (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/incidents",
+    "status": 403
+  },
+  {
+    "name": "newman-incidents-19",
+    "collection": "incidents",
+    "title": "Retrieve Specific Incident",
+    "request": "Get - reporter views own incident",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Incident \u2013 Get - reporter views own incident (HTTP 200)",
+    "method": "GET",
+    "path": "/incidents/1",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-20",
+    "collection": "incidents",
+    "title": "Retrieve Specific Incident",
+    "request": "Get - admin",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Incident \u2013 Get - admin (HTTP 200)",
+    "method": "GET",
+    "path": "/incidents/2",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-21",
+    "collection": "incidents",
+    "title": "Retrieve Specific Incident",
+    "request": "Get - invalid id",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Incident \u2013 Get - invalid id (HTTP 404)",
+    "method": "GET",
+    "path": "/incidents/99999",
+    "status": 404
+  },
+  {
+    "name": "newman-incidents-22",
+    "collection": "incidents",
+    "title": "Retrieve Specific Incident",
+    "request": "Get - analyst not assigned (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Incident \u2013 Get - analyst not assigned (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/incidents/1",
+    "status": 403
+  },
+  {
+    "name": "newman-incidents-23",
+    "collection": "incidents",
+    "title": "Update Incident Status",
+    "request": "Status before assignment (rejected)",
+    "caption": "Elie Medawar \u2013 Update Incident Status \u2013 Status before assignment (rejected) (HTTP 400)",
+    "method": "PUT",
+    "path": "/incidents/1/status",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-24",
+    "collection": "incidents",
+    "title": "Assign Incident to Analyst",
+    "request": "Assign - admin to analyst",
+    "caption": "Elie Medawar \u2013 Assign Incident to Analyst \u2013 Assign - admin to analyst (HTTP 200)",
+    "method": "PUT",
+    "path": "/incidents/1/assign",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-25",
+    "collection": "incidents",
+    "title": "Assign Incident to Analyst",
+    "request": "Assign incident 2 to analyst",
+    "caption": "Elie Medawar \u2013 Assign Incident to Analyst \u2013 Assign incident 2 to analyst (HTTP 200)",
+    "method": "PUT",
+    "path": "/incidents/2/assign",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-26",
+    "collection": "incidents",
+    "title": "Assign Incident to Analyst",
+    "request": "Assign - user is not an analyst",
+    "caption": "Elie Medawar \u2013 Assign Incident to Analyst \u2013 Assign - user is not an analyst (HTTP 400)",
+    "method": "PUT",
+    "path": "/incidents/2/assign",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-27",
+    "collection": "incidents",
+    "title": "Assign Incident to Analyst",
+    "request": "Assign - by analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Assign Incident to Analyst \u2013 Assign - by analyst (forbidden) (HTTP 403)",
+    "method": "PUT",
+    "path": "/incidents/2/assign",
+    "status": 403
+  },
+  {
+    "name": "newman-incidents-28",
+    "collection": "incidents",
+    "title": "Assign Incident to Analyst",
+    "request": "Assign - non-existing incident",
+    "caption": "Elie Medawar \u2013 Assign Incident to Analyst \u2013 Assign - non-existing incident (HTTP 404)",
+    "method": "PUT",
+    "path": "/incidents/99999/assign",
+    "status": 404
+  },
+  {
+    "name": "newman-incidents-29",
+    "collection": "incidents",
+    "title": "Update Incident Status",
+    "request": "Open -> Closed (rejected)",
+    "caption": "Elie Medawar \u2013 Update Incident Status \u2013 Open -> Closed (rejected) (HTTP 400)",
+    "method": "PUT",
+    "path": "/incidents/1/status",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-30",
+    "collection": "incidents",
+    "title": "Update Incident Status",
+    "request": "Open -> Under Investigation",
+    "caption": "Elie Medawar \u2013 Update Incident Status \u2013 Open -> Under Investigation (HTTP 200)",
+    "method": "PUT",
+    "path": "/incidents/1/status",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-31",
+    "collection": "incidents",
+    "title": "Update Incident Status",
+    "request": "Under Investigation -> Mitigated",
+    "caption": "Elie Medawar \u2013 Update Incident Status \u2013 Under Investigation -> Mitigated (HTTP 200)",
+    "method": "PUT",
+    "path": "/incidents/1/status",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-32",
+    "collection": "incidents",
+    "title": "Update Incident Status",
+    "request": "Mitigated -> Resolved",
+    "caption": "Elie Medawar \u2013 Update Incident Status \u2013 Mitigated -> Resolved (HTTP 200)",
+    "method": "PUT",
+    "path": "/incidents/1/status",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-33",
+    "collection": "incidents",
+    "title": "Update Incident Status",
+    "request": "Resolved -> Mitigated (rejected)",
+    "caption": "Elie Medawar \u2013 Update Incident Status \u2013 Resolved -> Mitigated (rejected) (HTTP 400)",
+    "method": "PUT",
+    "path": "/incidents/1/status",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-34",
+    "collection": "incidents",
+    "title": "Update Incident Status",
+    "request": "Resolved -> Closed",
+    "caption": "Elie Medawar \u2013 Update Incident Status \u2013 Resolved -> Closed (HTTP 200)",
+    "method": "PUT",
+    "path": "/incidents/1/status",
+    "status": 200
+  },
+  {
+    "name": "newman-incidents-35",
+    "collection": "incidents",
+    "title": "Update Incident Status",
+    "request": "Closed -> Open (rejected)",
+    "caption": "Elie Medawar \u2013 Update Incident Status \u2013 Closed -> Open (rejected) (HTTP 400)",
+    "method": "PUT",
+    "path": "/incidents/1/status",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-36",
+    "collection": "incidents",
+    "title": "Update Incident Status",
+    "request": "Status change - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Update Incident Status \u2013 Status change - regular user (forbidden) (HTTP 403)",
+    "method": "PUT",
+    "path": "/incidents/2/status",
+    "status": 403
+  },
+  {
+    "name": "newman-incidents-37",
+    "collection": "incidents",
+    "title": "Add Investigation Notes",
+    "request": "Add note - assigned analyst",
+    "caption": "Elie Medawar \u2013 Add Investigation Notes \u2013 Add note - assigned analyst (HTTP 201)",
+    "method": "POST",
+    "path": "/incidents/2/notes",
+    "status": 201
+  },
+  {
+    "name": "newman-incidents-38",
+    "collection": "incidents",
+    "title": "Add Investigation Notes",
+    "request": "Add note - evidence",
+    "caption": "Elie Medawar \u2013 Add Investigation Notes \u2013 Add note - evidence (HTTP 201)",
+    "method": "POST",
+    "path": "/incidents/2/notes",
+    "status": 201
+  },
+  {
+    "name": "newman-incidents-39",
+    "collection": "incidents",
+    "title": "Add Investigation Notes",
+    "request": "Add note - admin",
+    "caption": "Elie Medawar \u2013 Add Investigation Notes \u2013 Add note - admin (HTTP 201)",
+    "method": "POST",
+    "path": "/incidents/2/notes",
+    "status": 201
+  },
+  {
+    "name": "newman-incidents-40",
+    "collection": "incidents",
+    "title": "Add Investigation Notes",
+    "request": "Add note - empty content",
+    "caption": "Elie Medawar \u2013 Add Investigation Notes \u2013 Add note - empty content (HTTP 400)",
+    "method": "POST",
+    "path": "/incidents/2/notes",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-41",
+    "collection": "incidents",
+    "title": "Add Investigation Notes",
+    "request": "Add note - closed incident",
+    "caption": "Elie Medawar \u2013 Add Investigation Notes \u2013 Add note - closed incident (HTTP 400)",
+    "method": "POST",
+    "path": "/incidents/1/notes",
+    "status": 400
+  },
+  {
+    "name": "newman-incidents-42",
+    "collection": "incidents",
+    "title": "Add Investigation Notes",
+    "request": "Add note - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Add Investigation Notes \u2013 Add note - regular user (forbidden) (HTTP 403)",
+    "method": "POST",
+    "path": "/incidents/2/notes",
+    "status": 403
+  },
+  {
+    "name": "newman-incidents-43",
+    "collection": "incidents",
+    "title": "Retrieve Specific Incident",
+    "request": "Get incident with notes",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Incident \u2013 Get incident with notes (HTTP 200)",
+    "method": "GET",
+    "path": "/incidents/2",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-05",
+    "collection": "notifications",
+    "title": "Create Notification",
+    "request": "Create - system notification",
+    "caption": "Elie Medawar \u2013 Create Notification \u2013 Create - system notification (HTTP 201)",
+    "method": "POST",
+    "path": "/notifications",
+    "status": 201
+  },
+  {
+    "name": "newman-notifications-06",
+    "collection": "notifications",
+    "title": "Create Notification",
+    "request": "Create - threat alert",
+    "caption": "Elie Medawar \u2013 Create Notification \u2013 Create - threat alert (HTTP 201)",
+    "method": "POST",
+    "path": "/notifications",
+    "status": 201
+  },
+  {
+    "name": "newman-notifications-07",
+    "collection": "notifications",
+    "title": "Create Notification",
+    "request": "Create - vulnerability alert to analyst",
+    "caption": "Elie Medawar \u2013 Create Notification \u2013 Create - vulnerability alert to analyst (HTTP 201)",
+    "method": "POST",
+    "path": "/notifications",
+    "status": 201
+  },
+  {
+    "name": "newman-notifications-08",
+    "collection": "notifications",
+    "title": "Create Notification",
+    "request": "Create - invalid type",
+    "caption": "Elie Medawar \u2013 Create Notification \u2013 Create - invalid type (HTTP 400)",
+    "method": "POST",
+    "path": "/notifications",
+    "status": 400
+  },
+  {
+    "name": "newman-notifications-09",
+    "collection": "notifications",
+    "title": "Create Notification",
+    "request": "Create - non-existing user",
+    "caption": "Elie Medawar \u2013 Create Notification \u2013 Create - non-existing user (HTTP 400)",
+    "method": "POST",
+    "path": "/notifications",
+    "status": 400
+  },
+  {
+    "name": "newman-notifications-10",
+    "collection": "notifications",
+    "title": "Create Notification",
+    "request": "Create - missing fields",
+    "caption": "Elie Medawar \u2013 Create Notification \u2013 Create - missing fields (HTTP 400)",
+    "method": "POST",
+    "path": "/notifications",
+    "status": 400
+  },
+  {
+    "name": "newman-notifications-11",
+    "collection": "notifications",
+    "title": "Create Notification",
+    "request": "Create - analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Create Notification \u2013 Create - analyst (forbidden) (HTTP 403)",
+    "method": "POST",
+    "path": "/notifications",
+    "status": 403
+  },
+  {
+    "name": "newman-notifications-12",
+    "collection": "notifications",
+    "title": "Retrieve User Notifications",
+    "request": "User's own notifications",
+    "caption": "Elie Medawar \u2013 Retrieve User Notifications \u2013 User's own notifications (HTTP 200)",
+    "method": "GET",
+    "path": "/notifications/user/2",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-13",
+    "collection": "notifications",
+    "title": "Retrieve User Notifications",
+    "request": "User's unread notifications",
+    "caption": "Elie Medawar \u2013 Retrieve User Notifications \u2013 User's unread notifications (HTTP 200)",
+    "method": "GET",
+    "path": "/notifications/user/2",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-14",
+    "collection": "notifications",
+    "title": "Retrieve User Notifications",
+    "request": "Auditor views a user's notifications",
+    "caption": "Elie Medawar \u2013 Retrieve User Notifications \u2013 Auditor views a user's notifications (HTTP 200)",
+    "method": "GET",
+    "path": "/notifications/user/2",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-15",
+    "collection": "notifications",
+    "title": "Retrieve User Notifications",
+    "request": "Empty result (user with no notifications)",
+    "caption": "Elie Medawar \u2013 Retrieve User Notifications \u2013 Empty result (user with no notifications) (HTTP 200)",
+    "method": "GET",
+    "path": "/notifications/user/4",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-16",
+    "collection": "notifications",
+    "title": "Retrieve User Notifications",
+    "request": "Other user's notifications (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve User Notifications \u2013 Other user's notifications (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/notifications/user/3",
+    "status": 403
+  },
+  {
+    "name": "newman-notifications-17",
+    "collection": "notifications",
+    "title": "Retrieve Specific Notification",
+    "request": "Get - owner",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Notification \u2013 Get - owner (HTTP 200)",
+    "method": "GET",
+    "path": "/notifications/7",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-18",
+    "collection": "notifications",
+    "title": "Retrieve Specific Notification",
+    "request": "Get - invalid id",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Notification \u2013 Get - invalid id (HTTP 404)",
+    "method": "GET",
+    "path": "/notifications/99999",
+    "status": 404
+  },
+  {
+    "name": "newman-notifications-19",
+    "collection": "notifications",
+    "title": "Retrieve Specific Notification",
+    "request": "Get - another user (forbidden)",
+    "caption": "Elie Medawar \u2013 Retrieve Specific Notification \u2013 Get - another user (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/notifications/7",
+    "status": 403
+  },
+  {
+    "name": "newman-notifications-20",
+    "collection": "notifications",
+    "title": "Mark Notification as Read",
+    "request": "Mark read - another user (forbidden)",
+    "caption": "Elie Medawar \u2013 Mark Notification as Read \u2013 Mark read - another user (forbidden) (HTTP 403)",
+    "method": "PUT",
+    "path": "/notifications/7/read",
+    "status": 403
+  },
+  {
+    "name": "newman-notifications-21",
+    "collection": "notifications",
+    "title": "Mark Notification as Read",
+    "request": "Mark read - owner",
+    "caption": "Elie Medawar \u2013 Mark Notification as Read \u2013 Mark read - owner (HTTP 200)",
+    "method": "PUT",
+    "path": "/notifications/7/read",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-22",
+    "collection": "notifications",
+    "title": "Mark Notification as Read",
+    "request": "Mark read - again",
+    "caption": "Elie Medawar \u2013 Mark Notification as Read \u2013 Mark read - again (HTTP 200)",
+    "method": "PUT",
+    "path": "/notifications/7/read",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-23",
+    "collection": "notifications",
+    "title": "Mark Notification as Read",
+    "request": "Mark read - auditor (forbidden)",
+    "caption": "Elie Medawar \u2013 Mark Notification as Read \u2013 Mark read - auditor (forbidden) (HTTP 403)",
+    "method": "PUT",
+    "path": "/notifications/7/read",
+    "status": 403
+  },
+  {
+    "name": "newman-notifications-24",
+    "collection": "notifications",
+    "title": "Search Notifications",
+    "request": "Search by type",
+    "caption": "Elie Medawar \u2013 Search Notifications \u2013 Search by type (HTTP 200)",
+    "method": "GET",
+    "path": "/notifications/search",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-25",
+    "collection": "notifications",
+    "title": "Search Notifications",
+    "request": "Search by user and status",
+    "caption": "Elie Medawar \u2013 Search Notifications \u2013 Search by user and status (HTTP 200)",
+    "method": "GET",
+    "path": "/notifications/search",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-26",
+    "collection": "notifications",
+    "title": "Search Notifications",
+    "request": "Search by severity - auditor",
+    "caption": "Elie Medawar \u2013 Search Notifications \u2013 Search by severity - auditor (HTTP 200)",
+    "method": "GET",
+    "path": "/notifications/search",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-27",
+    "collection": "notifications",
+    "title": "Search Notifications",
+    "request": "Search - analyst (own only)",
+    "caption": "Elie Medawar \u2013 Search Notifications \u2013 Search - analyst (own only) (HTTP 200)",
+    "method": "GET",
+    "path": "/notifications/search",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-28",
+    "collection": "notifications",
+    "title": "Search Notifications",
+    "request": "Search - no criteria",
+    "caption": "Elie Medawar \u2013 Search Notifications \u2013 Search - no criteria (HTTP 400)",
+    "method": "GET",
+    "path": "/notifications/search",
+    "status": 400
+  },
+  {
+    "name": "newman-notifications-29",
+    "collection": "notifications",
+    "title": "Search Notifications",
+    "request": "Search - invalid type",
+    "caption": "Elie Medawar \u2013 Search Notifications \u2013 Search - invalid type (HTTP 400)",
+    "method": "GET",
+    "path": "/notifications/search",
+    "status": 400
+  },
+  {
+    "name": "newman-notifications-30",
+    "collection": "notifications",
+    "title": "Search Notifications",
+    "request": "Search - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Search Notifications \u2013 Search - regular user (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/notifications/search",
+    "status": 403
+  },
+  {
+    "name": "newman-notifications-31",
+    "collection": "notifications",
+    "title": "Delete Notification",
+    "request": "Delete - analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Delete Notification \u2013 Delete - analyst (forbidden) (HTTP 403)",
+    "method": "DELETE",
+    "path": "/notifications/7",
+    "status": 403
+  },
+  {
+    "name": "newman-notifications-32",
+    "collection": "notifications",
+    "title": "Delete Notification",
+    "request": "Delete - admin",
+    "caption": "Elie Medawar \u2013 Delete Notification \u2013 Delete - admin (HTTP 200)",
+    "method": "DELETE",
+    "path": "/notifications/7",
+    "status": 200
+  },
+  {
+    "name": "newman-notifications-33",
+    "collection": "notifications",
+    "title": "Delete Notification",
+    "request": "Delete - already deleted",
+    "caption": "Elie Medawar \u2013 Delete Notification \u2013 Delete - already deleted (HTTP 404)",
+    "method": "DELETE",
+    "path": "/notifications/7",
+    "status": 404
+  },
+  {
+    "name": "newman-reports_a-05",
+    "collection": "reports_a",
+    "title": "Generate Security Summary Report",
+    "request": "Summary - admin",
+    "caption": "Elie Medawar \u2013 Generate Security Summary Report \u2013 Summary - admin (HTTP 200)",
+    "method": "GET",
+    "path": "/reports/summary",
+    "status": 200
+  },
+  {
+    "name": "newman-reports_a-06",
+    "collection": "reports_a",
+    "title": "Generate Security Summary Report",
+    "request": "Summary - auditor",
+    "caption": "Elie Medawar \u2013 Generate Security Summary Report \u2013 Summary - auditor (HTTP 200)",
+    "method": "GET",
+    "path": "/reports/summary",
+    "status": 200
+  },
+  {
+    "name": "newman-reports_a-07",
+    "collection": "reports_a",
+    "title": "Generate Security Summary Report",
+    "request": "Summary - analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Generate Security Summary Report \u2013 Summary - analyst (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/reports/summary",
+    "status": 403
+  },
+  {
+    "name": "newman-reports_a-08",
+    "collection": "reports_a",
+    "title": "Generate Security Summary Report",
+    "request": "Summary - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Generate Security Summary Report \u2013 Summary - regular user (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/reports/summary",
+    "status": 403
+  },
+  {
+    "name": "newman-reports_a-09",
+    "collection": "reports_a",
+    "title": "Generate Security Summary Report",
+    "request": "Summary - no token",
+    "caption": "Elie Medawar \u2013 Generate Security Summary Report \u2013 Summary - no token (HTTP 401)",
+    "method": "GET",
+    "path": "/reports/summary",
+    "status": 401
+  },
+  {
+    "name": "newman-reports_a-10",
+    "collection": "reports_a",
+    "title": "Generate Incident Report",
+    "request": "Incident report - admin",
+    "caption": "Elie Medawar \u2013 Generate Incident Report \u2013 Incident report - admin (HTTP 200)",
+    "method": "GET",
+    "path": "/reports/incidents",
+    "status": 200
+  },
+  {
+    "name": "newman-reports_a-11",
+    "collection": "reports_a",
+    "title": "Generate Incident Report",
+    "request": "Incident report - auditor",
+    "caption": "Elie Medawar \u2013 Generate Incident Report \u2013 Incident report - auditor (HTTP 200)",
+    "method": "GET",
+    "path": "/reports/incidents",
+    "status": 200
+  },
+  {
+    "name": "newman-reports_a-12",
+    "collection": "reports_a",
+    "title": "Generate Incident Report",
+    "request": "Incident report - analyst (forbidden)",
+    "caption": "Elie Medawar \u2013 Generate Incident Report \u2013 Incident report - analyst (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/reports/incidents",
+    "status": 403
+  },
+  {
+    "name": "newman-reports_a-13",
+    "collection": "reports_a",
+    "title": "Generate Activity Report",
+    "request": "Activity report - admin",
+    "caption": "Elie Medawar \u2013 Generate Activity Report \u2013 Activity report - admin (HTTP 200)",
+    "method": "GET",
+    "path": "/reports/activity",
+    "status": 200
+  },
+  {
+    "name": "newman-reports_a-14",
+    "collection": "reports_a",
+    "title": "Generate Activity Report",
+    "request": "Activity report - auditor",
+    "caption": "Elie Medawar \u2013 Generate Activity Report \u2013 Activity report - auditor (HTTP 200)",
+    "method": "GET",
+    "path": "/reports/activity",
+    "status": 200
+  },
+  {
+    "name": "newman-reports_a-15",
+    "collection": "reports_a",
+    "title": "Generate Activity Report",
+    "request": "Activity report - regular user (forbidden)",
+    "caption": "Elie Medawar \u2013 Generate Activity Report \u2013 Activity report - regular user (forbidden) (HTTP 403)",
+    "method": "GET",
+    "path": "/reports/activity",
+    "status": 403
+  }
+]

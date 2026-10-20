@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}</style>
+<article>
+<h1>Elie Medawar – Create Log Record – Create log - non-existing user (HTTP 400)</h1>
+<small>Genuine Newman execution report • 2026-10-20T20:01:05.401Z • source: newman-logs.json</small>
+<p>POST http://127.0.0.1:5005/logs</p>
+<h2>Actual request body (credentials redacted)</h2><pre>{
+  &quot;user_id&quot;: 9999,
+  &quot;action&quot;: &quot;TEST_EVENT&quot;,
+  &quot;description&quot;: &quot;Ghost&quot;,
+  &quot;severity&quot;: &quot;Error&quot;,
+  &quot;related_service&quot;: &quot;users&quot;
+}</pre>
+<h2>Actual response — HTTP 400</h2><pre>{
+  &quot;status&quot;: &quot;error&quot;,
+  &quot;message&quot;: &quot;User with id 9999 does not exist&quot;
+}</pre>
+<p>This screenshot displays stored results from an actual API execution. It is not a simulated API response or a Postman GUI screenshot.</p></article>

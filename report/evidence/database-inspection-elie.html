@@ -1,0 +1,320 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}</style>
+<h1>Elie Medawar – Database records – users, incidents, investigation_notes, logs, notifications (actual SQLite after the Newman run)</h1>
+<h2>users (4 rows, first 4 shown)</h2><pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;full_name&quot;: &quot;Elie Medawar&quot;,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;email&quot;: &quot;admin@corp.com&quot;,
+    &quot;department&quot;: &quot;Security&quot;,
+    &quot;role&quot;: &quot;admin&quot;,
+    &quot;account_status&quot;: &quot;Active&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:00:51.395457&quot;,
+    &quot;last_login&quot;: &quot;2026-10-20 20:01:17.245381&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;full_name&quot;: &quot;Rami Haddad&quot;,
+    &quot;username&quot;: &quot;rami&quot;,
+    &quot;email&quot;: &quot;rami@corp.com&quot;,
+    &quot;department&quot;: &quot;Accounting&quot;,
+    &quot;role&quot;: &quot;user&quot;,
+    &quot;account_status&quot;: &quot;Active&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:00:55.552172&quot;,
+    &quot;last_login&quot;: &quot;2026-10-20 20:01:17.543789&quot;
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;full_name&quot;: &quot;Lara Khoury&quot;,
+    &quot;username&quot;: &quot;lara&quot;,
+    &quot;email&quot;: &quot;lara@corp.com&quot;,
+    &quot;department&quot;: &quot;Security Operations Center&quot;,
+    &quot;role&quot;: &quot;analyst&quot;,
+    &quot;account_status&quot;: &quot;Active&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:00:55.838769&quot;,
+    &quot;last_login&quot;: &quot;2026-10-20 20:01:17.820747&quot;
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;full_name&quot;: &quot;Nadia Saab&quot;,
+    &quot;username&quot;: &quot;nadia&quot;,
+    &quot;email&quot;: &quot;nadia@corp.com&quot;,
+    &quot;department&quot;: &quot;Compliance&quot;,
+    &quot;role&quot;: &quot;auditor&quot;,
+    &quot;account_status&quot;: &quot;Active&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:00:56.104349&quot;,
+    &quot;last_login&quot;: &quot;2026-10-20 20:01:18.108727&quot;
+  }
+]</pre>
+<h2>incidents (4 rows, first 4 shown)</h2><pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Phishing email received&quot;,
+    &quot;category&quot;: &quot;Phishing&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;reporter_id&quot;: 2,
+    &quot;asset_id&quot;: 1,
+    &quot;assigned_analyst_id&quot;: 3,
+    &quot;status&quot;: &quot;Closed&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:07.522252&quot;,
+    &quot;resolved_at&quot;: &quot;2026-10-20 20:01:10.281049&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;title&quot;: &quot;Ransomware on web server&quot;,
+    &quot;category&quot;: &quot;Malware&quot;,
+    &quot;severity&quot;: &quot;Critical&quot;,
+    &quot;reporter_id&quot;: 1,
+    &quot;asset_id&quot;: 1,
+    &quot;assigned_analyst_id&quot;: 3,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:07.648600&quot;,
+    &quot;resolved_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;title&quot;: &quot;Brute force on HR database&quot;,
+    &quot;category&quot;: &quot;Unauthorized Access&quot;,
+    &quot;severity&quot;: &quot;High&quot;,
+    &quot;reporter_id&quot;: 1,
+    &quot;asset_id&quot;: 1,
+    &quot;assigned_analyst_id&quot;: null,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:07.788774&quot;,
+    &quot;resolved_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;title&quot;: &quot;Port scan detected&quot;,
+    &quot;category&quot;: &quot;Other&quot;,
+    &quot;severity&quot;: &quot;Low&quot;,
+    &quot;reporter_id&quot;: 2,
+    &quot;asset_id&quot;: 1,
+    &quot;assigned_analyst_id&quot;: null,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:07.928554&quot;,
+    &quot;resolved_at&quot;: null
+  }
+]</pre>
+<h2>investigation_notes (3 rows, first 3 shown)</h2><pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;incident_id&quot;: 2,
+    &quot;analyst_id&quot;: 3,
+    &quot;content&quot;: &quot;Analysis: ransomware strain identified as LockBit&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:10.843383&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;incident_id&quot;: 2,
+    &quot;analyst_id&quot;: 3,
+    &quot;content&quot;: &quot;Evidence: memory dump and encrypted samples collected&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:10.968161&quot;
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;incident_id&quot;: 2,
+    &quot;analyst_id&quot;: 1,
+    &quot;content&quot;: &quot;Action: server isolated and restored from backup&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:11.095129&quot;
+  }
+]</pre>
+<h2>notifications (8 rows, first 8 shown)</h2><pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;user_id&quot;: 3,
+    &quot;title&quot;: &quot;New incident assigned: #1&quot;,
+    &quot;notification_type&quot;: &quot;Incident Assignment&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:09.412942&quot;,
+    &quot;read_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;user_id&quot;: 3,
+    &quot;title&quot;: &quot;New incident assigned: #2&quot;,
+    &quot;notification_type&quot;: &quot;Incident Assignment&quot;,
+    &quot;severity&quot;: &quot;Critical&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:09.581950&quot;,
+    &quot;read_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;user_id&quot;: 2,
+    &quot;title&quot;: &quot;Incident #1 is now Under Investigation&quot;,
+    &quot;notification_type&quot;: &quot;System Notification&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:10.088169&quot;,
+    &quot;read_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;user_id&quot;: 2,
+    &quot;title&quot;: &quot;Incident #1 is now Mitigated&quot;,
+    &quot;notification_type&quot;: &quot;System Notification&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:10.192468&quot;,
+    &quot;read_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;user_id&quot;: 2,
+    &quot;title&quot;: &quot;Incident #1 is now Resolved&quot;,
+    &quot;notification_type&quot;: &quot;System Notification&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:10.339152&quot;,
+    &quot;read_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 6,
+    &quot;user_id&quot;: 2,
+    &quot;title&quot;: &quot;Incident #1 is now Closed&quot;,
+    &quot;notification_type&quot;: &quot;System Notification&quot;,
+    &quot;severity&quot;: &quot;Medium&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:10.537900&quot;,
+    &quot;read_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 8,
+    &quot;user_id&quot;: 2,
+    &quot;title&quot;: &quot;Malicious IP blocked&quot;,
+    &quot;notification_type&quot;: &quot;Threat Alert&quot;,
+    &quot;severity&quot;: &quot;High&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:13.690121&quot;,
+    &quot;read_at&quot;: null
+  },
+  {
+    &quot;id&quot;: 9,
+    &quot;user_id&quot;: 3,
+    &quot;title&quot;: &quot;Critical CVE&quot;,
+    &quot;notification_type&quot;: &quot;Vulnerability Alert&quot;,
+    &quot;severity&quot;: &quot;Critical&quot;,
+    &quot;status&quot;: &quot;Unread&quot;,
+    &quot;created_at&quot;: &quot;2026-10-20 20:01:13.802091&quot;,
+    &quot;read_at&quot;: null
+  }
+]</pre>
+<h2>logs (86 rows, first 12 shown)</h2><pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;LOGIN_SUCCESS&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:53.607660&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;ASSET_CREATED&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;assets&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:53.662532&quot;
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;ASSET_CREATED&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;assets&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:53.725094&quot;
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;ASSET_CREATED&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;assets&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:53.801691&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;LOGIN_SUCCESS&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:54.915502&quot;
+  },
+  {
+    &quot;id&quot;: 6,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;LOGIN_FAILED&quot;,
+    &quot;severity&quot;: &quot;Warning&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:55.211077&quot;
+  },
+  {
+    &quot;id&quot;: 7,
+    &quot;user_id&quot;: 2,
+    &quot;username&quot;: &quot;rami&quot;,
+    &quot;action&quot;: &quot;USER_CREATED&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:55.568867&quot;
+  },
+  {
+    &quot;id&quot;: 8,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;USER_CREATED&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:55.844168&quot;
+  },
+  {
+    &quot;id&quot;: 9,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;USER_CREATED&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:56.126816&quot;
+  },
+  {
+    &quot;id&quot;: 10,
+    &quot;user_id&quot;: 1,
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;action&quot;: &quot;USER_CREATED&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:56.423929&quot;
+  },
+  {
+    &quot;id&quot;: 11,
+    &quot;user_id&quot;: null,
+    &quot;username&quot;: null,
+    &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+    &quot;severity&quot;: &quot;Warning&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:56.922223&quot;
+  },
+  {
+    &quot;id&quot;: 12,
+    &quot;user_id&quot;: 2,
+    &quot;username&quot;: &quot;rami&quot;,
+    &quot;action&quot;: &quot;LOGIN_SUCCESS&quot;,
+    &quot;severity&quot;: &quot;Information&quot;,
+    &quot;related_service&quot;: &quot;users&quot;,
+    &quot;timestamp&quot;: &quot;2026-10-20 20:00:57.218144&quot;
+  }
+]</pre>
+<h2>Password storage: bcrypt hashes only (prefix shown)</h2><pre>{
+  &quot;admin&quot;: &quot;$2b$12$\u2026&quot;,
+  &quot;rami&quot;: &quot;$2b$12$\u2026&quot;,
+  &quot;lara&quot;: &quot;$2b$12$\u2026&quot;,
+  &quot;nadia&quot;: &quot;$2b$12$\u2026&quot;
+}</pre>

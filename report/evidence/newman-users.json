@@ -1,0 +1,816 @@
+{
+  "source": "Actual Newman/Postman Runtime execution; secrets redacted",
+  "collection": "users.postman_collection.json",
+  "executed_at": "2026-10-20T20:00:59.697Z",
+  "requests": {
+    "total": 35,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 70,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "records": [
+    {
+      "name": "Login - admin (success)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 1,
+            "full_name": "Elie Medawar",
+            "username": "admin",
+            "email": "admin@corp.com",
+            "department": "Security",
+            "role": "admin",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:51Z",
+            "last_login": "2026-10-20T20:00:54Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - wrong password (failure)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin",
+        "password": "[REDACTED]"
+      },
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Invalid username/email or password"
+      },
+      "error": null
+    },
+    {
+      "name": "Login - missing password",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "admin"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Provide 'username' (or 'email') and 'password'"
+      },
+      "error": null
+    },
+    {
+      "name": "Register - regular user (self-registration)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/register",
+      "request": {
+        "full_name": "Rami Haddad",
+        "username": "rami",
+        "email": "rami@corp.com",
+        "password": "[REDACTED]",
+        "department": "Finance",
+        "role": "user"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "User registered successfully",
+        "data": {
+          "id": 2,
+          "full_name": "Rami Haddad",
+          "username": "rami",
+          "email": "rami@corp.com",
+          "department": "Finance",
+          "role": "user",
+          "account_status": "Active",
+          "created_at": "2026-10-20T20:00:55Z",
+          "last_login": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Register - analyst (by admin)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/register",
+      "request": {
+        "full_name": "Lara Khoury",
+        "username": "lara",
+        "email": "lara@corp.com",
+        "password": "[REDACTED]",
+        "department": "SOC",
+        "role": "analyst"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "User registered successfully",
+        "data": {
+          "id": 3,
+          "full_name": "Lara Khoury",
+          "username": "lara",
+          "email": "lara@corp.com",
+          "department": "SOC",
+          "role": "analyst",
+          "account_status": "Active",
+          "created_at": "2026-10-20T20:00:55Z",
+          "last_login": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Register - auditor (by admin)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/register",
+      "request": {
+        "full_name": "Nadia Saab",
+        "username": "nadia",
+        "email": "nadia@corp.com",
+        "password": "[REDACTED]",
+        "department": "Compliance",
+        "role": "auditor"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "User registered successfully",
+        "data": {
+          "id": 4,
+          "full_name": "Nadia Saab",
+          "username": "nadia",
+          "email": "nadia@corp.com",
+          "department": "Compliance",
+          "role": "auditor",
+          "account_status": "Active",
+          "created_at": "2026-10-20T20:00:56Z",
+          "last_login": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Register - temporary user (to delete later)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/register",
+      "request": {
+        "full_name": "Temp Employee",
+        "username": "temp.employee",
+        "email": "temp@corp.com",
+        "password": "[REDACTED]",
+        "department": "HR",
+        "role": "user"
+      },
+      "status": 201,
+      "response": {
+        "status": "success",
+        "message": "User registered successfully",
+        "data": {
+          "id": 5,
+          "full_name": "Temp Employee",
+          "username": "temp.employee",
+          "email": "temp@corp.com",
+          "department": "HR",
+          "role": "user",
+          "account_status": "Active",
+          "created_at": "2026-10-20T20:00:56Z",
+          "last_login": null
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Register - duplicate username",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/register",
+      "request": {
+        "full_name": "Another Rami",
+        "username": "RAMI",
+        "email": "rami2@corp.com",
+        "password": "[REDACTED]",
+        "department": "IT"
+      },
+      "status": 409,
+      "response": {
+        "status": "error",
+        "message": "Username 'RAMI' already exists"
+      },
+      "error": null
+    },
+    {
+      "name": "Register - invalid email",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/register",
+      "request": {
+        "full_name": "Bad Email",
+        "username": "bademail",
+        "email": "not-an-email",
+        "password": "[REDACTED]",
+        "department": "IT"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid email format"
+      },
+      "error": null
+    },
+    {
+      "name": "Register - weak password",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/register",
+      "request": {
+        "full_name": "Weak Pass",
+        "username": "weakpass",
+        "email": "weak@corp.com",
+        "password": "[REDACTED]",
+        "department": "IT"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Password must contain 8-64 characters, an uppercase letter, a digit, a special character"
+      },
+      "error": null
+    },
+    {
+      "name": "Register - missing required fields",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/register",
+      "request": {
+        "username": "incomplete"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Missing required field(s): full_name, email, password, department"
+      },
+      "error": null
+    },
+    {
+      "name": "Register - unexpected field",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/register",
+      "request": {
+        "full_name": "X Y",
+        "username": "xyuser",
+        "email": "xy@corp.com",
+        "password": "[REDACTED]",
+        "department": "IT",
+        "is_admin": true
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Unexpected field(s): is_admin"
+      },
+      "error": null
+    },
+    {
+      "name": "Register - self-register as admin (forbidden)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/register",
+      "request": {
+        "full_name": "Sneaky",
+        "username": "sneaky",
+        "email": "sneaky@corp.com",
+        "password": "[REDACTED]",
+        "department": "IT",
+        "role": "admin"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "Only a Security Administrator can create accounts with the 'admin' role"
+      },
+      "error": null
+    },
+    {
+      "name": "Login - regular user (by email)",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "email": "rami@corp.com",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 2,
+            "full_name": "Rami Haddad",
+            "username": "rami",
+            "email": "rami@corp.com",
+            "department": "Finance",
+            "role": "user",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:55Z",
+            "last_login": "2026-10-20T20:00:57Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - analyst",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "lara",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 3,
+            "full_name": "Lara Khoury",
+            "username": "lara",
+            "email": "lara@corp.com",
+            "department": "SOC",
+            "role": "analyst",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:55Z",
+            "last_login": "2026-10-20T20:00:57Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Login - auditor",
+      "method": "POST",
+      "url": "http://127.0.0.1:5001/users/login",
+      "request": {
+        "username": "nadia",
+        "password": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Login successful",
+        "data": {
+          "token": "[REDACTED]",
+          "token_type": "[REDACTED]",
+          "user": {
+            "id": 4,
+            "full_name": "Nadia Saab",
+            "username": "nadia",
+            "email": "nadia@corp.com",
+            "department": "Compliance",
+            "role": "auditor",
+            "account_status": "Active",
+            "created_at": "2026-10-20T20:00:56Z",
+            "last_login": "2026-10-20T20:00:57Z"
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get all users - admin",
+      "method": "GET",
+      "url": "http://127.0.0.1:5001/users",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Users retrieved successfully",
+        "data": {
+          "count": 5,
+          "users": [
+            {
+              "id": 1,
+              "full_name": "Elie Medawar",
+              "username": "admin",
+              "email": "admin@corp.com",
+              "department": "Security",
+              "role": "admin",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:51Z",
+              "last_login": "2026-10-20T20:00:54Z"
+            },
+            {
+              "id": 2,
+              "full_name": "Rami Haddad",
+              "username": "rami",
+              "email": "rami@corp.com",
+              "department": "Finance",
+              "role": "user",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:55Z",
+              "last_login": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 3,
+              "full_name": "Lara Khoury",
+              "username": "lara",
+              "email": "lara@corp.com",
+              "department": "SOC",
+              "role": "analyst",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:55Z",
+              "last_login": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 4,
+              "full_name": "Nadia Saab",
+              "username": "nadia",
+              "email": "nadia@corp.com",
+              "department": "Compliance",
+              "role": "auditor",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:56Z",
+              "last_login": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 5,
+              "full_name": "Temp Employee",
+              "username": "temp.employee",
+              "email": "temp@corp.com",
+              "department": "HR",
+              "role": "user",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:56Z",
+              "last_login": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get all users - auditor",
+      "method": "GET",
+      "url": "http://127.0.0.1:5001/users",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Users retrieved successfully",
+        "data": {
+          "count": 5,
+          "users": [
+            {
+              "id": 1,
+              "full_name": "Elie Medawar",
+              "username": "admin",
+              "email": "admin@corp.com",
+              "department": "Security",
+              "role": "admin",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:51Z",
+              "last_login": "2026-10-20T20:00:54Z"
+            },
+            {
+              "id": 2,
+              "full_name": "Rami Haddad",
+              "username": "rami",
+              "email": "rami@corp.com",
+              "department": "Finance",
+              "role": "user",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:55Z",
+              "last_login": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 3,
+              "full_name": "Lara Khoury",
+              "username": "lara",
+              "email": "lara@corp.com",
+              "department": "SOC",
+              "role": "analyst",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:55Z",
+              "last_login": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 4,
+              "full_name": "Nadia Saab",
+              "username": "nadia",
+              "email": "nadia@corp.com",
+              "department": "Compliance",
+              "role": "auditor",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:56Z",
+              "last_login": "2026-10-20T20:00:57Z"
+            },
+            {
+              "id": 5,
+              "full_name": "Temp Employee",
+              "username": "temp.employee",
+              "email": "temp@corp.com",
+              "department": "HR",
+              "role": "user",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:56Z",
+              "last_login": null
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get users filtered by role",
+      "method": "GET",
+      "url": "http://127.0.0.1:5001/users?role=analyst",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "Users retrieved successfully",
+        "data": {
+          "count": 1,
+          "users": [
+            {
+              "id": 3,
+              "full_name": "Lara Khoury",
+              "username": "lara",
+              "email": "lara@corp.com",
+              "department": "SOC",
+              "role": "analyst",
+              "account_status": "Active",
+              "created_at": "2026-10-20T20:00:55Z",
+              "last_login": "2026-10-20T20:00:57Z"
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get all users - regular user (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5001/users",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Get all users - analyst (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5001/users",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Get all users - no token",
+      "method": "GET",
+      "url": "http://127.0.0.1:5001/users",
+      "request": null,
+      "status": 401,
+      "response": {
+        "status": "error",
+        "message": "Missing authentication token (use 'Authorization: Bearer <token>')"
+      },
+      "error": null
+    },
+    {
+      "name": "Get user by username - existing",
+      "method": "GET",
+      "url": "http://127.0.0.1:5001/users/lara",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "User retrieved successfully",
+        "data": {
+          "id": 3,
+          "full_name": "Lara Khoury",
+          "username": "lara",
+          "email": "lara@corp.com",
+          "department": "SOC",
+          "role": "analyst",
+          "account_status": "Active",
+          "created_at": "2026-10-20T20:00:55Z",
+          "last_login": "2026-10-20T20:00:57Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get user by username - non-existing",
+      "method": "GET",
+      "url": "http://127.0.0.1:5001/users/ghost",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "User 'ghost' not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Get own info - regular user",
+      "method": "GET",
+      "url": "http://127.0.0.1:5001/users/rami",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "User retrieved successfully",
+        "data": {
+          "id": 2,
+          "full_name": "Rami Haddad",
+          "username": "rami",
+          "email": "rami@corp.com",
+          "department": "Finance",
+          "role": "user",
+          "account_status": "Active",
+          "created_at": "2026-10-20T20:00:55Z",
+          "last_login": "2026-10-20T20:00:57Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Get another user - regular user (forbidden)",
+      "method": "GET",
+      "url": "http://127.0.0.1:5001/users/lara",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "You can only view your own information"
+      },
+      "error": null
+    },
+    {
+      "name": "Update own info - regular user",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5001/users/2",
+      "request": {
+        "department": "Accounting",
+        "full_name": "Rami Haddad"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "User updated successfully",
+        "data": {
+          "id": 2,
+          "full_name": "Rami Haddad",
+          "username": "rami",
+          "email": "rami@corp.com",
+          "department": "Accounting",
+          "role": "user",
+          "account_status": "Active",
+          "created_at": "2026-10-20T20:00:55Z",
+          "last_login": "2026-10-20T20:00:57Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Update another user - regular user (forbidden)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5001/users/3",
+      "request": {
+        "department": "X"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "You can only update your own information"
+      },
+      "error": null
+    },
+    {
+      "name": "Update own role - regular user (forbidden)",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5001/users/2",
+      "request": {
+        "role": "admin"
+      },
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "Only a Security Administrator can change roles or account status"
+      },
+      "error": null
+    },
+    {
+      "name": "Update role - admin",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5001/users/3",
+      "request": {
+        "role": "analyst",
+        "department": "Security Operations Center"
+      },
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "User updated successfully",
+        "data": {
+          "id": 3,
+          "full_name": "Lara Khoury",
+          "username": "lara",
+          "email": "lara@corp.com",
+          "department": "Security Operations Center",
+          "role": "analyst",
+          "account_status": "Active",
+          "created_at": "2026-10-20T20:00:55Z",
+          "last_login": "2026-10-20T20:00:57Z"
+        }
+      },
+      "error": null
+    },
+    {
+      "name": "Update - invalid role value",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5001/users/2",
+      "request": {
+        "role": "superuser"
+      },
+      "status": 400,
+      "response": {
+        "status": "error",
+        "message": "Invalid role 'superuser'. Allowed values: admin, analyst, user, auditor"
+      },
+      "error": null
+    },
+    {
+      "name": "Update - non-existing user",
+      "method": "PUT",
+      "url": "http://127.0.0.1:5001/users/9999",
+      "request": {
+        "department": "X"
+      },
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "User with id 9999 not found"
+      },
+      "error": null
+    },
+    {
+      "name": "Delete user - regular user (forbidden)",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5001/users/5",
+      "request": null,
+      "status": 403,
+      "response": {
+        "status": "error",
+        "message": "User does not have permission to perform this operation"
+      },
+      "error": null
+    },
+    {
+      "name": "Delete user - admin (success)",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5001/users/5",
+      "request": null,
+      "status": 200,
+      "response": {
+        "status": "success",
+        "message": "User 5 deleted successfully",
+        "data": null
+      },
+      "error": null
+    },
+    {
+      "name": "Delete user - already deleted",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:5001/users/5",
+      "request": null,
+      "status": 404,
+      "response": {
+        "status": "error",
+        "message": "User with id 5 not found"
+      },
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}</style>
+<article>
+<h1>Elie Medawar – Generate Activity Report – Activity report - admin (HTTP 200)</h1>
+<small>Genuine Newman execution report • 2026-10-20T20:01:19.454Z • source: newman-reports_a.json</small>
+<p>GET http://127.0.0.1:5006/reports/activity</p>
+<h2>Actual request body (credentials redacted)</h2><pre>null</pre>
+<h2>Actual response — HTTP 200</h2><pre>{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;message&quot;: &quot;Activity report generated&quot;,
+  &quot;data&quot;: {
+    &quot;report_type&quot;: &quot;activity&quot;,
+    &quot;generated_at&quot;: &quot;2026-10-20T20:01:19Z&quot;,
+    &quot;generated_by&quot;: &quot;admin&quot;,
+    &quot;total_user_activities&quot;: 85,
+    &quot;login_attempts&quot;: 23,
+    &quot;successful_logins&quot;: 21,
+    &quot;failed_login_attempts&quot;: 2,
+    &quot;failed_login_rate_percent&quot;: 8.7,
+    &quot;unauthorized_access_attempts&quot;: 31,
+    &quot;activities_by_severity&quot;: {
+      &quot;Information&quot;: 46,
+      &quot;Warning&quot;: 37,
+      &quot;Error&quot;: 0,
+      &quot;Critical&quot;: 2
+    },
+    &quot;activities_by_service&quot;: {
+      &quot;assets&quot;: 4,
+      &quot;incidents&quot;: 20,
+      &quot;logs&quot;: 9,
+      &quot;notifications&quot;: 12,
+      &quot;reports&quot;: 3,
+      &quot;users&quot;: 37
+    },
+    &quot;most_performed_actions&quot;: [
+      {
+        &quot;action&quot;: &quot;UNAUTHORIZED_ACCESS&quot;,
+        &quot;count&quot;: 31
+      },
+      {
+        &quot;action&quot;: &quot;LOGIN_SUCCESS&quot;,
+        &quot;count&quot;: 21
+      },
+      {
+        &quot;action&quot;: &quot;INCIDENT_CREATED&quot;,
+        &quot;count&quot;: 4
+      },
+      {
+        &quot;action&quot;: &quot;INCIDENT_STATUS_CHANGED&quot;,
+        &quot;count&quot;: 4
+      },
+      {
+        &quot;action&quot;: &quot;USER_CREATED&quot;,
+        &quot;count&quot;: 4
+      }
+    ]
+  }
+}</pre>
+<p>This screenshot displays stored results from an actual API execution. It is not a simulated API response or a Postman GUI screenshot.</p></article>

@@ -1,0 +1,83 @@
+<!doctype html><meta charset="utf-8">
+<style>body{font:16px Arial;margin:32px;color:#172033;background:#f7f9fc}h1{font-size:24px}h2{font-size:19px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #cbd5e1;border-radius:6px;padding:16px;font:14px Consolas;line-height:1.45}small{color:#475569}article{max-width:1120px}</style>
+<article>
+<h1>Elie Medawar – Retrieve User Notifications – User&#x27;s unread notifications (HTTP 200)</h1>
+<small>Genuine Newman execution report • 2026-10-20T20:01:16.182Z • source: newman-notifications.json</small>
+<p>GET http://127.0.0.1:5008/notifications/user/2?status=Unread</p>
+<h2>Actual request body (credentials redacted)</h2><pre>null</pre>
+<h2>Actual response — HTTP 200</h2><pre>{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;message&quot;: &quot;6 notification(s) found for user 2&quot;,
+  &quot;data&quot;: {
+    &quot;count&quot;: 6,
+    &quot;notifications&quot;: [
+      {
+        &quot;id&quot;: 8,
+        &quot;user_id&quot;: 2,
+        &quot;title&quot;: &quot;Malicious IP blocked&quot;,
+        &quot;message&quot;: &quot;185.220.101.4 tried to reach your laptop&quot;,
+        &quot;notification_type&quot;: &quot;Threat Alert&quot;,
+        &quot;severity&quot;: &quot;High&quot;,
+        &quot;status&quot;: &quot;Unread&quot;,
+        &quot;created_at&quot;: &quot;2026-10-20T20:01:13Z&quot;,
+        &quot;read_at&quot;: null
+      },
+      {
+        &quot;id&quot;: 7,
+        &quot;user_id&quot;: 2,
+        &quot;title&quot;: &quot;Security awareness training&quot;,
+        &quot;message&quot;: &quot;Mandatory training on Friday&quot;,
+        &quot;notification_type&quot;: &quot;System Notification&quot;,
+        &quot;severity&quot;: &quot;Low&quot;,
+        &quot;status&quot;: &quot;Unread&quot;,
+        &quot;created_at&quot;: &quot;2026-10-20T20:01:13Z&quot;,
+        &quot;read_at&quot;: null
+      },
+      {
+        &quot;id&quot;: 6,
+        &quot;user_id&quot;: 2,
+        &quot;title&quot;: &quot;Incident #1 is now Closed&quot;,
+        &quot;message&quot;: &quot;The status of your reported incident &#x27;Phishing email received&#x27; changed from Resolved to Closed.&quot;,
+        &quot;notification_type&quot;: &quot;System Notification&quot;,
+        &quot;severity&quot;: &quot;Medium&quot;,
+        &quot;status&quot;: &quot;Unread&quot;,
+        &quot;created_at&quot;: &quot;2026-10-20T20:01:10Z&quot;,
+        &quot;read_at&quot;: null
+      },
+      {
+        &quot;id&quot;: 5,
+        &quot;user_id&quot;: 2,
+        &quot;title&quot;: &quot;Incident #1 is now Resolved&quot;,
+        &quot;message&quot;: &quot;The status of your reported incident &#x27;Phishing email received&#x27; changed from Mitigated to Resolved.&quot;,
+        &quot;notification_type&quot;: &quot;System Notification&quot;,
+        &quot;severity&quot;: &quot;Medium&quot;,
+        &quot;status&quot;: &quot;Unread&quot;,
+        &quot;created_at&quot;: &quot;2026-10-20T20:01:10Z&quot;,
+        &quot;read_at&quot;: null
+      },
+      {
+        &quot;id&quot;: 4,
+        &quot;user_id&quot;: 2,
+        &quot;title&quot;: &quot;Incident #1 is now Mitigated&quot;,
+        &quot;message&quot;: &quot;The status of your reported incident &#x27;Phishing email received&#x27; changed from Under Investigation to Mitigated.&quot;,
+        &quot;notification_type&quot;: &quot;System Notification&quot;,
+        &quot;severity&quot;: &quot;Medium&quot;,
+        &quot;status&quot;: &quot;Unread&quot;,
+        &quot;created_at&quot;: &quot;2026-10-20T20:01:10Z&quot;,
+        &quot;read_at&quot;: null
+      },
+      {
+        &quot;id&quot;: 3,
+        &quot;user_id&quot;: 2,
+        &quot;title&quot;: &quot;Incident #1 is now Under Investigation&quot;,
+        &quot;message&quot;: &quot;The status of your reported incident &#x27;Phishing email received&#x27; changed from Open to Under Investigation.&quot;,
+        &quot;notification_type&quot;: &quot;System Notification&quot;,
+        &quot;severity&quot;: &quot;Medium&quot;,
+        &quot;status&quot;: &quot;Unread&quot;,
+        &quot;created_at&quot;: &quot;2026-10-20T20:01:10Z&quot;,
+        &quot;read_at&quot;: null
+      }
+    ]
+  }
+}</pre>
+<p>This screenshot displays stored results from an actual API execution. It is not a simulated API response or a Postman GUI screenshot.</p></article>
