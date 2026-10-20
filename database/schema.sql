@@ -87,6 +87,7 @@ CREATE TABLE response_actions (
  description VARCHAR(2000) NOT NULL, step_number INTEGER NOT NULL CHECK(step_number > 0),
  status VARCHAR(20) NOT NULL CHECK(status IN ('Pending','In Progress','Completed')),
  assigned_user_id INTEGER REFERENCES users(id) ON DELETE SET NULL, completion_date DATETIME,
+ execution_history JSON NOT NULL DEFAULT '[]',
  CONSTRAINT uq_action_step UNIQUE(playbook_id, step_number)
 );
 CREATE INDEX ix_response_actions_playbook_id ON response_actions(playbook_id);

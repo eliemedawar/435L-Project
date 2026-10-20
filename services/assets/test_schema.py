@@ -75,9 +75,9 @@ class SchemaTests(unittest.TestCase):
 
     def test_playbook_actions_unique_order_and_cascade(self):
         self.db.execute("INSERT INTO playbooks VALUES (1,'Playbook','Description','Malware','High',1,'2026-01-01')")
-        self.db.execute("INSERT INTO response_actions VALUES (1,1,'Step',1,'Pending',1,NULL)")
+        self.db.execute("INSERT INTO response_actions (id,playbook_id,description,step_number,status,assigned_user_id) VALUES (1,1,'Step',1,'Pending',1)")
         with self.assertRaises(sqlite3.IntegrityError):
-            self.db.execute("INSERT INTO response_actions VALUES (2,1,'Duplicate',1,'Pending',1,NULL)")
+            self.db.execute("INSERT INTO response_actions (id,playbook_id,description,step_number,status,assigned_user_id) VALUES (2,1,'Duplicate',1,'Pending',1)")
         for column, value in (("step_number", 0), ("status", "Invalid"), ("assigned_user_id", 999)):
             with self.assertRaises(sqlite3.IntegrityError):
                 self.db.execute(f"UPDATE response_actions SET {column}=?", (value,))
