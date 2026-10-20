@@ -32,9 +32,14 @@ class PlaybookTests(LiveBackend):
         self.assertEqual([event['to_status'] for event in history],['Pending','Pending','In Progress','Completed'])
         self.assertEqual(history[-1]['actor_id'],self.ids['analyst'])
         self.call('playbooks','PUT',f'/actions/{aid}/status',400,json={'status':'In Progress'})
+        with patch.dict('os.environ',{'LOGS_URL':'http://127.0.0.1:1'}):
+            self.call('playbooks','DELETE',f'/playbooks/{pid}',503)
+        self.call('playbooks','GET',f'/playbooks/{pid}')
         self.call('playbooks','DELETE',f'/playbooks/{pid}')
         self.assertEqual(self.sql('SELECT id FROM response_actions WHERE playbook_id=?',(pid,)),[])
         self.assertTrue(self.sql("SELECT id FROM logs WHERE action='PLAYBOOK_DELETED'"))
+        archived=[json.loads(row[0]) for row in self.sql("SELECT description FROM logs WHERE action='ACTION_HISTORY_ARCHIVED'")]
+        self.assertTrue(any(row['action_id']==aid and row['event']['to_status']=='Completed' for row in archived))
 
     def test_uniqueness_validation_and_missing_resources(self):
         pid=self.create()['id']

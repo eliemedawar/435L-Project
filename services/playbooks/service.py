@@ -1,4 +1,5 @@
 """Response workflow and durable execution history. Developed by: Marc Bteich."""
+import json
 from common.clients import fetch_service, log_event
 from common.db import db, iso, utcnow
 from common.enums import ACTION_STATUSES, INCIDENT_CATEGORIES, SEVERITIES, next_status
@@ -107,6 +108,14 @@ class PlaybookService:
     @classmethod
     def delete(cls,record_id,actor):
         item=cls.get(record_id)
+        # Cascade deletion must not erase the only copy of execution history.
+        # Archive each bounded event through the existing audit HTTP API first.
+        # If Logs cannot acknowledge it, retain the playbook/actions for retry.
+        for action in item.actions:
+            for event in action.execution_history:
+                snapshot=json.dumps(dict(playbook_id=record_id,action_id=action.id,event=event),separators=(',',':'))
+                if not log_event(actor['user_id'],'ACTION_HISTORY_ARCHIVED',snapshot,service='playbooks'):
+                    raise APIError('Cannot preserve action execution history: Logs Service unavailable',503)
         db.session.delete(item)
         db.session.commit()
         log_event(actor['user_id'],'PLAYBOOK_DELETED',f'Deleted playbook {record_id} and its actions',service='playbooks')
