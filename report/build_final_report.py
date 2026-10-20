@@ -120,7 +120,7 @@ def add_runs(paragraph, text):
             paragraph.add_run(part)
 
 
-def add_picture(document, png, caption=None, width_in=6.3):
+def add_picture(document, png, caption=None, width_in=5.2, max_slices=1):
     """Add an image with its caption; very tall images are split into page-sized slices."""
     if caption:
         p = document.add_paragraph()
@@ -136,11 +136,17 @@ def add_picture(document, png, caption=None, width_in=6.3):
             document.add_picture(str(png), width=Inches(width_in))
             return
         slice_h = int(width * max_ratio)
-        for index, top in enumerate(range(0, height, slice_h)):
+        tops = list(range(0, height, slice_h))
+        for index, top in enumerate(tops[:max_slices]):
             part = png.parent / f".{png.stem}-part{index}.png"
             image.crop((0, top, width, min(height, top + slice_h))).save(part)
             document.add_picture(str(part), width=Inches(width_in))
             part.unlink()
+        if len(tops) > max_slices:
+            note = document.add_paragraph()
+            run = note.add_run(f"(Output shortened; the full capture is report/{png.relative_to(REPORT).as_posix()} in the submission.)")
+            run.italic = True
+            run.font.size = Pt(8.5)
 
 
 def add_table(document, rows):
@@ -168,7 +174,7 @@ def add_table(document, rows):
     document.add_paragraph()
 
 
-def add_markdown(document, text, base_dir, heading_offset=0, shot_handler=None):
+def add_markdown(document, text, base_dir, heading_offset=0, shot_handler=None, max_code_lines=None):
     """Small Markdown renderer: headings, paragraphs, lists, pipe tables, code blocks, images, [[shot]] tags."""
     lines = text.splitlines()
     i = 0
@@ -297,7 +303,7 @@ def marc_cards():
     for card in json.loads((REPORT / "evidence/screenshot-manifest.json").read_text(encoding="utf-8")):
         collection = card["name"].split("-")[1]
         picked = chosen.setdefault(collection, [])
-        if len(picked) < 9 and all((c["method"], c["status"]) != (card["method"], card["status"]) for c in picked):
+        if len(picked) < 6 and all((c["method"], c["status"]) != (card["method"], card["status"]) for c in picked):
             picked.append(card)
     return chosen
 
@@ -400,9 +406,9 @@ def main():
     add_markdown(document, marc[key], REPORT, heading_offset=1)
     if (SHOTS_B / "database-inspection.png").exists():
         add_picture(document, SHOTS_B / "database-inspection.png",
-                    "Marc Bteich – Database structure and stored records – actual local SQLite inspection")
+                    "Marc Bteich – Database structure and stored records – actual local SQLite inspection", max_slices=1)
     add_picture(document, SHOTS_A / "database-inspection-elie.png",
-                "Elie Medawar – Database records after the Newman run – users, incidents, investigation_notes, notifications, logs")
+                "Elie Medawar – Database records after the Newman run – users, incidents, investigation_notes, notifications, logs", max_slices=1)
 
     # 7 (Elie)
     document.add_heading("7. Error Handling and Validation (Elie Medawar)", level=1)
@@ -413,7 +419,7 @@ def main():
     document.add_heading(key, level=1)
     add_markdown(document, marc[key], REPORT, heading_offset=1)
     api = (REPORT / "API_DOCUMENTATION.md").read_text(encoding="utf-8").split("\n", 1)[1]
-    add_markdown(document, api, REPORT, heading_offset=1)
+    add_markdown(document, api, REPORT, heading_offset=1, max_code_lines=6)
 
     # 9, 10 (Elie)
     for title in ("9. Authentication and Authorization (Elie Medawar)", "10. GitHub and Version Control (Elie Medawar)"):
